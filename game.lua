@@ -26,4 +26,8 @@ function game:draw()
     love.graphics.pop()
 end
 
+function game:mousepressed(x, y, button)
+    self.level:mousepressed(x, y)
+end
+
 return game

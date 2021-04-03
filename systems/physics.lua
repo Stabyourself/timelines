@@ -18,14 +18,18 @@ function physics:process(e, dt)
         goalY = e.y + e.vy * dt
     end
 
+    if goalX == e.x and goalY == e.y then
+        return
+    end
+
     local nextX, nextY, cols = e.world:move(e, goalX, goalY, e.filter)
 
     for _, col in ipairs(cols) do
-        if col.type == "cross" then
-            if e.collide then
-                e:collide(col.other)
-            end
-        else
+        if e.collide then
+            e:collide(col.other, col.normal.x, col.normal.y)
+        end
+
+        if col.type ~= "cross" then
             physics.resolveCollision(e, col.normal.x, col.normal.y)
         end
     end

@@ -38,14 +38,14 @@ function Level:initialize(path)
         end
 
         if type == "key" then
-            local key = Key:new(self, object.x, object.y, object.properties.trancendent)
+            local key = Key:new(self, object.x, object.y, object.properties.transcendent)
             table.insert(self.entities, key)
 
             self.ecs:addEntity(key)
         end
 
         if type == "door" then
-            local door = Door:new(self, object.x, object.y, object.properties.trancendent)
+            local door = Door:new(self, object.x, object.y, object.properties.transcendent)
             table.insert(self.entities, door)
 
             self.ecs:addEntity(door)
@@ -70,15 +70,25 @@ function Level:update(dt)
     end
 
     -- camera
-    self.camera:lockWindow(
-        self.cameraFocus.x+self.cameraFocus.w/2,
-        self.cameraFocus.y+self.cameraFocus.h/2,
-        love.graphics.getWidth()*0.5 - 100,
-        love.graphics.getWidth()*0.5 + 100,
-        love.graphics.getHeight()*0.5 - 50,
-        love.graphics.getHeight()*0.5 + 50,
-        camera.smooth.damped(dt, 10)
-    ) --todo: some kind of SMW camera thing maybe
+    if controls:pressed("camera") then
+        self.cameraFocus = false
+    end
+
+    if self.cameraFocus then
+        self.camera:lockWindow(
+            self.cameraFocus.x+self.cameraFocus.w/2,
+            self.cameraFocus.y+self.cameraFocus.h/2,
+            love.graphics.getWidth()*0.5 - 100,
+            love.graphics.getWidth()*0.5 + 100,
+            love.graphics.getHeight()*0.5 - 50,
+            love.graphics.getHeight()*0.5 + 50,
+            camera.smooth.damped(dt, 10)
+        ) --todo: some kind of SMW camera thing maybe
+    else
+        local x, y = controls:get("camera")
+        self.camera.x = self.camera.x + x*dt*400
+        self.camera.y = self.camera.y + y*dt*400
+    end
 end
 
 function Level:draw()
@@ -107,6 +117,15 @@ function Level:draw()
     end
 
     self.camera:detach()
+end
+
+function Level:mousepressed(x, y, button)
+    local wx, wy = self.camera:worldCoords(x, y)
+    self.player.x = wx
+    self.player.y = wy
+    self.player.vx = 0
+    self.player.vy = 0
+    self.world:update(self.player, wx, wy)
 end
 
 return Level

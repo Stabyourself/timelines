@@ -34,7 +34,13 @@ function Key:initialize(level, x, y, transcendent)
 end
 
 function Key:draw()
+    if self.transcendent then
+        love.graphics.setColor(1, 0, 1)
+    end
+
     keyDrawable:draw(self.x+7.5, self.y+3, self.r)
+
+    love.graphics.setColor(1, 1, 1)
 end
 
 return Key

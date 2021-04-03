@@ -40,15 +40,23 @@ function Player:initialize(level, x, y)
     self.keyCount = 0
 end
 
-function Player:collide(other)
-    if other:isInstanceOf(Key) then
-        other:queueRemove()
-        self.keyCount = self.keyCount + 1
-    end
+function Player:collide(other, nx, ny)
+    if other.isInstanceOf then
+        if other:isInstanceOf(Key) then
+            other:queueRemove()
+            self.keyCount = self.keyCount + 1
+        end
 
-    if other:isInstanceOf(Door) then
-        other:queueRemove()
-        self.keyCount = self.keyCount - 1
+        if other:isInstanceOf(Door) then
+            if self.keyCount > 0 then
+                other:queueRemove()
+                self.keyCount = self.keyCount - 1
+            end
+        end
+    else -- world tile
+        if other.properties.spikes and ny < 0  then
+            print("oh no I died!")
+        end
     end
 end
 

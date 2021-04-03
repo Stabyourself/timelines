@@ -163,7 +163,7 @@ return {
       properties = {},
       encoding = "base64",
       compression = "zlib",
-      data = "eAHt0uGqwjAMBlB/ePH93/gqMvgsaWexysQjDNM2SbvTnU+n09nzlMGV6e2/210c5Tf6LladcbTHM2urztHrc6T7uJ0xTXpnXjWfe1Xxqn1m+hztPm5n/+SZqnv45P7tXb2yd75L2/ebxkd6D/dx/3JecVj57e2dY/t2qj23tb0eVW3OZZ+Vce7xLXHPsnWp3qfNqXrt5VTr75yr3uNIc+9896P2Tv+ZM2ad+C4w49fmtobt+jZu84z7ApvZ9t/PHK9s9dX/uNJqCqRfzs/E2aOKZ3r9em76zVhk3V480/fXc9Oytfi7TuSTuTNx29e4L5Cu/azHlax5Jn6sNhoJpOcor1rL2lFc1ZqrBdKxzhjPZn0vHnewmgJpeLkuzD5Z34tzP/FYoGe4cn58AqspsMo9e4oJECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBwRIF/kjYHXA=="
+      data = "eAHt1duKwjAQAFAfXPf//3gbJHQMmbTa6FY4hZLJddIzgtfL5XL17jJYmN7+lFqc5Rn9LmbdcZRjz9yse2TnnKke5Y7RJLvzrPGYqxfPyvPMOWerR7n7J+/Uq8Mn87e1OpL7thxW3/bcb+rHmvz3vY/U40zfcdTxiMPR3HH/1j1Gv/9Z9ag5ZrfxO78lzupRbap573vqXGnr+nZdHY9tXFPG4zkz45izxjH3GeNoWe/cM4pzNe7Z1bnabq3pzb9zrNwrPvWee9q4T3wXOFKr1rDUoHdeu04/F2j98pXjmawW5XzPfoFYj/27HleOaqEej1ZbvVfrEf8f4hm9eOsO5leB6LeO3qOfpYnvMzUYndvm0V8FXnGLe/bEazbRlkD03Frbzse9o7jdp58LRMd8VT4T92dxvttMKxANf5fJZ9+4P4vbnPq5QGY4czzPbqYVmOXenqtPgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgACBswn8AZE8B/w="
     },
     {
       type = "objectgroup",
@@ -204,7 +204,9 @@ return {
           rotation = 0,
           gid = 2,
           visible = true,
-          properties = {}
+          properties = {
+            ["transcendent"] = true
+          }
         },
         {
           id = 24,
@@ -246,7 +248,9 @@ return {
           rotation = 0,
           gid = 3,
           visible = true,
-          properties = {}
+          properties = {
+            ["transcendent"] = true
+          }
         }
       }
     }
