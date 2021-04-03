@@ -10,16 +10,21 @@ inspect = function(v, o) print(require "lib.inspect"(v, o)) end -- good code
 
 local tiny = require("lib.tiny")
 
-
-local FrameDebug3 = require "lib.FrameDebug3"
 local baton = require "lib.baton"
-local gamestate = require "lib.gamestate"
-local game = require "game"
+local FrameDebug3 = require "lib.FrameDebug3"
+
+-- evil globals go in this cage so they can't escape --
+gamestate = require "lib.gamestate"
+require "game"
+require "timeline"
+controls = baton.new(require "controls")
+-------------------------------------------------------
+
+
 
 function love.load()
-    controls = baton.new(require "controls")
-
     gamestate.registerEvents()
+    gamestate.switch(timeline)
     gamestate.switch(game)
 end
 

@@ -44,7 +44,6 @@ local function change_state(stack_offset, to, ...)
 	initialized_states[to] = __NULL__
 
 	stack[#stack+stack_offset] = to
-	state_is_dirty = true
 	return (to.enter or __NULL__)(to, pre, ...)
 end
 
@@ -66,7 +65,6 @@ function GS.pop(...)
 	local pre, to = stack[#stack], stack[#stack-1]
 	stack[#stack] = nil
 	;(pre.leave or __NULL__)(pre)
-	state_is_dirty = true
 	return (to.resume or __NULL__)(to, pre, ...)
 end
 
@@ -99,15 +97,9 @@ end
 
 -- forward any undefined functions
 setmetatable(GS, {__index = function(_, func)
-	-- call function only if at least one 'update' was called beforehand
-	-- (see issue #46)
-	if not state_is_dirty or func == 'update' then
-		state_is_dirty = false
-		return function(...)
-			return (stack[#stack][func] or __NULL__)(stack[#stack], ...)
-		end
+	return function(...)
+		return (stack[#stack][func] or __NULL__)(stack[#stack], ...)
 	end
-	return __NULL__
 end})
 
 return GS

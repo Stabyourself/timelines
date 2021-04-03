@@ -22,21 +22,22 @@ function Player:filter(other)
     return "slide"
 end
 
+Player.runAccel = 500
+Player.brakeAccel = 800
+Player.runAccel = 500
+Player.maxSpeed = 100
+
+Player.jumpSpeed = 210
+Player.totalAirJumps = 1
+
+Player.gravity = 800
+Player.maxYSpeed = 300
+
 function Player:initialize(level, x, y)
     self.level = level
     Entity.initialize(self, level, x+2, y-12, 12, 12)
 
-    self.runAccel = 500
-    self.brakeAccel = 800
-    self.maxSpeed = 100
-
-    self.jumpSpeed = 210
-    self.totalAirJumps = 1
     self.airJumpsLeft = self.totalAirJumps
-
-    self.gravity = 800
-    self.maxYSpeed = 300
-
     self.keyCount = 0
 end
 

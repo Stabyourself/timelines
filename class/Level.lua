@@ -12,7 +12,9 @@ local tiny = require "lib.tiny"
 
 local allSystems = require "systemLoader"
 
-function Level:initialize(path)
+function Level:initialize(gamestate, path)
+    self.gamestate = gamestate
+
     self.world = bump.newWorld()
     self.world.level = self -- I never know if this is good code
     self.map = sti(path, {"bump"})
@@ -126,6 +128,7 @@ function Level:mousepressed(x, y, button)
     self.player.vx = 0
     self.player.vy = 0
     self.world:update(self.player, wx, wy)
+    self.cameraFocus = self.player
 end
 
 return Level

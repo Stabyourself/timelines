@@ -1,9 +1,10 @@
-local game = {}
+game = gamestate.new()
 
 local Level = require "class.Level"
 
 function game:init()
-    self.level = Level:new("levels/level1.lua")
+    self.activeNode = timeline.rootNode
+    self.level = Level:new(self, "levels/level1.lua")
 end
 
 function game:enter(previous)
@@ -11,8 +12,11 @@ function game:enter(previous)
 end
 
 function game:update(dt)
-
     self.level:update(dt)
+
+    if controls:pressed("opentimeline") then
+        gamestate.push(timeline)
+    end
 end
 
 function game:draw()

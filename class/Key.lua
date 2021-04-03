@@ -14,6 +14,11 @@ function Key:filter(other)
     return "slide"
 end
 
+Key.bobDistance = 2
+Key.bobTime = 3
+
+Key.wobbleTime = 1.5
+Key.wobbleDistance = 0.1
 
 function Key:initialize(level, x, y, transcendent)
     self.level = level
@@ -24,12 +29,8 @@ function Key:initialize(level, x, y, transcendent)
     self.goalY = self.y
 
     self.bobStart = self.y
-    self.bobDistance = 2
-    self.bobTime = 3
     self.bobTimer = 0
 
-    self.wobbleTime = 1.5
-    self.wobbleDistance = 0.1
     self.wobbleTimer = 0
 end
 

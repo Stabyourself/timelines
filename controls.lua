@@ -15,6 +15,8 @@ return {
 
         camzoomin = {'key:pageup'},
         camzoomout = {'key:pagedown'},
+
+        opentimeline = {'key:return'},
     },
     pairs = {
         camera = {'camleft', 'camright', 'camup', 'camdown'}
