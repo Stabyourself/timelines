@@ -41,7 +41,10 @@ return {
       tiles = {
         {
           id = 0,
-          type = "start"
+          type = "start",
+          properties = {
+            ["type"] = "start"
+          }
         },
         {
           id = 1,
@@ -52,6 +55,7 @@ return {
         },
         {
           id = 2,
+          type = "door",
           properties = {
             ["transcendent"] = false
           }
@@ -177,10 +181,10 @@ return {
         {
           id = 21,
           name = "",
-          type = "start",
+          type = "",
           shape = "rectangle",
-          x = 848,
-          y = 208,
+          x = 416,
+          y = 112,
           width = 16,
           height = 16,
           rotation = 0,
@@ -191,7 +195,7 @@ return {
         {
           id = 22,
           name = "",
-          type = "key",
+          type = "",
           shape = "rectangle",
           x = 784,
           y = 256,
@@ -205,7 +209,7 @@ return {
         {
           id = 24,
           name = "",
-          type = "key",
+          type = "",
           shape = "rectangle",
           x = 416,
           y = 96,

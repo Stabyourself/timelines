@@ -1,5 +1,6 @@
 local Entity = require "class.Entity"
 local Key = require "class.Key"
+local Door = require "class.Door"
 
 local Player = class("Player", Entity)
 
@@ -12,17 +13,25 @@ function Player:initialize(level, x, y)
     self.maxSpeed = 100
 
     self.jumpSpeed = 210
-    self.totalAirJumps = 1
+    self.totalAirJumps = 2
     self.airJumpsLeft = self.totalAirJumps
 
     self.gravity = 800
 
     self.mask = {
-        Key
+        Key,
+        Door,
     }
 end
 
-function Player:collide(obj)
+function Player:collide(other)
+    if other:isInstanceOf(Key) then
+        other:queueRemove()
+    end
+
+    if other:isInstanceOf(Door) then
+        other:queueRemove()
+    end
 end
 
 return Player

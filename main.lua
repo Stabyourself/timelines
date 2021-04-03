@@ -6,7 +6,7 @@ require "environment"
 require "run"
 
 class = require("lib.middleclass")
-inspect = function(v) print(require "lib.inspect"(v)) end -- good code
+inspect = function(v, o) print(require "lib.inspect"(v, o)) end -- good code
 
 local tiny = require("lib.tiny")
 

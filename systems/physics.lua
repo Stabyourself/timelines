@@ -6,17 +6,32 @@ physics.filter = tiny.requireAll("x", "y", "vx", "vy", "w", "h")
 function physics:process(e, dt)
     e.onGround = false
 
-    local future_x = e.x + e.vx * dt
-    local future_y = e.y + e.vy * dt
 
-    local next_x, next_y, cols = e.world:move(e, future_x, future_y, e.filter)
+    local goalX
+    local goalY
 
-    for _, col in ipairs(cols) do
-        physics.resolveCollision(e, col.normal.x, col.normal.y)
+    if e.goalX then
+        goalX = e.goalX
+        goalY = e.goalY
+    else
+        goalX = e.x + e.vx * dt
+        goalY = e.y + e.vy * dt
     end
 
-    e.x = next_x
-    e.y = next_y
+    local nextX, nextY, cols = e.world:move(e, goalX, goalY, e.filter)
+
+    for _, col in ipairs(cols) do
+        if col.type == "cross" then
+            if e.collide then
+                e:collide(col.other)
+            end
+        else
+            physics.resolveCollision(e, col.normal.x, col.normal.y)
+        end
+    end
+
+    e.x = nextX
+    e.y = nextY
 end
 
 function physics.resolveCollision(e, nx, ny) -- default collision resolvement only sets speed to 0

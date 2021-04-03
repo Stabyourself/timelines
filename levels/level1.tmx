@@ -5,13 +5,17 @@
  </editorsettings>
  <tileset firstgid="1" name="markers" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="3" columns="3">
   <image source="../img/markers.png" trans="000000" width="54" height="18"/>
-  <tile id="0" type="start"/>
+  <tile id="0" type="start">
+   <properties>
+    <property name="type" value="start"/>
+   </properties>
+  </tile>
   <tile id="1" type="key">
    <properties>
     <property name="transcendent" type="bool" value="false"/>
    </properties>
   </tile>
-  <tile id="2">
+  <tile id="2" type="door">
    <properties>
     <property name="transcendent" type="bool" value="false"/>
    </properties>
@@ -51,9 +55,9 @@
   </data>
  </layer>
  <objectgroup color="#00aa00" id="7" name="markers">
-  <object id="21" type="start" gid="1" x="848" y="208" width="16" height="16"/>
-  <object id="22" type="key" gid="2" x="784" y="256" width="16" height="16"/>
-  <object id="24" type="key" gid="2" x="416" y="96" width="16" height="16"/>
+  <object id="21" gid="1" x="416" y="112" width="16" height="16"/>
+  <object id="22" gid="2" x="784" y="256" width="16" height="16"/>
+  <object id="24" gid="2" x="416" y="96" width="16" height="16"/>
   <object id="25" gid="3" x="592" y="96" width="16" height="16"/>
   <object id="26" gid="3" x="1056" y="128" width="16" height="16"/>
  </objectgroup>

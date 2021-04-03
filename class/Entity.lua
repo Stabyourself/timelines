@@ -8,7 +8,7 @@ function Entity.filter(item, other)
     end
 
     if (item.mask and intablei(item.mask, other.class)) or (other.mask and intablei(other.mask, item.class)) then
-        return false
+        return "cross"
     end
 
     return "slide"
@@ -32,6 +32,15 @@ end
 
 function Entity:draw()
     love.graphics.rectangle("line", self.x+.5, self.y+.5, self.w-1, self.h-1)
+end
+
+function Entity:queueRemove()
+    self.removeMe = true
+end
+
+function Entity:remove()
+    self.level.world:remove(self)
+    self.level.ecs:remove(self)
 end
 
 return Entity

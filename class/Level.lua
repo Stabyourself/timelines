@@ -6,6 +6,7 @@ local camera = require "lib.camera"
 
 local Player = require "class.Player"
 local Key = require "class.Key"
+local Door = require "class.Door"
 
 local tiny = require "lib.tiny"
 
@@ -23,8 +24,7 @@ function Level:initialize(path)
     self.entities = {}
 
     for _, object in ipairs(self.map.layers.markers.objects) do
-        local type = object.type
-        inspect(type)
+        local type = self.map.tiles[object.gid].type
 
         if type == "start" then
             local player = Player:new(self, object.x, object.y)
@@ -40,6 +40,13 @@ function Level:initialize(path)
 
             self.ecs:addEntity(key)
         end
+
+        if type == "door" then
+            local door = Door:new(self, object.x, object.y)
+            table.insert(self.entities, door)
+
+            self.ecs:addEntity(door)
+        end
     end
 
     self.camera = camera()
@@ -49,6 +56,15 @@ end
 
 function Level:update(dt)
     self.ecs:update(dt)
+
+    for i = #self.entities, 1, -1 do
+        local v = self.entities[i]
+
+        if v.removeMe then
+            v:remove()
+            table.remove(self.entities, i, i)
+        end
+    end
 
     -- camera
     self.camera:lockWindow(
