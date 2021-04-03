@@ -2,15 +2,7 @@ local Entity = class("Entity")
 
 local DEFAULT_GRAVITY = 200
 
-function Entity.filter(item, other)
-    if other.properties and other.properties.platform and item.y + item.h > other.y then
-        return false
-    end
-
-    if (item.mask and intablei(item.mask, other.class)) or (other.mask and intablei(other.mask, item.class)) then
-        return "cross"
-    end
-
+function Entity:filter(other)
     return "slide"
 end
 

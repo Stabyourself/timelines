@@ -2,9 +2,23 @@ local Entity = require "class.Entity"
 local Key = class("Key", Entity)
 local keyDrawable = require "class.drawables.keyDrawable"
 
-function Key:initialize(level, x, y)
+function Key:filter(other)
+    if other.properties and other.properties.platform and self.y + self.h > other.y then
+        return false
+    end
+
+    if other.class and other.class.name == "Player" then
+        return "cross"
+    end
+
+    return "slide"
+end
+
+
+function Key:initialize(level, x, y, transcendent)
     self.level = level
     Entity.initialize(self, level, x+1, y-12, 15, 6)
+    self.transcendent = transcendent
 
     self.goalX = self.x
     self.goalY = self.y
@@ -20,7 +34,7 @@ function Key:initialize(level, x, y)
 end
 
 function Key:draw()
-    keyDrawable:draw(self.x, self.y, self.r)
+    keyDrawable:draw(self.x+7.5, self.y+3, self.r)
 end
 
 return Key

@@ -18,6 +18,9 @@ function Level:initialize(path)
     self.map = sti(path, {"bump"})
     self.map:bump_init(self.world)
 
+    local r, g, b = unpack(self.map.backgroundcolor)
+    love.graphics.setBackgroundColor(r/255, g/255, b/255)
+
     self.ecs = tiny.world(unpack(allSystems))
 
     -- load objects
@@ -27,22 +30,22 @@ function Level:initialize(path)
         local type = self.map.tiles[object.gid].type
 
         if type == "start" then
-            local player = Player:new(self, object.x, object.y)
-            table.insert(self.entities, player)
+            self.player = Player:new(self, object.x, object.y)
+            table.insert(self.entities, self.player)
 
-            self.ecs:addEntity(player)
-            self.cameraFocus = player
+            self.ecs:addEntity(self.player)
+            self.cameraFocus = self.player
         end
 
         if type == "key" then
-            local key = Key:new(self, object.x, object.y)
+            local key = Key:new(self, object.x, object.y, object.properties.trancendent)
             table.insert(self.entities, key)
 
             self.ecs:addEntity(key)
         end
 
         if type == "door" then
-            local door = Door:new(self, object.x, object.y)
+            local door = Door:new(self, object.x, object.y, object.properties.trancendent)
             table.insert(self.entities, door)
 
             self.ecs:addEntity(door)
@@ -51,7 +54,7 @@ function Level:initialize(path)
 
     self.camera = camera()
     self.camera:lookAt(self.cameraFocus.x+self.cameraFocus.w/2, self.cameraFocus.y+self.cameraFocus.h/2)
-    self.camera:zoomTo(3)
+    self.camera:zoomTo(SCALE)
 end
 
 function Level:update(dt)
@@ -89,6 +92,7 @@ function Level:draw()
 
     -- debug
     if DEBUG then
+        love.graphics.setColor(1, 1, 1, 0.4)
         self.map:drawLayer(self.map.layers.markers)
         love.graphics.setColor(1, 0, 0)
         love.graphics.push()

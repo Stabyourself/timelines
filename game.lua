@@ -11,11 +11,19 @@ function game:enter(previous)
 end
 
 function game:update(dt)
+
     self.level:update(dt)
 end
 
 function game:draw()
     self.level:draw()
+
+    love.graphics.push()
+    love.graphics.scale(SCALE, SCALE)
+
+    -- UI!
+    love.graphics.print("Keys: " .. self.level.player.keyCount)
+    love.graphics.pop()
 end
 
 return game
