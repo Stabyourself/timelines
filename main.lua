@@ -19,6 +19,7 @@ require "menu"
 require "game"
 require "timetable"
 controls = baton.new(require "controls")
+timer = require "lib.timer"
 -------------------------------------------------------
 
 
@@ -31,6 +32,7 @@ function love.load()
 end
 
 function love.update(dt)
+    timer.update(dt)
     controls:update()
 end
 

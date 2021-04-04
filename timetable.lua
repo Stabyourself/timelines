@@ -35,11 +35,20 @@ end
 
 function timetable:enter(from)
     self.from = from
+
+    if self.from ~= menu then
+        self.offY = 225
+        timer.tween(0.3, self, {offY = 0}, 'out-quad')
+    end
 end
 
 function timetable:update(dt)
-    if controls:pressed("opentimeline") then
+    local function backToGame()
         gamestate.pop()
+    end
+
+    if controls:pressed("opentimeline") then
+        timer.tween(0.3, self, {offY = 255}, 'out-quad', backToGame)
     end
 end
 
@@ -50,6 +59,7 @@ function timetable:draw()
 
     love.graphics.push()
     love.graphics.scale(SCALE, SCALE)
+    love.graphics.translate(0, self.offY)
 
     love.graphics.draw(timetable_back)
 
@@ -93,14 +103,12 @@ function timetable.drawArrow(x, y, w, h)
     love.graphics.draw(timetable_arrow, timetable_quad_left, x, y+h-11)
 
     if h > 0 then
-        love.graphics.draw(timetable_arrow, timetable_quad_top, x, y)
         love.graphics.draw(timetable_arrow, timetable_quad_vertical, x, y, 0, 1, h-10)
     end
 
     if w > 0 then
         love.graphics.draw(timetable_arrow, timetable_quad_horizontal, x+4, y+h-11, 0, w-16, 1)
     end
-
 
     love.graphics.draw(timetable_arrow, timetable_quad_end, x+w-12, y+h-16)
 end
