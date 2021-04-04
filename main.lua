@@ -15,8 +15,9 @@ local FrameDebug3 = require "lib.FrameDebug3"
 
 -- evil globals go in this cage so they can't escape --
 gamestate = require "lib.gamestate"
+require "menu"
 require "game"
-require "timeline"
+require "timetable"
 controls = baton.new(require "controls")
 -------------------------------------------------------
 
@@ -24,7 +25,8 @@ controls = baton.new(require "controls")
 
 function love.load()
     gamestate.registerEvents()
-    gamestate.switch(timeline)
+    gamestate.switch(menu)
+    gamestate.switch(timetable)
     gamestate.switch(game)
 end
 

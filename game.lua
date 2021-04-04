@@ -1,9 +1,10 @@
+local Node = require "class.Node"
 game = gamestate.new()
 
 local Level = require "class.Level"
 
 function game:init()
-    self.activeNode = timeline.rootNode
+    self.activeNode = timetable.rootNode
     self.level = Level:new(self, "levels/level1.lua")
 end
 
@@ -15,7 +16,7 @@ function game:update(dt)
     self.level:update(dt)
 
     if controls:pressed("opentimeline") then
-        gamestate.push(timeline)
+        gamestate.push(timetable)
     end
 end
 
@@ -33,5 +34,3 @@ end
 function game:mousepressed(x, y, button)
     self.level:mousepressed(x, y)
 end
-
-return game

@@ -1,8 +1,11 @@
 local Node = class("Node")
 
-function Node:initialize(parent)
+function Node:initialize(parent, nodeTime, timeline)
     self.parent = parent
-    self.lifeTime = 0
+    self.nodeTime = nodeTime
+    self.timeline = timeline
+
+    self.children = {}
 end
 
 return Node
