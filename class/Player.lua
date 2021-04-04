@@ -36,14 +36,14 @@ Player.totalAirJumps = 1
 Player.gravity = 800
 Player.maxYSpeed = 300
 
+Player.drawable = {
+    img = img,
+    x = -1,
+}
+
 function Player:initialize(level, x, y)
     self.level = level
     Entity.initialize(self, level, x+2, y-14, 12, 14)
-
-    self.drawable = {
-        img = img,
-        x = -1,
-    }
 
     self.airJumpsLeft = self.totalAirJumps
     self.keyCount = 0

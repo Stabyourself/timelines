@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="116" height="116" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#55aaff" nextlayerid="9" nextobjectid="27">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="116" height="116" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#55aaff" nextlayerid="9" nextobjectid="29">
  <editorsettings>
   <export target="level1.lua" format="lua"/>
  </editorsettings>
- <tileset firstgid="1" name="markers" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="3" columns="3">
-  <image source="../img/markers.png" trans="000000" width="54" height="18"/>
+ <tileset firstgid="1" name="markers" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="4" columns="4">
+  <image source="../img/markers.png" trans="000000" width="72" height="18"/>
   <tile id="0" type="start">
    <properties>
     <property name="type" value="start"/>
@@ -20,8 +20,9 @@
     <property name="transcendent" type="bool" value="false"/>
    </properties>
   </tile>
+  <tile id="3" type="altar"/>
  </tileset>
- <tileset firstgid="4" name="tiles" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="49" columns="7">
+ <tileset firstgid="5" name="tiles" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="49" columns="7">
   <image source="../img/tiles.png" width="128" height="128"/>
   <tile id="0">
    <properties>
@@ -96,7 +97,7 @@
  </tileset>
  <layer id="3" name="world" width="116" height="116">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup color="#00aa00" id="7" name="markers">
@@ -113,5 +114,7 @@
     <property name="transcendent" type="bool" value="true"/>
    </properties>
   </object>
+  <object id="27" gid="4" x="288" y="384" width="16" height="16"/>
+  <object id="28" gid="4" x="1424" y="384" width="16" height="16"/>
  </objectgroup>
 </map>

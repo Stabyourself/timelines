@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 27,
+  nextobjectid = 29,
   backgroundcolor = { 85, 170, 255 },
   properties = {},
   tilesets = {
@@ -20,9 +20,9 @@ return {
       tileheight = 16,
       spacing = 2,
       margin = 1,
-      columns = 3,
+      columns = 4,
       image = "../img/markers.png",
-      imagewidth = 54,
+      imagewidth = 72,
       imageheight = 18,
       transparentcolor = "#000000",
       objectalignment = "unspecified",
@@ -37,7 +37,7 @@ return {
       },
       properties = {},
       wangsets = {},
-      tilecount = 3,
+      tilecount = 4,
       tiles = {
         {
           id = 0,
@@ -59,12 +59,16 @@ return {
           properties = {
             ["transcendent"] = false
           }
+        },
+        {
+          id = 3,
+          type = "altar"
         }
       }
     },
     {
       name = "tiles",
-      firstgid = 4,
+      firstgid = 5,
       tilewidth = 16,
       tileheight = 16,
       spacing = 2,
@@ -216,7 +220,7 @@ return {
       properties = {},
       encoding = "base64",
       compression = "zlib",
-      data = "eAHt2stu2zAUhGEv2nTRZtNk0/b937MkCgIEoZFGJHtMGr8AwRJ1eNE3kp1FPh6Px8fA/pn6rrD9TItQ97HKGiOclIHbvooVef57WtzcVB15Rrx1/hwqJ7edPH3riEo3N1VHnhEp+XOonNx28vStIyrd3FQdeUak5M+hcnLbydO3jqh0c1N15BmRkj+HysltJ0/fOqLSzU3VkWdESv4cKie3nTx964hKNzdVR54RKflzqJzcdvL0rSMq3dxUHXlGpOTPoXJy28nTt46odHNTdavk+SthzV7jlzTmzJ087wm0mf5O3fP+594wp9Wj+Z4OPuGieqbd9lXez0JRMp2ZYRm7/bzKtq2POHdzU3Wr5ZnN8jsZtalMo+Zv51E5ue0jeX5Pi/mR9vd2UZud15k+e+lubqpuJM/yPz8jYzzbr8yfM11hUzm57VdZ5HdQvX+z8izveX7Xz/a3dP3OvkI+d9fg5qbqVJ7FOPdTNSXPXKO+d8s4Jaf22cjX1dra9vp70Tk+yv6ub3R9e88958W6/mzHqa+V47Ymn5dr5fOq5ui6anMyvKrJGdfbUeaqre73v47Vvb9ieza8yuvseptBzu2ovq2LPH/F3NQ9ZdfWv9daZZnHf+am7v0V27NznWev+1mW5On/PTP6jI3kWf8m1s/E0XHvczKj36jRTv2v8vyaCur9ToZ1rjNy6R1jpzxG13qVpzKss3KO1TgR7aNGO/XvzbPk4GSZa5657ZTH6Fqzc51Jj3vdXx33jDurz6jRTv2zWZ3Bt3R+d6/7q+NZ2fSMs1Meo2vNPiqDme09OczqM2q0U/+Zec7ynz3OTnmMrnW23YrjjRrt1H9Ff9aEAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAgisKvAXkNBuMQ=="
+      data = "eAHt2stu2zAUhGFv2nTRZtNk0/b9n7MkCgIEoZFGJHtMGr8AwRJ1eNE3kp1FPh6Px8fA/pn6rrD9TItQ97HKGiOclIHbvooVef57WtzcVB15Rrx1/hwqJ7edPH3riEo3N1VHnhEp+XOonNx28vStIyrd3FQdeUak5M+hcnLbydO3jqh0c1N15BmRkj+HysltJ0/fOqLSzU3VkWdESv4cKie3nTx964hKNzdVR54RKflzqJzcdvL0rSMq3dxUHXlGpOTPoXJy28nTt46odHNTdavk+SthzV7jlzTmzJ087wm0mf5O3fP+594wp9Wj+Z4OPuGieqbd9lXez0JRMp2ZYRm7/bzKtq2POHdzU3Wr5ZnN8jsZtalMo+Zv51E5ue0jeX5Pi/mR9vd2UZud15k+e+lubqpuJM/yPz8jYzzbr8yfM11hUzm57VdZ5HdQvX+z8izveX7Xz/a3dP3OvkI+d9fg5qbqVJ7FOPdTNSXPXKO+d8s4Jaf22cjX1dra9vp70Tk+yv6ub3R9e88958W6/mzHqa+V47Ymn5dr5fOq5ui6anMyvKrJGdfbUeaqre73v47Vvb9ieza8yuvseptBzu2ovq2LPH/F3NQ9ZdfWv9daZZnHf+am7v0V27NznWev+1mW5On/PTP6jI3kWf8m1s/E0XHvczKj36jRTv2v8vyaCur9ToZ1rjNy6R1jpzxG13qVpzKss3KO1TgR7aNGO/XvzbPk4GSZa5657ZTH6Fqzc51Jj3vdXx33jDurz6jRTv2zWZ3Bt3R+d6/7q+NZ2fSMs1Meo2vNPiqDme09OczqM2q0U/+Zec7ynz3OTnmMrnW23YrjjRrt1H9Ff9aEAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAgisKvAX2Ot07g=="
     },
     {
       type = "objectgroup",
@@ -304,6 +308,34 @@ return {
           properties = {
             ["transcendent"] = true
           }
+        },
+        {
+          id = 27,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 288,
+          y = 384,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 4,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 28,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1424,
+          y = 384,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 4,
+          visible = true,
+          properties = {}
         }
       }
     }

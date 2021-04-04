@@ -26,7 +26,7 @@ timer = require "lib.timer"
 function love.load()
     gamestate.registerEvents()
     gamestate.switch(game)
-    gamestate.push(timetable, false)
+    gamestate.push(timetable, true)
 end
 
 function love.update(dt)

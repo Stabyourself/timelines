@@ -7,6 +7,7 @@ local camera = require "lib.camera"
 local Player = require "class.Player"
 local Key = require "class.Key"
 local Door = require "class.Door"
+local Altar = require "class.Altar"
 
 local tiny = require "lib.tiny"
 
@@ -51,6 +52,11 @@ function Level:initialize(gamestate, path)
             table.insert(self.entities, door)
 
             self.ecs:addEntity(door)
+        end
+
+        if type == "altar" then
+            local altar = Altar:new(self, object.x, object.y)
+            table.insert(self.entities, altar)
         end
     end
 
@@ -99,8 +105,13 @@ function Level:draw()
     self.map:drawLayer(self.map.layers.world)
 
     for _, entity in ipairs(self.entities) do
-        entity:draw()
+        if entity ~= self.player then
+            entity:draw()
+        end
     end
+
+    -- draw player last
+    self.player:draw()
 
     -- debug
     if DEBUG then

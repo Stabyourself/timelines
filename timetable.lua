@@ -6,9 +6,10 @@ timetable = gamestate.new()
 local timetable_back = love.graphics.newImage("img/timetable_back.png")
 local timetable_node = love.graphics.newImage("img/timetable_node.png")
 local timetable_node_active = love.graphics.newImage("img/timetable_node_active.png")
+local timeline_left = love.graphics.newImage("img/timeline_left.png")
 
 local timelineHeight = 24
-local timelineSecondWidth = 1
+local timelineSecondWidth = 2
 
 function timetable:init()
     timetable.rootNode = Node:new(nil, 0, 1)
@@ -19,24 +20,25 @@ function timetable:init()
     self.selectedNode = nil
 
     self.buttons = {
-        Button:new(20, 200, 105, 20, "Start from here", function() self:startOnNode(self.activeNode) end)
+        Button:new(20, 200, 105, 20, "Start from here", function() self:startOnNode(self.selectedNode) end)
     }
 
     self.buttons[1].active = false
 end
 
-function timetable:enter(from, transition)
+function timetable:enter(from, booted)
+    self.booted = booted or false
     self.from = from
     self.offY = 0
 
-    if self.from == game and transition ~= false then
+    if self.from == game and not booted then
         self.offY = 225
         timer.tween(0.3, self, {offY = 0}, 'out-quad')
     end
 end
 
 function timetable:update(dt)
-    if controls:pressed("opentimeline") then
+    if not self.booted and controls:pressed("opentimeline") then
         self:close()
     end
 end
@@ -52,10 +54,14 @@ function timetable:draw()
 
     love.graphics.draw(timetable_back)
 
+    for y = 1, self.timelines do
+        love.graphics.draw(timeline_left, 0, 37+(y-1)*timelineHeight)
+    end
+
     love.graphics.printf("Timelines :D", 0, 5, 400, "center")
 
     self.nodeLocations = {}
-    self:drawNodeAndChildren(self.rootNode, 16, 48)
+    self:drawNodeAndChildren(self.rootNode, 32, 48)
 
     for _, button in ipairs(self.buttons) do
         button:draw()
@@ -72,7 +78,7 @@ function timetable:mousepressed(x, y, button)
 
     for _, nodeLocation in ipairs(self.nodeLocations) do
         if x > nodeLocation.x-8 and x <= nodeLocation.x+10 and y > nodeLocation.y-8 and y <= nodeLocation.y+10 then
-            game.selectedNode = nodeLocation.node
+            self.selectedNode = nodeLocation.node
             self.buttons[1].active = true
         end
     end
@@ -102,7 +108,7 @@ function timetable:drawNodeAndChildren(node, offX, offY)
     end
     local img = timetable_node
 
-    if node == game.selectedNode then
+    if node == self.selectedNode then
         img = timetable_node_active
     end
 
@@ -142,6 +148,6 @@ function timetable:close()
 end
 
 function timetable:startOnNode(node)
-    self.activeNode = timetable.node
+    game.activeNode = node
     self:close()
 end

@@ -2,7 +2,14 @@ local Entity = require "class.Entity"
 local Key = class("Key", Entity)
 
 local spriteDrawable = require "class.drawables.sprite"
-local img = love.graphics.newImage("img/key.png")
+
+Key.drawable = {
+    img = love.graphics.newImage("img/key.png"),
+    x = 7.5,
+    y = 3,
+    ox = 7.5,
+    oy = 3
+}
 
 function Key:filter(other)
     if other.properties and other.properties.platform and self.y + self.h > other.y then
@@ -34,14 +41,6 @@ function Key:initialize(level, x, y, transcendent)
     self.bobTimer = 0
 
     self.wobbleTimer = 0
-
-    self.drawable = {
-        img = img,
-        x = 7.5,
-        y = 3,
-        ox = 7.5,
-        oy = 3
-    }
 end
 
 function Key:draw()
