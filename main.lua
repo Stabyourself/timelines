@@ -34,6 +34,10 @@ end
 function love.update(dt)
     timer.update(dt)
     controls:update()
+
+    if controls:pressed("debug1") then
+        game:makeNode()
+    end
 end
 
 function love.keypressed(key)

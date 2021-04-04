@@ -34,3 +34,17 @@ end
 function game:mousepressed(x, y, button)
     self.level:mousepressed(x, y)
 end
+
+function game:makeNode()
+    local timeline = self.activeNode.timeline
+
+    if #self.activeNode.children > 0 then
+        timeline = timetable.timelines+1
+        timetable.timelines = timetable.timelines + 1
+    end
+
+    local node = Node:new(self.activeNode, love.math.random(30, 150), timeline)
+    table.insert(self.activeNode.children, node)
+
+    self.activeNode = node
+end

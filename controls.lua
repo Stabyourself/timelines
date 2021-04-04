@@ -5,8 +5,7 @@ return {
         up = {'key:w', 'axis:lefty-', 'button:dpup'},
         down = {'key:s', 'axis:lefty+', 'button:dpdown'},
 
-        jump = {'key:k', "key:space", 'button:a'},
-        shoot = {'key:j', 'button:x'},
+        jump = {"key:space", 'button:a'},
 
         camleft = {'key:left', 'axis:rightx-'},
         camright = {'key:right', 'axis:rightx+'},
@@ -17,6 +16,8 @@ return {
         camzoomout = {'key:pagedown'},
 
         opentimeline = {'key:return'},
+
+        debug1 = {"key:k"},
     },
     pairs = {
         camera = {'camleft', 'camright', 'camup', 'camdown'}

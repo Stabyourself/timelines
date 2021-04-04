@@ -10,27 +10,11 @@ local timelineHeight = 24
 local timelineSecondWidth = 0.8
 
 function timetable:init()
-    timetable.nodes = {}
-
     timetable.rootNode = Node:new(nil, 0, 1)
 
-    table.insert(timetable.nodes, timetable.rootNode)
+    timetable.timelines = 1
 
-    for i = 1, 3 do
-        local node = Node:new(timetable.rootNode, love.math.random(30, 150), i)
-        table.insert(timetable.rootNode.children, node)
-    end
-
-    local node = Node:new(timetable.rootNode.children[1], love.math.random(30, 150), 1)
-    table.insert(timetable.rootNode.children[1].children, node)
-
-    for i = 4, 6 do
-        local node = Node:new(timetable.rootNode.children[1], love.math.random(30, 150), i)
-        table.insert(timetable.rootNode.children[1].children, node)
-    end
-
-    local node = Node:new(timetable.rootNode.children[2], love.math.random(30, 150), 2)
-    table.insert(timetable.rootNode.children[2].children, node)
+    self.nodeLocations = {}
 end
 
 function timetable:enter(from)
@@ -63,32 +47,46 @@ function timetable:draw()
 
     love.graphics.draw(timetable_back)
 
-    love.graphics.translate(16, 32)
-
-    self.drawNodeAndChildren(self.rootNode)
+    self.nodeLocations = {}
+    self:drawNodeAndChildren(self.rootNode, 16, 32)
 
     love.graphics.pop()
 end
 
-function timetable.drawNodeAndChildren(node)
-    local lastOff = 0
+function timetable:mousepressed(x, y, button)
+    x = x/SCALE
+    y = y/SCALE
+
+    y = y - self.offY
+
+    for _, nodeLocation in ipairs(self.nodeLocations) do
+        if x > nodeLocation.x-8 and x <= nodeLocation.x+10 and y > nodeLocation.y-8 and y <= nodeLocation.y+10 then
+            game.activeNode = nodeLocation.node
+        end
+    end
+end
+
+function timetable:drawNodeAndChildren(node, offX, offY)
     for _, childNode in ipairs(node.children) do
         local timelineOffset = childNode.timeline - node.timeline
         local nodeTimeOffset = childNode.nodeTime
 
-        local offX = nodeTimeOffset*timelineSecondWidth
-        local offY = timelineHeight*timelineOffset
+        local w = nodeTimeOffset*timelineSecondWidth
+        local h = timelineHeight*timelineOffset
 
-        timetable.drawArrow(-1, 10+lastOff, offX, offY-lastOff)
-        lastOff = offY-8
+        local newX = offX + w
+        local newY = offY + h
+
+        timetable.drawArrow(offX-1, offY+10, w+1, h)
 
         love.graphics.push()
-        love.graphics.translate(offX, offY)
 
-        timetable.drawNodeAndChildren(childNode)
+        self:drawNodeAndChildren(childNode, newX, newY)
         love.graphics.pop()
     end
-    love.graphics.draw(timetable_node, 0, 0, 0, 1, 1, 8, 8)
+    love.graphics.draw(timetable_node, offX, offY, 0, 1, 1, 8, 8)
+
+    table.insert(self.nodeLocations, {node=node, x=offX, y=offY})
 end
 
 local timetable_arrow = love.graphics.newImage("img/timetable_arrow.png")
