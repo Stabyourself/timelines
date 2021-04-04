@@ -100,7 +100,7 @@
   </data>
  </layer>
  <objectgroup color="#00aa00" id="7" name="markers">
-  <object id="21" gid="1" x="672" y="368" width="16" height="16"/>
+  <object id="21" gid="1" x="288" y="384" width="16" height="16"/>
   <object id="22" gid="2" x="1040" y="512" width="16" height="16">
    <properties>
     <property name="transcendent" type="bool" value="true"/>

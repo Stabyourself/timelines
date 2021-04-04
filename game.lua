@@ -4,7 +4,7 @@ game = gamestate.new()
 local Level = require "class.Level"
 
 function game:init()
-    self.activeNode = timetable.rootNode
+    self.nodeStartTime = love.timer.getTime()
     self.level = Level:new(self, "levels/level1.lua")
 end
 
@@ -43,8 +43,9 @@ function game:makeNode()
         timetable.timelines = timetable.timelines + 1
     end
 
-    local node = Node:new(self.activeNode, love.math.random(30, 150), timeline)
+    local node = Node:new(self.activeNode, love.timer.getTime()-self.nodeStartTime, timeline)
     table.insert(self.activeNode.children, node)
 
     self.activeNode = node
+    self.nodeStartTime = love.timer.getTime()
 end
