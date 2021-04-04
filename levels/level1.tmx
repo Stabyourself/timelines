@@ -21,8 +21,8 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="4" name="tiles" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="4" columns="4">
-  <image source="../img/tiles.png" trans="000000" width="72" height="18"/>
+ <tileset firstgid="4" name="tiles" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="49" columns="7">
+  <image source="../img/tiles.png" width="128" height="128"/>
   <tile id="0">
    <properties>
     <property name="collidable" type="bool" value="true"/>
@@ -48,10 +48,55 @@
     <property name="spikes" type="bool" value="true"/>
    </properties>
   </tile>
+  <tile id="7">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer id="3" name="world" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eAHt1duKwjAQAFAfXPf//3gbJHQMmbTa6FY4hZLJddIzgtfL5XL17jJYmN7+lFqc5Rn9LmbdcZRjz9yse2TnnKke5Y7RJLvzrPGYqxfPyvPMOWerR7n7J+/Uq8Mn87e1OpL7thxW3/bcb+rHmvz3vY/U40zfcdTxiMPR3HH/1j1Gv/9Z9ag5ZrfxO78lzupRbap573vqXGnr+nZdHY9tXFPG4zkz45izxjH3GeNoWe/cM4pzNe7Z1bnabq3pzb9zrNwrPvWee9q4T3wXOFKr1rDUoHdeu04/F2j98pXjmawW5XzPfoFYj/27HleOaqEej1ZbvVfrEf8f4hm9eOsO5leB6LeO3qOfpYnvMzUYndvm0V8FXnGLe/bEazbRlkD03Frbzse9o7jdp58LRMd8VT4T92dxvttMKxANf5fJZ9+4P4vbnPq5QGY4czzPbqYVmOXenqtPgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgACBswn8AZE8B/w=
+   eAHt1slu2zAQANAcmvTQ5pLk0vb//7MkAsLMQCNSSxwFeAIIcRkuemPZfnu4xvWnHOM1KW87j/ijzDuz7DzGpml7n3XTJpPBMSd/y7xa/k3Onwk7mp+ZPY7EXCkf9TlaTs7MQeYzyk027zP7r5aP+qz1nbjXleXkXvvHfY7k41dZ7Hcpz3HRb9buc/LVRz+Sj5dy+PobfGSNr37+tn/NyRWukWV9B7LP/1n5aO9ZfdfWylMZ31Ku4Lv1DFk+mtHa57/lo8Zk31ttneYcc1vHs/+5sb//XpmpL+Vuq8+945tl82r3aNH6+3uMWVprFLM0nvXN5GAUU3PUX0s5y/r6eervAiPvtfFoWN2X4mOcdi4Q/fLI9ZEsF3V917xAn4/5WR8j13IhHx+tRq29+eh/E/o1luqjMxi/CfR+t9732mO59WVLDtbWjfto3wT2uPVzZuq33dRGAr3nKDaO93PX6nGedi7QO+ZR+Ug/P6vns41Egd7wZxncWvr5WT3uqZ0LZIZn9ue7G4kCZ7nHdbUJECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBwNYH/xOgM1A==
   </data>
  </layer>
  <objectgroup color="#00aa00" id="7" name="markers">

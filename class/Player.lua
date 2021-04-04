@@ -1,6 +1,7 @@
 local Entity = require "class.Entity"
 local Key = require "class.Key"
 local Door = require "class.Door"
+local playerDrawable = require "class.drawables.playerDrawable"
 
 local Player = class("Player", Entity)
 
@@ -35,7 +36,7 @@ Player.maxYSpeed = 300
 
 function Player:initialize(level, x, y)
     self.level = level
-    Entity.initialize(self, level, x+2, y-12, 12, 12)
+    Entity.initialize(self, level, x+2, y-14, 12, 14)
 
     self.airJumpsLeft = self.totalAirJumps
     self.keyCount = 0
@@ -59,6 +60,10 @@ function Player:collide(other, nx, ny)
             print("oh no I died!")
         end
     end
+end
+
+function Player:draw()
+    playerDrawable:draw(self.x, self.y)
 end
 
 return Player

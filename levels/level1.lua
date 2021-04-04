@@ -69,11 +69,10 @@ return {
       tileheight = 16,
       spacing = 2,
       margin = 1,
-      columns = 4,
+      columns = 7,
       image = "../img/tiles.png",
-      imagewidth = 72,
-      imageheight = 18,
-      transparentcolor = "#000000",
+      imagewidth = 128,
+      imageheight = 128,
       objectalignment = "unspecified",
       tileoffset = {
         x = 0,
@@ -86,7 +85,7 @@ return {
       },
       properties = {},
       wangsets = {},
-      tilecount = 4,
+      tilecount = 49,
       tiles = {
         {
           id = 0,
@@ -141,6 +140,60 @@ return {
             ["collidable"] = true,
             ["spikes"] = true
           }
+        },
+        {
+          id = 7,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 8,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 9,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 14,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 15,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 16,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 21,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 22,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 23,
+          properties = {
+            ["collidable"] = true
+          }
         }
       }
     }
@@ -163,7 +216,7 @@ return {
       properties = {},
       encoding = "base64",
       compression = "zlib",
-      data = "eAHt1duKwjAQAFAfXPf//3gbJHQMmbTa6FY4hZLJddIzgtfL5XL17jJYmN7+lFqc5Rn9LmbdcZRjz9yse2TnnKke5Y7RJLvzrPGYqxfPyvPMOWerR7n7J+/Uq8Mn87e1OpL7thxW3/bcb+rHmvz3vY/U40zfcdTxiMPR3HH/1j1Gv/9Z9ag5ZrfxO78lzupRbap573vqXGnr+nZdHY9tXFPG4zkz45izxjH3GeNoWe/cM4pzNe7Z1bnabq3pzb9zrNwrPvWee9q4T3wXOFKr1rDUoHdeu04/F2j98pXjmawW5XzPfoFYj/27HleOaqEej1ZbvVfrEf8f4hm9eOsO5leB6LeO3qOfpYnvMzUYndvm0V8FXnGLe/bEazbRlkD03Frbzse9o7jdp58LRMd8VT4T92dxvttMKxANf5fJZ9+4P4vbnPq5QGY4czzPbqYVmOXenqtPgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgACBswn8AZE8B/w="
+      data = "eAHt1slu2zAQANAcmvTQ5pLk0vb//7MkAsLMQCNSSxwFeAIIcRkuemPZfnu4xvWnHOM1KW87j/ijzDuz7DzGpml7n3XTJpPBMSd/y7xa/k3Onwk7mp+ZPY7EXCkf9TlaTs7MQeYzyk027zP7r5aP+qz1nbjXleXkXvvHfY7k41dZ7Hcpz3HRb9buc/LVRz+Sj5dy+PobfGSNr37+tn/NyRWukWV9B7LP/1n5aO9ZfdfWylMZ31Ku4Lv1DFk+mtHa57/lo8Zk31ttneYcc1vHs/+5sb//XpmpL+Vuq8+945tl82r3aNH6+3uMWVprFLM0nvXN5GAUU3PUX0s5y/r6eervAiPvtfFoWN2X4mOcdi4Q/fLI9ZEsF3V917xAn4/5WR8j13IhHx+tRq29+eh/E/o1luqjMxi/CfR+t9732mO59WVLDtbWjfto3wT2uPVzZuq33dRGAr3nKDaO93PX6nGedi7QO+ZR+Ug/P6vns41Egd7wZxncWvr5WT3uqZ0LZIZn9ue7G4kCZ7nHdbUJECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIECBwNYH/xOgM1A=="
     },
     {
       type = "objectgroup",
