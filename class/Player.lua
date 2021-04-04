@@ -1,7 +1,9 @@
 local Entity = require "class.Entity"
 local Key = require "class.Key"
 local Door = require "class.Door"
-local playerDrawable = require "class.drawables.playerDrawable"
+
+local spriteDrawable = require "class.drawables.sprite"
+local img = love.graphics.newImage("img/player.png")
 
 local Player = class("Player", Entity)
 
@@ -38,6 +40,11 @@ function Player:initialize(level, x, y)
     self.level = level
     Entity.initialize(self, level, x+2, y-14, 12, 14)
 
+    self.drawable = {
+        img = img,
+        x = -1,
+    }
+
     self.airJumpsLeft = self.totalAirJumps
     self.keyCount = 0
 end
@@ -63,7 +70,7 @@ function Player:collide(other, nx, ny)
 end
 
 function Player:draw()
-    playerDrawable:draw(self.x, self.y)
+    spriteDrawable:draw(self)
 end
 
 return Player
