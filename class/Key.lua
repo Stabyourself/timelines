@@ -5,10 +5,10 @@ local spriteDrawable = require "class.drawables.sprite"
 
 Key.drawable = {
     img = love.graphics.newImage("img/key.png"),
-    x = 7.5,
-    y = 3,
-    ox = 7.5,
-    oy = 3
+    x = 7,
+    y = 4,
+    ox = 7,
+    oy = 4
 }
 
 function Key:filter(other)
@@ -31,7 +31,7 @@ Key.wobbleDistance = 0.1
 
 function Key:initialize(level, x, y, transcendent)
     self.level = level
-    Entity.initialize(self, level, x+1, y-12, 15, 6)
+    Entity.initialize(self, level, x+1, y-12, 14, 8)
     self.transcendent = transcendent
 
     self.goalX = self.x
