@@ -4,6 +4,7 @@ local Door = require "class.Door"
 
 local spriteDrawable = require "class.drawables.sprite"
 local img = love.graphics.newImage("img/player.png")
+local useBubble = love.graphics.newImage("img/use_bubble.png")
 
 local Player = class("Player", Entity)
 
@@ -41,6 +42,18 @@ Player.drawable = {
     x = -1,
 }
 
+function Player:nearAltar()
+    if self.onGround then
+        for _, altarLocation in ipairs(self.level.altarLocations) do
+            if self.x >= altarLocation[1]-self.w and self.x < altarLocation[1]+32 and self.y >= altarLocation[2]-16 and self.y < altarLocation[2] then
+                return true
+            end
+        end
+    end
+
+    return false
+end
+
 function Player:initialize(level, x, y)
     self.level = level
     Entity.initialize(self, level, x+2, y-14, 12, 14)
@@ -71,6 +84,10 @@ end
 
 function Player:draw()
     spriteDrawable:draw(self)
+
+    if self:nearAltar() then
+        love.graphics.draw(useBubble, self.x-6, self.y-26)
+    end
 end
 
 return Player

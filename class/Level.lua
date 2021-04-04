@@ -28,6 +28,7 @@ function Level:initialize(gamestate, path)
 
     -- load objects
     self.entities = {}
+    self.altarLocations = {}
 
     for _, object in ipairs(self.map.layers.markers.objects) do
         local type = self.map.tiles[object.gid].type
@@ -57,6 +58,8 @@ function Level:initialize(gamestate, path)
         if type == "altar" then
             local altar = Altar:new(self, object.x, object.y)
             table.insert(self.entities, altar)
+
+            table.insert(self.altarLocations, {object.x, object.y})
         end
     end
 

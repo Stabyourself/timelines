@@ -6,6 +6,7 @@ return {
         down = {'key:s', 'axis:lefty+', 'button:dpdown'},
 
         jump = {"key:space", 'button:a'},
+        use = {"key:e"},
 
         camleft = {'key:left', 'axis:rightx-'},
         camright = {'key:right', 'axis:rightx+'},
