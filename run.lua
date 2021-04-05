@@ -1,4 +1,4 @@
-local FrameDebug3 = require "lib.FrameDebug3"
+local frameDebug3 = require "lib.frameDebug3"
 
 function love.run()
 	if love.load then love.load(love.arg.parseGameArguments(arg), arg) end
@@ -27,7 +27,7 @@ function love.run()
 		if love.timer then dt = love.timer.step() end
 
 		-- fake DT for debug
-		dt = FrameDebug3.update(dt)
+		dt = frameDebug3.update(dt)
 
 		-- Call update and draw
 		if love.update then love.update(dt) end -- will pass 0 if love.timer is disabled

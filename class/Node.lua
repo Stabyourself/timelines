@@ -1,11 +1,17 @@
 local Node = class("Node")
 
-function Node:initialize(parent, nodeTime, timeline)
+function Node:initialize(parent, timeline)
     self.parent = parent
-    self.nodeTime = nodeTime
     self.timeline = timeline
 
+    self.nodeTime = 0
+    self.ended = false
+
     self.children = {}
+
+    if parent then
+        table.insert(self.parent.children, self)
+    end
 end
 
 return Node

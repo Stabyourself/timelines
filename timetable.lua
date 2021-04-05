@@ -7,26 +7,27 @@ local timetable_back = love.graphics.newImage("img/timetable_back.png")
 local timetable_node = love.graphics.newImage("img/timetable_node.png")
 local timetable_node_active = love.graphics.newImage("img/timetable_node_active.png")
 local timeline_left = love.graphics.newImage("img/timeline_left.png")
+local timetable_end = love.graphics.newImage("img/timetable_end.png")
+local timetable_active = love.graphics.newImage("img/player.png")
 
 local timelineHeight = 24
-local timelineSecondWidth = 2
+local timelineSecondWidth = 20
 
 function timetable:init()
-    timetable.rootNode = Node:new(nil, 0, 1)
-
     timetable.timelines = 1
 
     self.nodeLocations = {}
-    self.selectedNode = nil
 
     self.buttons = {
-        Button:new(20, 200, 105, 20, "Start from here", function() self:startOnNode(self.selectedNode) end)
+        Button:new(20, 200, 105, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
+        Button:new(275, 200, 105, 20, "Back", function() self:close() end),
     }
 
     self.buttons[1].active = false
 end
 
 function timetable:enter(from, booted)
+    self.selectedNode = nil
     self.booted = booted or false
     self.from = from
     self.offY = 0
@@ -35,10 +36,12 @@ function timetable:enter(from, booted)
         self.offY = 225
         timer.tween(0.3, self, {offY = 0}, 'out-quad')
     end
+
+    self.buttons[2].active = not booted
 end
 
 function timetable:update(dt)
-    if not self.booted and controls:pressed("opentimeline") then
+    if not self.booted and controls:pressed("closetimeline") then
         self:close()
     end
 end
@@ -61,7 +64,7 @@ function timetable:draw()
     love.graphics.printf("Timelines :D", 0, 5, 400, "center")
 
     self.nodeLocations = {}
-    self:drawNodeAndChildren(self.rootNode, 32, 48)
+    self:drawNodeAndChildren(game.rootNode, 32, 48)
 
     for _, button in ipairs(self.buttons) do
         button:draw()
@@ -99,22 +102,33 @@ function timetable:drawNodeAndChildren(node, offX, offY)
         local newX = offX + w
         local newY = offY + h
 
-        timetable.drawArrow(offX-1, offY+10, w+1, h)
+        timetable.drawArrow(offX-2, offY+9, w+1, h)
 
         love.graphics.push()
 
         self:drawNodeAndChildren(childNode, newX, newY)
         love.graphics.pop()
     end
+
     local img = timetable_node
 
     if node == self.selectedNode then
         img = timetable_node_active
     end
 
-    love.graphics.draw(img, offX, offY, 0, 1, 1, 8, 8)
+    if node == game.activeNode and node.nodeTime > 0 then
+        img = timetable_active
+    end
 
-    table.insert(self.nodeLocations, {node=node, x=offX, y=offY})
+    if node.ended then
+        img = timetable_end
+    end
+
+    love.graphics.draw(img, offX, offY, 0, 1, 1, img:getWidth()/2, img:getHeight()/2)
+
+    if not node.ended then
+        table.insert(self.nodeLocations, {node=node, x=offX, y=offY})
+    end
 end
 
 local timetable_arrow = love.graphics.newImage("img/timetable_arrow.png")
@@ -125,7 +139,6 @@ local timetable_quad_horizontal = love.graphics.newQuad(4, 5, 1, 4, timetable_ar
 local timetable_quad_end = love.graphics.newQuad(5, 0, timetable_arrow:getWidth()-5, timetable_arrow:getHeight(), timetable_arrow)
 
 function timetable.drawArrow(x, y, w, h)
-
     love.graphics.draw(timetable_arrow, timetable_quad_left, x, y+h-11)
 
     if h > 0 then
@@ -145,9 +158,4 @@ function timetable:close()
     end
 
     timer.tween(0.3, self, {offY = 255}, 'out-quad', backToGame)
-end
-
-function timetable:startOnNode(node)
-    game.activeNode = node
-    self:close()
 end

@@ -1,6 +1,7 @@
 local Entity = require "class.Entity"
 local Key = require "class.Key"
 local Door = require "class.Door"
+local Altar = require "class.Altar"
 
 local spriteDrawable = require "class.drawables.sprite"
 local img = love.graphics.newImage("img/player.png")
@@ -9,10 +10,6 @@ local useBubble = love.graphics.newImage("img/use_bubble.png")
 local Player = class("Player", Entity)
 
 function Player:filter(other)
-    if other.properties and other.properties.platform and self.y + self.h > other.y then
-        return false
-    end
-
     if other.class and other.class.name == "Key" then
         return "cross"
     end
@@ -23,7 +20,7 @@ function Player:filter(other)
         end
     end
 
-    return "slide"
+    return Entity.filter(self, other)
 end
 
 Player.runAccel = 500
@@ -42,12 +39,19 @@ Player.drawable = {
     x = -1,
 }
 
+combineArrays(Player.serializeTable, {
+    "airJumpsLeft",
+    "keyCount"
+})
+
 function Player:nearAltar()
     if self.onGround then
-        for _, altarLocation in ipairs(self.level.altarLocations) do
-            if self.x >= altarLocation[1]-self.w and self.x < altarLocation[1]+32 and self.y >= altarLocation[2]-16 and self.y < altarLocation[2] then
-                return true
-            end
+        local items, len = self.level.world:queryRect(self.x, self.y, self.w, self.h, function(item)
+            return item.isInstanceOf and item:isInstanceOf(Altar)
+        end)
+
+        if len > 0 then
+            return items[1]
         end
     end
 
@@ -55,8 +59,7 @@ function Player:nearAltar()
 end
 
 function Player:initialize(level, x, y)
-    self.level = level
-    Entity.initialize(self, level, x+2, y-14, 12, 14)
+    Entity.initialize(self, level, x, y, 12, 14)
 
     self.airJumpsLeft = self.totalAirJumps
     self.keyCount = 0
@@ -77,7 +80,8 @@ function Player:collide(other, nx, ny)
         end
     else -- world tile
         if other.properties.spikes and ny < 0  then
-            print("oh no I died!")
+            game:die()
+            self.active = false
         end
     end
 end

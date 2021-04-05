@@ -1,6 +1,6 @@
 -- Debug thing for Mari0 2. Feel free to use it, MIT License
 
-local FrameDebug3 = {}
+local frameDebug3 = {}
 
 local advanceDT = 1/60
 
@@ -19,7 +19,7 @@ local ffKeys = {
     }
 }
 
-function FrameDebug3.update(dt)
+function frameDebug3.update(dt)
     local mul = 1
 
     for _, ffKey in ipairs(ffKeys) do
@@ -41,13 +41,13 @@ function FrameDebug3.update(dt)
     return dt*mul
 end
 
-function FrameDebug3.pausePlay()
+function frameDebug3.pausePlay()
     playing = not playing
 end
 
-function FrameDebug3.frameAdvance()
+function frameDebug3.frameAdvance()
     playing = false
     advanceFrame = true
 end
 
-return FrameDebug3
+return frameDebug3

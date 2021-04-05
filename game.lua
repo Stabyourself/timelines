@@ -4,8 +4,11 @@ game = gamestate.new()
 local Level = require "class.Level"
 
 function game:init()
-    self.nodeStartTime = love.timer.getTime()
+    self.rootNode = Node:new(nil, 0, 1)
+
     self.level = Level:new(self, "levels/level1.lua")
+
+    self.rootNode.state = self.level:makeState()
 end
 
 function game:enter(previous)
@@ -15,8 +18,18 @@ end
 function game:update(dt)
     self.level:update(dt)
 
-    if controls:pressed("opentimeline") then
-        gamestate.push(timetable)
+    if self.level.player.active then
+        self.activeNode.nodeTime = self.activeNode.nodeTime + dt
+    end
+
+    local altar = self.level.player:nearAltar()
+    if controls:pressed("use") and altar then
+        self:useAltar(altar)
+    end
+
+    if controls:pressed("debug1") then
+        -- gamestate.push(timetable)
+        self.level:serialize()
     end
 end
 
@@ -35,17 +48,42 @@ function game:mousepressed(x, y, button)
     self.level:mousepressed(x, y)
 end
 
-function game:makeNode()
-    local timeline = self.activeNode.timeline
+function game:die()
+    self.activeNode.ended = true
+end
 
-    if #self.activeNode.children > 0 then
-        timeline = timetable.timelines+1
+function game:useAltar(altar)
+    gamestate.push(timetable)
+
+    if not altar.used then
+        altar.used = true
+
+        -- make new state
+        self.activeNode.state = self.level:makeState()
+
+        local node = Node:new(self.activeNode, self.activeNode.timeline)
+
+        self.activeNode = node
+    end
+end
+
+function game:startOnNode(parentNode)
+    if self.activeNode then
+        self.activeNode.ended = true
+    end
+
+    local timeline = parentNode.timeline
+
+    if #parentNode.children > 0 then
+        timeline = timetable.timelines
         timetable.timelines = timetable.timelines + 1
     end
 
-    local node = Node:new(self.activeNode, love.timer.getTime()-self.nodeStartTime, timeline)
-    table.insert(self.activeNode.children, node)
+    local node = Node:new(parentNode, timeline)
 
     self.activeNode = node
-    self.nodeStartTime = love.timer.getTime()
+
+    if parentNode.state then
+        self.level:loadState(parentNode.state)
+    end
 end

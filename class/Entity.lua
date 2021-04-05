@@ -1,12 +1,29 @@
 local Entity = class("Entity")
 
-local DEFAULT_GRAVITY = 200
+Entity.serializeTable = {
+    "x",
+    "y",
+    "w",
+    "h",
+    "vx",
+    "vy",
+    "active",
+    "physics"
+}
 
 function Entity:filter(other)
+    if other.properties and other.properties.platform and self.y + self.h > other.y then
+        return false
+    end
+
+    if tostring(other.class) == "class Altar" then
+        return false
+    end
+
     return "slide"
 end
 
-function Entity:initialize(level, x, y, w, h)
+function Entity:initialize(level, x, y, w, h, physics)
     self.level = level
     self.world = level.world
     self.x = x
@@ -17,9 +34,39 @@ function Entity:initialize(level, x, y, w, h)
     self.vx = 0
     self.vy = 0
 
-    self.mask = {}
+    self.physics = physics ~= false
 
-    self.world:add(self, x, y, w, h)
+    if self.physics then
+        self.world:add(self, x, y, w, h)
+    end
+
+    self.active = true
+
+    self.level.ecs:addEntity(self)
+end
+
+function Entity:toState()
+    local out = {
+        class = self.class
+    }
+
+    for _, key in ipairs(self.serializeTable) do
+        out[key] = self[key]
+    end
+
+    return out
+end
+
+function Entity.fromState(level, state)
+    print("=========", state.class)
+    local entity = state.class:new(level, state.x, state.y, state.w, state.h, state.physics)
+
+    for k, v in pairs(state) do
+        entity[k] = v
+        print(k, v)
+    end
+
+    return entity
 end
 
 function Entity:draw()

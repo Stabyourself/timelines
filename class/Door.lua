@@ -7,9 +7,12 @@ Door.drawable = {
     img = love.graphics.newImage("img/door.png"),
 }
 
+combineArrays(Door.serializeTable, {
+    "transcendent",
+})
+
 function Door:initialize(level, x, y, transcendent)
-    self.level = level
-    Entity.initialize(self, level, x+4, y-32, 8, 32)
+    Entity.initialize(self, level, x, y, 8, 32)
     self.transcendent = transcendent
 end
 

@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 30,
+  nextobjectid = 32,
   backgroundcolor = { 85, 170, 255 },
   properties = {},
   tilesets = {
@@ -220,7 +220,7 @@ return {
       properties = {},
       encoding = "base64",
       compression = "zlib",
-      data = "eAHt2stu2zAUhGFv2nTRZtNk0/b9n7MkCgIEoZFGJHtMGr8AwRJ1eNE3kp1FPh6Px8fA/pn6rrD9TItQ97HKGiOclIHbvooVef57WtzcVB15Rrx1/hwqJ7edPH3riEo3N1VHnhEp+XOonNx28vStIyrd3FQdeUak5M+hcnLbydO3jqh0c1N15BmRkj+HysltJ0/fOqLSzU3VkWdESv4cKie3nTx964hKNzdVR54RKflzqJzcdvL0rSMq3dxUHXlGpOTPoXJy28nTt46odHNTdavk+SthzV7jlzTmzJ087wm0mf5O3fP+594wp9Wj+Z4OPuGieqbd9lXez0JRMp2ZYRm7/bzKtq2POHdzU3Wr5ZnN8jsZtalMo+Zv51E5ue0jeX5Pi/mR9vd2UZud15k+e+lubqpuJM/yPz8jYzzbr8yfM11hUzm57VdZ5HdQvX+z8izveX7Xz/a3dP3OvkI+d9fg5qbqVJ7FOPdTNSXPXKO+d8s4Jaf22cjX1dra9vp70Tk+yv6ub3R9e88958W6/mzHqa+V47Ymn5dr5fOq5ui6anMyvKrJGdfbUeaqre73v47Vvb9ieza8yuvseptBzu2ovq2LPH/F3NQ9ZdfWv9daZZnHf+am7v0V27NznWev+1mW5On/PTP6jI3kWf8m1s/E0XHvczKj36jRTv2v8vyaCur9ToZ1rjNy6R1jpzxG13qVpzKss3KO1TgR7aNGO/XvzbPk4GSZa5657ZTH6Fqzc51Jj3vdXx33jDurz6jRTv2zWZ3Bt3R+d6/7q+NZ2fSMs1Meo2vNPiqDme09OczqM2q0U/+Zec7ynz3OTnmMrnW23YrjjRrt1H9Ff9aEAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAgisKvAX2Ot07g=="
+      data = "eAHt2suO1DAQheHewLCA2TCzAd7/OXEJlWRZqeTENtV2648UJXHKl3wnmQHEx+Px+BjYP0vfFbafZRHRc6yyxgynyEBtX8WKPP+9LWpuUR15Znx1+hxRTmo7eerWGZVqblEdeWakpM8R5aS2k6dunVGp5hbVkWdGSvocUU5qO3nq1hmVam5RHXlmpKTPEeWktpOnbp1RqeYW1ZFnRkr6HFFOajt56tYZlWpuUR15ZqSkzxHlpLaTp26dUanmFtWRZ0ZK+hxRTmo7eerWGZVqblHdKnn+Kliz1/iljDlzJ897Am2mv0t32//cG+a0ejTf08En3IzeabV9le/TKTzTmRn62O3xKtu2PuNazS2qWy1PM7NvMmuLMs2av50nykltH8nze1nMj7K/t4va7LrO9NlLV3OL6kby9P/zMzLGs/18fst0hS3KSW1vs/haHsp23+wbjL6/WXn6d27f+tn+Vu7f2f0ZdjqquUV1bZ727N/K7sbW76jG6jxPq4l+7vo4nlP7btj9aG1te/1zUTk/yt7WvfLWPnPPtVvXx3ac+p6ftzV27ff8eFVzdD9qUzK8qrGM6+0o86it7ve/zqNnf8V2M7zK6+x+m4HldlTf1mVev2Ju0TOZa+vfax1laeM/c4ue/RXbzbnOs9f9LEvy1P88M/qOjeRZ/06s34mj8973ZEa/UaOd+l/l6X/X8uOdDOtcZ+TSO8ZOeYyu9SrPyLDOSjmPxsloHzXaqX9vnp6DkqXVPHPbKY/RtZpznUmPe90/Ou8Zd1afUaOd+ptZnYH9O9bdve4fnc/KpmecnfIYXav5RBnMbO/JYVafUaOd+s/Mc5b/7HF2ymN0rbPtVhxv1Gin/iv6syYEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQGBVgb8URXUC"
     },
     {
       type = "objectgroup",
@@ -348,6 +348,34 @@ return {
           height = 16,
           rotation = 0,
           gid = 4,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 30,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 352,
+          y = 352,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 2,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 31,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 368,
+          y = 368,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 3,
           visible = true,
           properties = {}
         }

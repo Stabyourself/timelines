@@ -1,5 +1,5 @@
 local Entity = require "class.Entity"
-local Altar = class("Door", Entity)
+local Altar = class("Altar", Entity)
 
 local spriteDrawable = require "class.drawables.sprite"
 
@@ -7,11 +7,14 @@ Altar.drawable = {
     img = love.graphics.newImage("img/altar.png"),
 }
 
-function Altar:initialize(level, x, y)
-    self.level = level
+combineArrays(Altar.serializeTable, {
+    "used",
+})
 
-    self.x = x
-    self.y = y-64
+function Altar:initialize(level, x, y)
+    self.used = false
+
+    Entity.initialize(self, level, x, y, 32, 64)
 end
 
 function Altar:draw()

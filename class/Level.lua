@@ -28,47 +28,37 @@ function Level:initialize(gamestate, path)
 
     -- load objects
     self.entities = {}
-    self.altarLocations = {}
 
     for _, object in ipairs(self.map.layers.markers.objects) do
         local type = self.map.tiles[object.gid].type
 
         if type == "start" then
-            self.player = Player:new(self, object.x, object.y)
+            self.player = Player:new(self, object.x+2, object.y-14)
             table.insert(self.entities, self.player)
-
-            self.ecs:addEntity(self.player)
-            self.cameraFocus = self.player
         end
 
         if type == "key" then
-            local key = Key:new(self, object.x, object.y, object.properties.transcendent)
-            table.insert(self.entities, key)
-
-            self.ecs:addEntity(key)
+            table.insert(self.entities, Key:new(self, object.x+1, object.y-12, object.properties.transcendent))
         end
 
         if type == "door" then
-            local door = Door:new(self, object.x, object.y, object.properties.transcendent)
-            table.insert(self.entities, door)
-
-            self.ecs:addEntity(door)
+            table.insert(self.entities, Door:new(self, object.x+4, object.y-32, object.properties.transcendent))
         end
 
         if type == "altar" then
-            local altar = Altar:new(self, object.x, object.y)
-            table.insert(self.entities, altar)
-
-            table.insert(self.altarLocations, {object.x, object.y})
+            table.insert(self.entities, Altar:new(self, object.x, object.y-64))
         end
     end
 
     self.camera = camera()
+    self.cameraFocus = self.player
     self.camera:lookAt(self.cameraFocus.x+self.cameraFocus.w/2, self.cameraFocus.y+self.cameraFocus.h/2)
     self.camera:zoomTo(SCALE)
+    self.ecs:update(0)
 end
 
 function Level:update(dt)
+    -- print("ents",self.ecs:getEntityCount())
     self.ecs:update(dt)
 
     for i = #self.entities, 1, -1 do
@@ -76,7 +66,7 @@ function Level:update(dt)
 
         if v.removeMe then
             v:remove()
-            table.remove(self.entities, i, i)
+            table.remove(self.entities, i)
         end
     end
 
@@ -144,5 +134,51 @@ function Level:mousepressed(x, y, button)
     self.world:update(self.player, wx, wy)
     self.cameraFocus = self.player
 end
+
+function Level:getEntities(entityClass)
+    local t = {}
+
+    for _, entity in ipairs(self.entities) do
+        if entity:isInstanceOf(entityClass) then
+            table.insert(t, entity)
+        end
+    end
+
+    return t
+end
+
+function Level:makeState()
+    local state = {
+        entities = {}
+    }
+
+    for _, entity in ipairs(self.entities) do
+        table.insert(state.entities, entity:toState())
+    end
+
+    return state
+end
+
+function Level:loadState(state)
+    -- remove all ecs from the world
+    self.ecs:clearEntities()
+
+    -- -- remove all entity collisions from the world
+    for _, entity in ipairs(self.entities) do
+        if self.world:hasItem(entity) then
+            self.world:remove(entity)
+        end
+    end
+
+    self.entities = {}
+
+    for _, entity in ipairs(state.entities) do
+        table.insert(self.entities, entity.class.fromState(self, entity))
+    end
+
+    self.player = self:getEntities(Player)[1]
+    self.cameraFocus = self.player
+end
+
 
 return Level

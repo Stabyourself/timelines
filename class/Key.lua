@@ -29,9 +29,17 @@ Key.bobTime = 3
 Key.wobbleTime = 1.5
 Key.wobbleDistance = 0.1
 
+combineArrays(Key.serializeTable, {
+    "goalX",
+    "goalY",
+    "bobStart",
+    "bobTimer",
+    "wobbleTimer",
+    "transcendent",
+})
+
 function Key:initialize(level, x, y, transcendent)
-    self.level = level
-    Entity.initialize(self, level, x+1, y-12, 14, 8)
+    Entity.initialize(self, level, x, y, 14, 8)
     self.transcendent = transcendent
 
     self.goalX = self.x
