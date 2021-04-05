@@ -1,15 +1,12 @@
 local Entity = require "class.Entity"
+local Sprite = require "class.drawables.Sprite"
 local Key = class("Key", Entity)
 
-local spriteDrawable = require "class.drawables.sprite"
-
-Key.drawable = {
-    img = love.graphics.newImage("img/key.png"),
-    x = 7,
-    y = 4,
-    ox = 7,
-    oy = 4
-}
+Key.drawable = Sprite:new(love.graphics.newImage("img/key.png"))
+Key.drawable.x = 7
+Key.drawable.y = 4
+Key.drawable.ox = 7
+Key.drawable.oy = 4
 
 function Key:filter(other)
     if other.properties and other.properties.platform and self.y + self.h > other.y then
@@ -56,7 +53,7 @@ function Key:draw()
         love.graphics.setColor(1, 0, 1)
     end
 
-    spriteDrawable:draw(self)
+    Entity.draw(self)
 
     love.graphics.setColor(1, 1, 1)
 end

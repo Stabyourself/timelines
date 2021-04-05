@@ -1,11 +1,8 @@
 local Entity = require "class.Entity"
+local Sprite = require "class.drawables.Sprite"
 local Door = class("Door", Entity)
 
-local spriteDrawable = require "class.drawables.sprite"
-
-Door.drawable = {
-    img = love.graphics.newImage("img/door.png"),
-}
+Door.drawable = Sprite:new(love.graphics.newImage("img/door.png"))
 
 combineArrays(Door.serializeTable, {
     "transcendent",
@@ -21,7 +18,7 @@ function Door:draw()
         love.graphics.setColor(1, 0, 1)
     end
 
-    spriteDrawable:draw(self)
+    Entity.draw(self)
 
     love.graphics.setColor(1, 1, 1)
 end

@@ -58,19 +58,17 @@ function Entity:toState()
 end
 
 function Entity.fromState(level, state)
-    print("=========", state.class)
     local entity = state.class:new(level, state.x, state.y, state.w, state.h, state.physics)
 
     for k, v in pairs(state) do
         entity[k] = v
-        print(k, v)
     end
 
     return entity
 end
 
 function Entity:draw()
-    love.graphics.rectangle("line", self.x+.5, self.y+.5, self.w-1, self.h-1)
+    self.drawable:draw(self)
 end
 
 function Entity:queueRemove()

@@ -1,20 +1,19 @@
-local _Sprite = class("Sprite")
+local Sprite = class("Sprite")
 
-function _Sprite:initialize(entity)
-    self.entity = entity
+function Sprite:initialize(img)
+    self.img = img
+
+    self.x = 0
+    self.y = 0
+    self.r = 0
+    self.sx = 1
+    self.sy = 1
+    self.ox = 0
+    self.oy = 0
 end
 
-function _Sprite:draw(e)
-    local img = e.drawable.img
-    local x = e.x+(e.drawable.x or 0)
-    local y = e.y+(e.drawable.y or 0)
-    local r = e.r or 0
-    local sx = e.drawable.sx or 1
-    local sy = e.drawable.sy or 1
-    local ox = e.drawable.ox or 0
-    local oy = e.drawable.oy or 0
-
-    love.graphics.draw(img, x, y, r, sx, sy, ox, oy)
+function Sprite:draw(e)
+    love.graphics.draw(self.img, e.x+self.x, e.y+self.y, e.r, self.sx, self.sy, self.ox, self.oy)
 end
 
-return _Sprite:new()
+return Sprite

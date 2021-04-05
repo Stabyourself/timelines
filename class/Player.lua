@@ -1,9 +1,10 @@
+local anim8 = require 'lib.anim8'
+local AnimationMachine = require "class.drawables.AnimationMachine"
+
 local Entity = require "class.Entity"
 local Key = require "class.Key"
 local Door = require "class.Door"
-local Altar = require "class.Altar"
 
-local spriteDrawable = require "class.drawables.sprite"
 local img = love.graphics.newImage("img/player.png")
 local useBubble = love.graphics.newImage("img/use_bubble.png")
 
@@ -34,20 +35,39 @@ Player.totalAirJumps = 1
 Player.gravity = 800
 Player.maxYSpeed = 300
 
-Player.drawable = {
-    img = img,
-    x = -1,
-}
-
 combineArrays(Player.serializeTable, {
     "airJumpsLeft",
     "keyCount"
 })
 
+local grid = anim8.newGrid(16, img:getHeight(), img:getWidth(), img:getHeight())
+
+Player.animations = {
+    idle = anim8.newAnimation(grid(1, 1), math.huge),
+    jump = anim8.newAnimation(grid(2, 1), math.huge),
+    fall = anim8.newAnimation(grid(2, 1), math.huge),
+    run = anim8.newAnimation(grid("3-6", 1), 0.08),
+}
+
+function Player:initialize(level, x, y)
+    Entity.initialize(self, level, x, y, 12, 14)
+
+    self.airJumpsLeft = self.totalAirJumps
+    self.keyCount = 0
+
+    self.drawable = AnimationMachine:new(img, self.animations)
+
+    self.drawable.x = 6
+    self.drawable.oy = 17
+    self.drawable.ox = 8
+
+    self.animationState = "idle"
+end
+
 function Player:nearAltar()
     if self.onGround then
         local items, len = self.level.world:queryRect(self.x, self.y, self.w, self.h, function(item)
-            return item.isInstanceOf and item:isInstanceOf(Altar)
+            return item.class and item.class.name == "Altar"
         end)
 
         if len > 0 then
@@ -56,13 +76,6 @@ function Player:nearAltar()
     end
 
     return false
-end
-
-function Player:initialize(level, x, y)
-    Entity.initialize(self, level, x, y, 12, 14)
-
-    self.airJumpsLeft = self.totalAirJumps
-    self.keyCount = 0
 end
 
 function Player:collide(other, nx, ny)
@@ -87,7 +100,7 @@ function Player:collide(other, nx, ny)
 end
 
 function Player:draw()
-    spriteDrawable:draw(self)
+    Entity.draw(self)
 
     if self:nearAltar() then
         love.graphics.draw(useBubble, self.x-6, self.y-26)
