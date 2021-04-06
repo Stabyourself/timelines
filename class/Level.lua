@@ -54,20 +54,15 @@ function Level:initialize(gamestate, path)
     self.cameraFocus = self.player
     self.camera:lookAt(self.cameraFocus.x+self.cameraFocus.w/2, self.cameraFocus.y+self.cameraFocus.h/2)
     self.ecs:update(0)
+
+    self.particles = {}
 end
 
 function Level:update(dt)
-    -- print("ents",self.ecs:getEntityCount())
     self.ecs:update(dt)
 
-    for i = #self.entities, 1, -1 do
-        local v = self.entities[i]
-
-        if v.removeMe then
-            v:remove()
-            table.remove(self.entities, i)
-        end
-    end
+    updateGroup(self.entities, dt)
+    updateGroup(self.particles, dt)
 
     -- camera
     if controls:pressed("camera") then
@@ -105,6 +100,11 @@ function Level:draw()
     -- draw player last
     self.player:draw()
 
+    -- particles
+    for _, particle in ipairs(self.particles) do
+        particle:draw()
+    end
+
     -- debug
     if DEBUG then
         love.graphics.setColor(1, 1, 1, 0.4)
@@ -132,6 +132,13 @@ function Level:mousepressed(x, y, button)
     self.player.vy = 0
     self.world:update(self.player, wx, wy)
     self.cameraFocus = self.player
+end
+
+function Level:addParticleInRect(x, y, w, h, particleClass)
+    local px = love.math.random(x, x+w)
+    local py = love.math.random(y, y+h)
+
+    table.insert(self.particles, particleClass:new(px, py))
 end
 
 function Level:getEntities(entityClass)

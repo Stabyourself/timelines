@@ -21,3 +21,12 @@ function combineArrays(t1, t2)
 
     return t
 end
+
+function updateGroup(group, dt)
+	for i = #group, 1, -1 do
+		if (group[i].update and group[i]:update(dt)) or group[i].removeMe then
+            if group[i].remove then group[i]:remove() end
+			table.remove(group, i)
+		end
+	end
+end

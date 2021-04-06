@@ -58,7 +58,7 @@ function game:useAltar(altar)
     gamestate.push(timetable)
 
     if not altar.used then
-        altar.used = true
+        altar:use()
 
         -- make new state
         self.activeNode.state = self.level:makeState()
