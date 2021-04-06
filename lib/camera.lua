@@ -111,12 +111,12 @@ function camera:attach(x,y,w,h, noclip)
 		love.graphics.setScissor(x,y,w,h)
 	end
 
-	local cx,cy = x+WIDTH/2, y+HEIGHT/2
+	local cx,cy = math.floor(x+WIDTH/2), math.floor(y+HEIGHT/2)
 	love.graphics.push()
-	love.graphics.translate(math.floor(cx), math.floor(cy))
+	love.graphics.translate(cx, cy)
 	love.graphics.scale(self.scale)
 	love.graphics.rotate(self.rot)
-	love.graphics.translate(-self.x, -self.y)
+	love.graphics.translate(math.floor(-self.x*SCALE)/SCALE, math.floor(-self.y*SCALE)/SCALE)
 end
 
 function camera:detach()
