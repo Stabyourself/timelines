@@ -49,17 +49,19 @@ Player.animations = {
     run = anim8.newAnimation(grid("3-6", 1), 0.08),
 }
 
+Player.drawable = AnimationMachine:new(img, Player.animations)
+
+Player.drawable.x = 6
+Player.drawable.oy = 17
+Player.drawable.ox = 8
+
+-- TODO: need to clone this somehow; animations are instanced
+
 function Player:initialize(level, x, y)
     Entity.initialize(self, level, x, y, 12, 14)
 
     self.airJumpsLeft = self.totalAirJumps
     self.keyCount = 0
-
-    self.drawable = AnimationMachine:new(img, self.animations)
-
-    self.drawable.x = 6
-    self.drawable.oy = 17
-    self.drawable.ox = 8
 
     self.animationState = "idle"
 end

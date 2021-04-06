@@ -16,7 +16,7 @@ local allSystems = require "systemLoader"
 function Level:initialize(gamestate, path)
     self.gamestate = gamestate
 
-    self.world = bump.newWorld()
+    self.world = bump.newWorld(32)
     self.world.level = self -- I never know if this is good code
     self.map = sti(path, {"bump"})
     self.map:bump_init(self.world)
@@ -53,7 +53,6 @@ function Level:initialize(gamestate, path)
     self.camera = camera()
     self.cameraFocus = self.player
     self.camera:lookAt(self.cameraFocus.x+self.cameraFocus.w/2, self.cameraFocus.y+self.cameraFocus.h/2)
-    self.camera:zoomTo(SCALE)
     self.ecs:update(0)
 end
 
@@ -79,10 +78,10 @@ function Level:update(dt)
         self.camera:lockWindow(
             self.cameraFocus.x+self.cameraFocus.w/2,
             self.cameraFocus.y+self.cameraFocus.h/2,
-            love.graphics.getWidth()*0.5 - 100,
-            love.graphics.getWidth()*0.5 + 100,
-            love.graphics.getHeight()*0.5 - 50,
-            love.graphics.getHeight()*0.5 + 50,
+            WIDTH*0.5 - 50,
+            WIDTH*0.5 + 50,
+            HEIGHT*0.5 - 30,
+            HEIGHT*0.5 + 30,
             camera.smooth.damped(dt, 10)
         ) --todo: some kind of SMW camera thing maybe
     else

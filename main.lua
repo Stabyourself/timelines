@@ -36,6 +36,8 @@ end
 function love.update(dt)
     timer.update(dt)
     controls:update()
+
+    love.window.setTitle("Timelines " .. love.timer.getFPS())
 end
 
 function love.keypressed(key)

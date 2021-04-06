@@ -1,1 +1,3 @@
 SCALE = 3
+WIDTH = 400
+HEIGHT = 225

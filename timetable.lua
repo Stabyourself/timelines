@@ -52,7 +52,6 @@ function timetable:draw()
     end
 
     love.graphics.push()
-    love.graphics.scale(SCALE, SCALE)
     love.graphics.translate(0, self.offY)
 
     love.graphics.draw(timetable_back)

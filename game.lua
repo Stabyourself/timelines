@@ -37,7 +37,6 @@ function game:draw()
     self.level:draw()
 
     love.graphics.push()
-    love.graphics.scale(SCALE, SCALE)
 
     -- UI!
     love.graphics.print("Keys: " .. self.level.player.keyCount)
@@ -45,6 +44,9 @@ function game:draw()
 end
 
 function game:mousepressed(x, y, button)
+    x = x/SCALE
+    y = y/SCALE
+
     self.level:mousepressed(x, y)
 end
 

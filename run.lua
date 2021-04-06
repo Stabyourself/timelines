@@ -35,8 +35,11 @@ function love.run()
 		if love.graphics and love.graphics.isActive() then
 			love.graphics.origin()
 			love.graphics.clear(love.graphics.getBackgroundColor())
+			love.graphics.scale(SCALE, SCALE)
 
 			if love.draw then love.draw() end
+
+			love.graphics.scale(1/SCALE, 1/SCALE)
 
 			love.graphics.present()
 		end
