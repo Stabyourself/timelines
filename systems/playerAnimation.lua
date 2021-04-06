@@ -21,10 +21,14 @@ function playerAnimation:process(e, dt)
             end
         end
     else
-        if e.airJumpsLeft > 0 then
-            e.animationState = "jump"
+        if e.jumping then
+            if e.airJumpsLeft > 0 then
+                e.animationState = "jump"
+            else
+                e.animationState = "doublejump"
+            end
         else
-            e.animationState = "doublejump"
+            e.animationState = "fall"
         end
     end
 end

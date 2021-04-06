@@ -50,6 +50,7 @@ Player.animations = {
 for i, dir in ipairs({"right", "left"}) do
     Player.animations[dir] = {
         idle = anim8.newAnimation(grid(1, i), math.huge),
+        fall = anim8.newAnimation(grid(3, i), math.huge),
         jump = anim8.newAnimation(grid("2-3", i), {0.15, math.huge}),
         doublejump = anim8.newAnimation(grid("4-5", i), {0.15, math.huge}),
         run = anim8.newAnimation(grid("6-9", i), 0.08),
@@ -110,16 +111,16 @@ function Player:collide(other, nx, ny)
 end
 
 function Player:jump()
-    for i, dir in ipairs({"right", "left"}) do
+    self.jumping = true
+
+    for _, dir in ipairs({"right", "left"}) do
         self.animations[dir].jump:gotoFrame(1)
         self.animations[dir].doublejump:gotoFrame(1)
     end
 end
 
 function Player:grounded()
-    for i, dir in ipairs({"right", "left"}) do
-        self.animations[dir].jump:gotoFrame(2)
-    end
+    self.jumping = false
 end
 
 function Player:draw()
