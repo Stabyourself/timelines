@@ -9,6 +9,8 @@ function playerJumping:process(e, dt)
     end
 
     if controls:pressed("jump") and (e.onGround or e.airJumpsLeft > 0) then
+        if e.jump then e:jump() end
+
         e.vy = -e.jumpSpeed
 
         if not e.onGround then

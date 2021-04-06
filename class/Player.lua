@@ -40,19 +40,27 @@ combineArrays(Player.serializeTable, {
     "keyCount"
 })
 
-local grid = anim8.newGrid(16, img:getHeight(), img:getWidth(), img:getHeight())
+local grid = anim8.newGrid(16, 32, img:getWidth(), img:getHeight())
 
 Player.animations = {
-    idle = anim8.newAnimation(grid(1, 1), math.huge),
-    jump = anim8.newAnimation(grid(2, 1), math.huge),
-    fall = anim8.newAnimation(grid(2, 1), math.huge),
-    run = anim8.newAnimation(grid("3-6", 1), 0.08),
+    right = {},
+    left = {},
 }
+
+for i, dir in ipairs({"right", "left"}) do
+    Player.animations[dir] = {
+        idle = anim8.newAnimation(grid(1, i), math.huge),
+        jump = anim8.newAnimation(grid("2-3", i), {0.15, math.huge}),
+        doublejump = anim8.newAnimation(grid("4-5", i), {0.15, math.huge}),
+        run = anim8.newAnimation(grid("6-9", i), 0.08),
+    }
+end
+
 
 Player.drawable = AnimationMachine:new(img, Player.animations)
 
 Player.drawable.x = 6
-Player.drawable.oy = 17
+Player.drawable.oy = 1
 Player.drawable.ox = 8
 
 -- TODO: need to clone this somehow; animations are instanced
@@ -98,6 +106,19 @@ function Player:collide(other, nx, ny)
             game:die()
             self.active = false
         end
+    end
+end
+
+function Player:jump()
+    for i, dir in ipairs({"right", "left"}) do
+        self.animations[dir].jump:gotoFrame(1)
+        self.animations[dir].doublejump:gotoFrame(1)
+    end
+end
+
+function Player:grounded()
+    for i, dir in ipairs({"right", "left"}) do
+        self.animations[dir].jump:gotoFrame(2)
     end
 end
 

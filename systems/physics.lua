@@ -5,6 +5,7 @@ physics.filter = tiny.requireAll("x", "y", "vx", "vy", "w", "h")
 
 function physics:process(e, dt)
     if e.physics and e.active then
+        local wasOnGround = e.onGround
         e.onGround = false
 
         local goalX
@@ -36,6 +37,10 @@ function physics:process(e, dt)
 
         e.x = nextX
         e.y = nextY
+
+        if not wasOnGround and e.onGround then
+            if e.grounded then e:grounded() end
+        end
     end
 end
 
