@@ -29,10 +29,11 @@ Player.brakeAccel = 800
 Player.runAccel = 500
 Player.maxSpeed = 100
 
-Player.jumpSpeed = 210
+Player.jumpSpeed = 200
 Player.totalAirJumps = 1
 
-Player.gravity = 800
+Player.gravity = 1400
+Player.jumpGravity = 650
 Player.maxYSpeed = 300
 
 combineArrays(Player.serializeTable, {
@@ -112,11 +113,16 @@ end
 
 function Player:jump()
     self.jumping = true
+    self.ascending = true
 
     for _, dir in ipairs({"right", "left"}) do
         self.animations[dir].jump:gotoFrame(1)
         self.animations[dir].doublejump:gotoFrame(1)
     end
+end
+
+function Player:unjump()
+    self.ascending = false
 end
 
 function Player:grounded()

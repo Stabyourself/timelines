@@ -4,7 +4,15 @@ local physics = tiny.processingSystem()
 physics.filter = tiny.requireAll("gravity")
 
 function physics:process(e, dt)
-    e.vy = math.min(e.maxYSpeed, e.vy + e.gravity*dt)
+    local gravity = e.gravity
+
+    if e.ascending and e.jumpGravity and e.vy < 0 then
+        gravity = e.jumpGravity
+    end
+
+    e.vy = math.min(e.maxYSpeed, e.vy + gravity*dt)
+
+
 end
 
 return physics
