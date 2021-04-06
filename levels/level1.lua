@@ -76,7 +76,7 @@ return {
       columns = 9,
       image = "../img/tiles.png",
       imagewidth = 162,
-      imageheight = 90,
+      imageheight = 108,
       objectalignment = "unspecified",
       tileoffset = {
         x = 0,
@@ -144,7 +144,19 @@ return {
           }
         },
         {
+          id = 4,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
           id = 5,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 6,
           properties = {
             ["collidable"] = true
           }
@@ -187,6 +199,12 @@ return {
         },
         {
           id = 13,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 14,
           properties = {
             ["collidable"] = true
           }
@@ -240,6 +258,12 @@ return {
           }
         },
         {
+          id = 24,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
           id = 25,
           properties = {
             ["collidable"] = true
@@ -271,6 +295,18 @@ return {
         },
         {
           id = 30,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 31,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 32,
           properties = {
             ["collidable"] = true
           }
@@ -310,6 +346,78 @@ return {
           properties = {
             ["collidable"] = true
           }
+        },
+        {
+          id = 39,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 40,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 41,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 42,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 43,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 44,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 45,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 46,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 47,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 51,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 52,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 53,
+          properties = {
+            ["collidable"] = true
+          }
         }
       }
     }
@@ -332,7 +440,7 @@ return {
       properties = {},
       encoding = "base64",
       compression = "zlib",
-      data = "eAHtmcuO1EAMRWcF7BhWPIRADIsZ4P//jzLqkoyn4rLjKiLgRIryKMfXPjfprnTf393d3Z9c37Tr/sbldSv6qOdVPXkaR9qj89V6Rjmj56raV90bHvtVPXkaUb4SV60no2Vjq9r4e/w50llXGfc8Z7ZVbfzF3x33gPfZueqe9TQyz1K1noyWja1q7/AuktNjv6onT8Ny9I6r9Xi5Z2NV7YgXO2I89qt68jRmXPV4tR6dK7tf1d7hXSSnx35VT55GhnO1noyWja1qR7zYEeOxX9WTp2E5esfVerzcs7Gq9g7vIjk99qt68jRmXPV4tR6dK7tf1Y54sSPGY7+qJ08jw7laT0bLxla1d3gXyemxX9WTp2E5esfVerzcs7GqdsSLHTEe+1U9eRozrnq8Wo/Old2vau/wLpLTY7+qJ08jw7laT0bLxla1I17siPHYr+rJ07AcveNqPV7u2VhVe4d3kZwe+1U9eRozrnq8Wo/Old2vake82BHzriV9bOuo31U94e8O5+I5tcdP7bL3t/VDPIUbib8unj8yKB5/bOsqT3XR+KtpXLf/dpM0/sbBvmihL2/rq/hll0bibxy/ZrVq/hNXPxepax7N46Lnqv1GdUZxEW159mbP3Oz51Kwimp4jWqt/Joy2s5o9DRmT7/Y+Z+vbozn7iG0/97nlqdTS85zZHrHWDD+1+o7i2tCvZeafHpd+xY9Rz1p3FCPjUk+k1yrXJvNs0Z7PvO73RN9+fZYtdiLS61FMZ/2tSX2/rT/a1jLsccJ8tOr4Uawe77VE4mzMKE/PN9rK9aP7qJ0uL/r9zGqvnM/b3Bz//nzPPnsqRluP5Vld6a3Uhp8+g53+Cn/xeNc7uOTHX5/Bbn/Fg13v4Pjreyv3vv0OH80f7Lld39niV3bh+Z17nGU0uieu8jxbO/H5++GpPXQyd7LvOPZ9zn4O2PeS7LMr8fh1jkH3rL+fetvRnDjzLq49ynqsr2U/5rV4O/Isyv6st+JPdsHTmKeaU2VOXfEWf/Nead+i+1l/9fds9jc0WxPP736PR/7KXEivX9rxQ1tlzlT1VHvc0qUWfS37sXtj5O8R9P6fwmMLWMH3SOfo/ArN/y1Hxt/O3f7WfJZZz8e2RsDjf8ZfqUb/z+nl98ZqXXF1J+AxHv0+ZX+bGB2v+B7u9bGtEfD8vXKs1hVXdwJXeuhp9/rYQgACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCPybBH4ChFOcOQ=="
+      data = "eAHtmcuO1DAQRXsFiA3DiodgwSBGYs0G+P8Pw4XaouRxrsspm+ZxIkVJx5W6Vec63c7M3eVyuTu5vyz3/Y3bi1L0Uc+relIaR9q969l6ejmj17Lat5obiv2qnpRGlK/FZeuZ0Wpjs9r4e/w9UllnGdc8Z45ZbfzF3x1zQH13rpqzSmPmWcrWM6PVxma1d3gXyanYr+pJabQc1edsPSr3aCyrHfFiR4xiv6onpTHi6sez9fhcs+dZ7R3eRXIq9qt6UhoznLP1zGi1sVntiBc7YhT7VT0pjZaj+pytR+UejWW1d3gXyanYr+pJaYy4+vFsPT7X7HlWO+LFjhjFflVPSmOGc7aeGa02Nqu9w7tITsV+VU9Ko+WoPmfrUblHY1ntiBc7YhT7VT0pjRFXP56tx+eaPc9q7/AuklOxX9WT0pjhnK1nRquNzWpHvNgRo9iv6klptBzV52w9KvdoLKu9w7tITsV+VU9KY8TVj2fr8blmz7PaES92xLwuST+Vvdfvqp7wd4dz8Zze44dy25vr/jaeQkbir8TzWwbN4+dlX+WpLxp/PY3bnb/aJI2/cbBPSujT6/4sfttNI/E3jt+zWrX+iaufi/Q199Zx0WvZfqM6vbiItj17o2du9Hx6VhFN5YjXqt8JveOoZqVhY/bbXtds9Xi0Zu+xrdfelzyZWmqeM8cj1p7hu1LfUVwZ+rmN/PPj1q/50evZ6/ZibNzqifSa5VpkHm3e85HXdU7Y8UvZPz7KFrsQ6fUoprL+WqS+Xffv5dgyrHG958Su+fherB+vtUTi2phenpqvd7T7e/OoXE5v5nXP44dyfeV6vtcX134946PvnozR3mPz1Z7Vld5abXipGez01/ibx7vewS0//moGu/01D3a9g+Ov9tbmfvsbfrSG8Nd3/WabX7Mbz+/Y41lGvTlxK89nayd+fj7Y2qn3jmPva/65b8/b9xIbn93wa94vY1bXu/499ei8tyY2b2ff10x3dsPfeX/N255nUfZnvcXfea/OzO/MmjrjLf7+mf6ap/W39cx3sp+D0e+IGufv5Tw2P3rPr62F/P6hfL4v++eyZz31vpR0U5u/l/Pz/h5Bt79P2bqr97fmM7yPdI6un9H43+/pPb9HfOt183mFxzUfxxwBNYfP+GvV+P9zqvxqLNcVd1cCinHv71N1/aSOK36Ha30ccwSUv7ccy3XF3ZXALT1U2rU+jhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAL/JoEfQvedCA=="
     },
     {
       type = "objectgroup",

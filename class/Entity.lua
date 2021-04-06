@@ -8,7 +8,8 @@ Entity.serializeTable = {
     "vx",
     "vy",
     "active",
-    "physics"
+    "physics",
+    "onGround",
 }
 
 function Entity:filter(other)
@@ -41,6 +42,7 @@ function Entity:initialize(level, x, y, w, h, physics)
     end
 
     self.active = true
+    self.onGround = true
 
     self.level.ecs:addEntity(self)
 end
