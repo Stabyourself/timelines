@@ -46,7 +46,7 @@ function Level:initialize(gamestate, path)
         end
 
         if type == "altar" then
-            table.insert(self.entities, Altar:new(self, object.x, object.y-64))
+            table.insert(self.entities, Altar:new(self, object.x+1, object.y-63))
         end
     end
 

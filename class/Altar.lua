@@ -13,6 +13,11 @@ Altar.drawable = Sprite:new(function(self)
     end
 end)
 
+Altar.drawable.x = -1
+Altar.drawable.y = -1
+
+Altar.platform = true
+
 combineArrays(Altar.serializeTable, {
     "used",
 })
@@ -20,7 +25,7 @@ combineArrays(Altar.serializeTable, {
 function Altar:initialize(level, x, y)
     self.used = false
 
-    Entity.initialize(self, level, x, y, 32, 64)
+    Entity.initialize(self, level, x, y, 30, 63)
 end
 
 return Altar

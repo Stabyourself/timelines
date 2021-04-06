@@ -13,11 +13,7 @@ Entity.serializeTable = {
 }
 
 function Entity:filter(other)
-    if other.properties and other.properties.platform and self.y + self.h > other.y then
-        return false
-    end
-
-    if tostring(other.class) == "class Altar" then
+    if (other.platform or (other.properties and other.properties.platform)) and self.y + self.h > other.y then
         return false
     end
 
