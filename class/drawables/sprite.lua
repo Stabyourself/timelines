@@ -13,7 +13,13 @@ function Sprite:initialize(img)
 end
 
 function Sprite:draw(e)
-    love.graphics.draw(self.img, e.x+self.x, e.y+self.y, e.r, self.sx, self.sy, self.ox, self.oy)
+    local img = self.img
+
+    if type(img) == "function" then
+        img = img(e)
+    end
+
+    love.graphics.draw(img, e.x+self.x, e.y+self.y, e.r, self.sx, self.sy, self.ox, self.oy)
 end
 
 return Sprite
