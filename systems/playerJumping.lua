@@ -6,14 +6,16 @@ playerJumping.filter = tiny.requireAll("jumpSpeed")
 function playerJumping:process(e, dt)
     if e.onGround then
         e.airJumpsLeft = e.totalAirJumps
+        e.coyoteTimer = 0
+    else
+        e.coyoteTimer = e.coyoteTimer + dt
     end
 
     local onGround = e.onGround
 
     -- coyote time
     if not onGround and e.coyoteTime then
-        print(love.timer.getTime(), e.coyoteTimer + e.coyoteTime)
-        if love.timer.getTime() <= e.coyoteTimer + e.coyoteTime then
+        if e.coyoteTimer <= e.coyoteTime then
             onGround = true
         end
     end

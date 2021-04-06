@@ -31,7 +31,7 @@ Player.maxSpeed = 100
 
 Player.jumpSpeed = 200
 Player.totalAirJumps = 1
-Player.coyoteTime = 0.1
+Player.coyoteTime = 0.08
 
 Player.gravity = 1400
 Player.jumpGravity = 650
@@ -122,10 +122,6 @@ end
 
 function Player:grounded()
     self.jumping = false
-end
-
-function Player:aired()
-    self.coyoteTimer = love.timer.getTime()
 end
 
 function Player:draw()
