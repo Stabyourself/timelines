@@ -41,6 +41,10 @@ function physics:process(e, dt)
         if not wasOnGround and e.onGround then
             if e.grounded then e:grounded() end
         end
+
+        if wasOnGround and not e.onGround then
+            if e.aired then e:aired() end
+        end
     end
 end
 

@@ -31,6 +31,7 @@ Player.maxSpeed = 100
 
 Player.jumpSpeed = 200
 Player.totalAirJumps = 1
+Player.coyoteTime = 0.1
 
 Player.gravity = 1400
 Player.jumpGravity = 650
@@ -74,6 +75,7 @@ function Player:initialize(level, x, y)
     self.keyCount = 0
 
     self.animationState = "idle"
+    self.coyoteTimer = 0
 end
 
 function Player:nearAltar()
@@ -112,21 +114,18 @@ function Player:collide(other, nx, ny)
 end
 
 function Player:jump()
-    self.jumping = true
-    self.ascending = true
-
     for _, dir in ipairs({"right", "left"}) do
         self.animations[dir].jump:gotoFrame(1)
         self.animations[dir].doublejump:gotoFrame(1)
     end
 end
 
-function Player:unjump()
-    self.ascending = false
-end
-
 function Player:grounded()
     self.jumping = false
+end
+
+function Player:aired()
+    self.coyoteTimer = love.timer.getTime()
 end
 
 function Player:draw()

@@ -8,18 +8,31 @@ function playerJumping:process(e, dt)
         e.airJumpsLeft = e.totalAirJumps
     end
 
-    if controls:pressed("jump") and (e.onGround or e.airJumpsLeft > 0) then
+    local onGround = e.onGround
+
+    -- coyote time
+    if not onGround and e.coyoteTime then
+        print(love.timer.getTime(), e.coyoteTimer + e.coyoteTime)
+        if love.timer.getTime() <= e.coyoteTimer + e.coyoteTime then
+            onGround = true
+        end
+    end
+
+    if controls:pressed("jump") and (onGround or e.airJumpsLeft > 0) then
         e:jump()
+
+        e.jumping = true
+        e.ascending = true
 
         e.vy = -e.jumpSpeed
 
-        if not e.onGround then
+        if not onGround then
             e.airJumpsLeft = e.airJumpsLeft - 1
         end
     end
 
     if controls:released("jump") then
-        e:unjump()
+        e.ascending = false
     end
 end
 
