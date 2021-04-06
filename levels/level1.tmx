@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="116" height="116" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#55aaff" nextlayerid="9" nextobjectid="32">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="120" height="116" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#55aaff" nextlayerid="9" nextobjectid="32">
  <editorsettings>
   <export target="level1.lua" format="lua"/>
  </editorsettings>
@@ -110,27 +110,27 @@
    </properties>
   </tile>
  </tileset>
- <layer id="3" name="world" width="116" height="116">
+ <layer id="3" name="world" width="120" height="116">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup color="#00aa00" id="7" name="markers">
   <object id="21" gid="1" x="288" y="384" width="16" height="16"/>
-  <object id="22" gid="2" x="1040" y="512" width="16" height="16">
+  <object id="22" gid="2" x="1280" y="608" width="16" height="16">
    <properties>
     <property name="transcendent" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="24" gid="2" x="672" y="352" width="16" height="16"/>
-  <object id="25" gid="3" x="848" y="352" width="16" height="16"/>
-  <object id="26" gid="3" x="1312" y="384" width="16" height="16">
+  <object id="24" gid="2" x="848" y="352" width="16" height="16"/>
+  <object id="25" gid="3" x="1024" y="352" width="16" height="16"/>
+  <object id="26" gid="3" x="1552" y="480" width="16" height="16">
    <properties>
     <property name="transcendent" type="bool" value="true"/>
    </properties>
   </object>
   <object id="27" gid="4" x="288" y="384" width="16" height="16"/>
-  <object id="28" gid="4" x="1424" y="384" width="16" height="16"/>
+  <object id="28" gid="4" x="1664" y="480" width="16" height="16"/>
   <object id="29" gid="4" x="384" y="352" width="16" height="16"/>
   <object id="30" gid="2" x="352" y="352" width="16" height="16"/>
   <object id="31" gid="3" x="368" y="368" width="16" height="16"/>

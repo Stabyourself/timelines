@@ -29,17 +29,19 @@ Player.brakeAccel = 800
 Player.runAccel = 500
 Player.maxSpeed = 100
 
-Player.jumpSpeed = 200
+Player.jumpSpeed = 170
 Player.totalAirJumps = 1
 Player.coyoteTime = 0.08
 
-Player.gravity = 1400
-Player.jumpGravity = 650
-Player.maxYSpeed = 300
+Player.gravity = 950
+Player.jumpGravity = 480
+Player.maxYSpeed = 400
 
 combineArrays(Player.serializeTable, {
     "airJumpsLeft",
-    "keyCount"
+    "keyCount",
+    "animationState",
+    "coyoteTimer",
 })
 
 local grid = anim8.newGrid(16, 32, img:getWidth(), img:getHeight())
@@ -58,15 +60,13 @@ for i, dir in ipairs({"right", "left"}) do
         run = anim8.newAnimation(grid("6-9", i), 0.08),
     }
 end
-
+-- TODO: need to clone this somehow; animations should be instanced
 
 Player.drawable = AnimationMachine:new(img, Player.animations)
 
 Player.drawable.x = 6
 Player.drawable.oy = 1
 Player.drawable.ox = 8
-
--- TODO: need to clone this somehow; animations are instanced
 
 function Player:initialize(level, x, y)
     Entity.initialize(self, level, x, y, 12, 14)
