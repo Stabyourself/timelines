@@ -5,10 +5,10 @@ timetable = gamestate.new()
 
 local timetable_back = love.graphics.newImage("img/timetable_back.png")
 local timetable_node = love.graphics.newImage("img/timetable_node.png")
-local timetable_node_active = love.graphics.newImage("img/timetable_node_active.png")
+local timetable_node_selected = love.graphics.newImage("img/timetable_node_selected.png")
 local timeline_left = love.graphics.newImage("img/timeline_left.png")
 local timetable_end = love.graphics.newImage("img/timetable_end.png")
-local timetable_active = love.graphics.newImage("img/player.png")
+local timetable_active = love.graphics.newImage("img/timetable_active.png")
 
 local timelineHeight = 24
 local timelineSecondWidth = 20
@@ -112,7 +112,7 @@ function timetable:drawNodeAndChildren(node, offX, offY)
     local img = timetable_node
 
     if node == self.selectedNode then
-        img = timetable_node_active
+        img = timetable_node_selected
     end
 
     if node == game.activeNode and node.nodeTime > 0 then

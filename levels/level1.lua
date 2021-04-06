@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 32,
+  nextobjectid = 35,
   backgroundcolor = { 85, 170, 255 },
   properties = {},
   tilesets = {
@@ -73,10 +73,10 @@ return {
       tileheight = 16,
       spacing = 2,
       margin = 1,
-      columns = 7,
+      columns = 9,
       image = "../img/tiles.png",
-      imagewidth = 128,
-      imageheight = 128,
+      imagewidth = 162,
+      imageheight = 90,
       objectalignment = "unspecified",
       tileoffset = {
         x = 0,
@@ -89,7 +89,7 @@ return {
       },
       properties = {},
       wangsets = {},
-      tilecount = 49,
+      tilecount = 54,
       tiles = {
         {
           id = 0,
@@ -128,8 +128,7 @@ return {
         {
           id = 1,
           properties = {
-            ["collidable"] = true,
-            ["platform"] = true
+            ["collidable"] = true
           }
         },
         {
@@ -141,8 +140,13 @@ return {
         {
           id = 3,
           properties = {
-            ["collidable"] = true,
-            ["spikes"] = true
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 5,
+          properties = {
+            ["collidable"] = true
           }
         },
         {
@@ -164,7 +168,25 @@ return {
           }
         },
         {
-          id = 14,
+          id = 10,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 11,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 12,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 13,
           properties = {
             ["collidable"] = true
           }
@@ -182,19 +204,55 @@ return {
           }
         },
         {
+          id = 17,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 18,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 19,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 20,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
           id = 21,
           properties = {
             ["collidable"] = true
           }
         },
         {
-          id = 22,
+          id = 23,
           properties = {
             ["collidable"] = true
           }
         },
         {
-          id = 23,
+          id = 25,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 26,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 27,
           properties = {
             ["collidable"] = true
           }
@@ -213,6 +271,42 @@ return {
         },
         {
           id = 30,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 33,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 34,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 35,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 36,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 37,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 38,
           properties = {
             ["collidable"] = true
           }
@@ -238,7 +332,7 @@ return {
       properties = {},
       encoding = "base64",
       compression = "zlib",
-      data = "eAHtmsuS1DAMRXvDYwFsGDbAhuH//xGLGlfdFlY7ctqN0zmpcsUPRbHOSabn9XK5XF4G27dy3RGPr2XTUc1HrSnyENW5Zf6oLPAbP9/qHb/RW7POvPrK9vG7jsdoJ1mnGo/fiOo68+or28fvOh6jnWSdajx+I6rrzKuvbB+/63iMdpJ1qvH4jaiuM6++sn38ruMx2knWqcbjN6K6zrz6yvbxu47HaCdZpxqP34jqOvPqK9vH7zoeo51knWo8fiOq68yrr2wfv+t4jHaSdarxR/X7vcDQOrR/1Jrwe03AO/5Rlq39vA47/Eif3Wz/6M96dfxsTvWhzDrV+KP7NQ72zj7zob6y/Uf5/VQEfH5rX55ZxoTask41/lF+9f+lHnXPCaj/S0r1le23WL8vVVirh717vXeu937e06/eq35NaJ0/1AIGz+/Kdfdsg9sIf07Y4rrl1/bxsbTK0fJEcRZrR8+frls+89F6Zuo9qy8fY+tb6rIYc7PXcUlxdez1fZVs42BrvVGcsfxV2utb+13ONufjK/PWuRfr1+vY56rzetYYne/1q4t7Oy5o/h41f3SucXvPvTrPuq7c9zKOrtd7aD+KH5k/q79e3bN4e0ez79Or86zrs7mrZ7vXrOOs/np1q1/7DM62Wb6yeXt1nnVd/Y70W89D1s094s/qr1f3iNPeNf578dYzoHP+55IR3706z7rec5Vd927MYyuHj9s7Pqu/Xt0t9n5ulH3k1vLf++jVedZ179KPRz3ccovff38vNuv58z79OONXP1N9Hj/O5N0SO4vP0fN67n7s2da/q9Rzxqnm9nn3jo/uYdb+lXmrv5V769pbc1vzbo2bxefoeW85sLXs0ctX17N5iR8jUHlH55GsUS6dH8nLNXkCyrzVt79xZ1srj5/L75QrRgh47o8aj+yVa/IEZvrM74YrIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABM5C4A9K/4Iv"
+      data = "eAHtmkFz0zAQRnMpcKOcgB5ggEML/f//r9ohmmw0+iytYrty5nnGI1leyav35NZx8ng6nR4H9y+p3xG3zylpNeejzkl5UPPsaT8qC/zq9e2941fdNfO0e1/ROn7n8agyiTr18fhVVOdp976idfzO41FlEnXq4/GrqM7T7n1F6/idx6PKJOrUx+NXUZ2n3fuK1vE7j0eVSdSpj8evojpPu/cVreN3Ho8qk6hTH49fRXWedu8rWsfvPB5VJlGnPh6/iuo87d5XtI7feTyqTKJOffxR/X5LMJ7T7ueS60edE36vCXjHL+nU9/P+dB12+KO8bkfKo691c2zzvjenflGOeM19ju7XOHz1MO6wnl2NlHv5/ZC4fzzvn+7QwZZTGvGa++zl1/9eaq9rbsl8z7Gzq5Gyh7Xde617rnV/runXXyv/TVDlLR4eUuc199FcRrzmPsqvZ/gjJabics4tf/78z9TJfNTWjL9uLcbOWz45/1ZpY6y53ep7JJfWHJfOZ9Z/04X/nffXVJYMc5y6T3x8Ldafz/n0xJUxtXHyeKpc23F21HKd424t1bxov9zntzJW/ZVjFT/SjseLR8VihGtvH++4t08kTs2J9ov3CM+RWHO81YbHi0fFQj03qPbas99W/lrjqjnR3vauGJXPdbYO3su5ypH2cb8lu5fk19r+FDdb+Xmu/HtQfi4puncdlrlw3OfVnOXvnFpl7fsL9Vm8S1ogCJ99Pj0nc1tz1otdubVrrL35vKn3uW69j1tytOQWv338t16nUb/+/2zrHdrS2hg5tzWLexy/5teehfz+Kx3/Trs9M0UYpPBVt8i1if3vquZXSbHfiNjz13Pae/ipcUbbe65JzLWbiN/sxf/ea4lnjqfclsCSgxG/lq3/nlONv+2sGD0TUPytvfZ+qnw3UTtuPVvZ2Gz7EFjyu+W5fWbHVXDIGoAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhB4DwJvcAB4Tw=="
     },
     {
       type = "objectgroup",
