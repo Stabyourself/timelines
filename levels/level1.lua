@@ -91,14 +91,14 @@ return {
       wangsets = {
         {
           name = "Unnamed Set",
-          tile = -1,
+          tile = 27,
           properties = {},
           colors = {
             {
               color = { 255, 0, 0 },
               name = "wall",
               probability = 1,
-              tile = -1,
+              tile = 27,
               properties = {}
             }
           },
