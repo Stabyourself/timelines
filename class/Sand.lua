@@ -44,7 +44,7 @@ function Sand:collide(other, nx, ny)
     if ny ~= 0 then
         self.vy = -self.vy*self.dampening
 
-        if math.abs(self.vx) < 2 then
+        if self.level.world:hasItem(self) and math.abs(self.vx) < 2 then
             self:removeFromWorld()
             self:removeFromECS()
         end
