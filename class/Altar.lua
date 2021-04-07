@@ -13,7 +13,7 @@ Altar.drawable = Sprite:new(function(self)
     end
 end)
 
-Altar.drawable.x = -1
+Altar.drawable.x = 0
 Altar.drawable.y = -1
 
 Altar.particleClass = require "class.MagicParticle"
@@ -31,7 +31,7 @@ combineArrays(Altar.serializeTable, {
 function Altar:initialize(level, x, y)
     self.used = false
 
-    Entity.initialize(self, level, x, y, 30, 63)
+    Entity.initialize(self, level, x, y, 32, 63)
 
     self.particleTimes = {0.1, 0.3, 0.3, 0.5}
     self.particleTimer = 0

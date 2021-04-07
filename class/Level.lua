@@ -46,7 +46,7 @@ function Level:initialize(gamestate, path)
         end
 
         if type == "altar" then
-            table.insert(self.entities, Altar:new(self, object.x+1, object.y-63))
+            table.insert(self.entities, Altar:new(self, object.x, object.y-63))
         end
     end
 
@@ -109,7 +109,7 @@ function Level:draw()
     if DEBUG then
         love.graphics.setColor(1, 1, 1, 0.4)
         self.map:drawLayer(self.map.layers.markers)
-        love.graphics.setColor(1, 0, 0)
+        love.graphics.setColor(1, 0, 0, 0.5)
         love.graphics.push()
         love.graphics.translate(0.5, 0.5)
 
