@@ -114,7 +114,10 @@ function Level:draw()
         love.graphics.translate(0.5, 0.5)
 
         for _, item in ipairs(self.world:getItems()) do
-            love.graphics.rectangle("line", self.world:getRect(item))
+            local x, y, w, h = self.world:getRect(item)
+            w = w - 1
+            h = h - 1
+            love.graphics.rectangle("line", x, y, w, h)
         end
 
         love.graphics.pop()

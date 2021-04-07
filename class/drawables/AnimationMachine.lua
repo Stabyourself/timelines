@@ -15,7 +15,11 @@ function AnimationMachine:initialize(img, animations)
 end
 
 function AnimationMachine:draw(e)
-    self.animations[self.dir][e.animationState]:draw(self.img, e.x+self.x, e.y+self.y, e.r, self.sx, self.sy, self.ox, self.oy)
+    self:getAnimation(e):draw(self.img, e.x+self.x, e.y+self.y, e.r, self.sx, self.sy, self.ox, self.oy)
+end
+
+function AnimationMachine:getAnimation(e)
+    return self.animations[self.dir][e.animationState]
 end
 
 return AnimationMachine

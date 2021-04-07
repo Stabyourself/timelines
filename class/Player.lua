@@ -5,7 +5,6 @@ local Entity = require "class.Entity"
 local Key = require "class.Key"
 local Door = require "class.Door"
 
-local img = love.graphics.newImage("img/player.png")
 local useBubble = love.graphics.newImage("img/use_bubble.png")
 
 local Player = class("Player", Entity)
@@ -44,7 +43,8 @@ combineArrays(Player.serializeTable, {
     "coyoteTimer",
 })
 
-local grid = anim8.newGrid(16, 32, img:getWidth(), img:getHeight())
+local playerImg = love.graphics.newImage("img/player.png")
+local grid = anim8.newGrid(16, 16, playerImg:getWidth(), playerImg:getHeight())
 
 Player.animations = {
     right = {},
@@ -62,10 +62,26 @@ for i, dir in ipairs({"right", "left"}) do
 end
 -- TODO: need to clone this somehow; animations should be instanced
 
-Player.drawable = AnimationMachine:new(img, Player.animations)
+local sandImg = love.graphics.newImage("img/player_sand.png")
+local sandQuads = {}
+
+for i = 1, 9 do
+    table.insert(sandQuads, love.graphics.newQuad((i-1)*16, 0, 16, 16, sandImg:getWidth(), sandImg:getHeight()))
+end
+
+local sandOffsets = {
+    jump = {
+        [1] = {0, 1}
+    },
+    doublejump = {
+        [1] = {0, 1}
+    },
+}
+
+Player.drawable = AnimationMachine:new(playerImg, Player.animations)
 
 Player.drawable.x = 6
-Player.drawable.oy = 1
+Player.drawable.oy = 0
 Player.drawable.ox = 8
 
 function Player:initialize(level, x, y)
@@ -76,6 +92,8 @@ function Player:initialize(level, x, y)
 
     self.animationState = "idle"
     self.coyoteTimer = 0
+
+    self.sand = 1
 end
 
 function Player:nearAltar()
@@ -125,6 +143,18 @@ function Player:grounded()
 end
 
 function Player:draw()
+    -- sand
+    local ox, oy = 0,0
+
+    local animation = self.drawable:getAnimation(self)
+    if sandOffsets[self.animationState] and sandOffsets[self.animationState][animation.position] then
+        ox, oy = unpack(sandOffsets[self.animationState][animation.position])
+    end
+
+    local sandQuad = math.floor((1-self.sand)*8)+1
+
+    love.graphics.draw(sandImg, sandQuads[sandQuad], self.x+self.drawable.x+ox, self.y+self.drawable.y+oy, 0, 1, 1, self.drawable.ox, self.drawable.oy)
+
     Entity.draw(self)
 
     if self:nearAltar() then
