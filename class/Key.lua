@@ -17,7 +17,7 @@ function Key:filter(other)
         return "cross"
     end
 
-    return "slide"
+    return Entity.filter(self, other)
 end
 
 Key.bobDistance = 2

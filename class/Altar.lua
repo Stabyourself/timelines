@@ -40,7 +40,7 @@ end
 function Altar:use()
     self.used = true
     self.particleTimes = nil
-    self.level.ecs:add(self) -- need to add ourselves again to let the ecs know the filter changed
+    self:refreshECS()
 end
 
 return Altar

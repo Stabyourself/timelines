@@ -17,6 +17,10 @@ function Entity:filter(other)
         return false
     end
 
+    if other.class and other.class.name == "Sand" then
+        return false
+    end
+
     return "slide"
 end
 
@@ -75,6 +79,18 @@ end
 
 function Entity:remove()
     self.level.world:remove(self)
+    self.level.ecs:remove(self)
+end
+
+function Entity:refreshECS()
+    self.level.ecs:add(self)
+end
+
+function Entity:removeFromWorld()
+    self.level.world:remove(self)
+end
+
+function Entity:removeFromECS()
     self.level.ecs:remove(self)
 end
 

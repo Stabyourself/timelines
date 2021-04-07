@@ -36,6 +36,9 @@ Player.gravity = 950
 Player.jumpGravity = 480
 Player.maxYSpeed = 400
 
+Player.sandSpawnTime = 0.01
+Player.sandSpawnTimer = 0
+
 combineArrays(Player.serializeTable, {
     "airJumpsLeft",
     "keyCount",

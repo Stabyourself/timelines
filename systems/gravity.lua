@@ -10,7 +10,7 @@ function gravity:process(e, dt)
         gravity = e.jumpGravity
     end
 
-    e.vy = math.min(e.maxYSpeed, e.vy + gravity*dt)
+    e.vy = math.min(e.maxYSpeed or math.huge, e.vy + gravity*dt)
 end
 
 return gravity

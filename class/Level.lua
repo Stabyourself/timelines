@@ -33,20 +33,19 @@ function Level:initialize(gamestate, path)
         local type = self.map.tiles[object.gid].type
 
         if type == "start" then
-            self.player = Player:new(self, object.x+2, object.y-14)
-            table.insert(self.entities, self.player)
+            self.player = self:addEntity(Player:new(self, object.x+2, object.y-14))
         end
 
         if type == "key" then
-            table.insert(self.entities, Key:new(self, object.x+1, object.y-12, object.properties.transcendent))
+            self:addEntity(Key:new(self, object.x+1, object.y-12, object.properties.transcendent))
         end
 
         if type == "door" then
-            table.insert(self.entities, Door:new(self, object.x+4, object.y-32, object.properties.transcendent))
+            self:addEntity(Door:new(self, object.x+4, object.y-32, object.properties.transcendent))
         end
 
         if type == "altar" then
-            table.insert(self.entities, Altar:new(self, object.x, object.y-63))
+            self:addEntity(Altar:new(self, object.x, object.y-63))
         end
     end
 
@@ -135,6 +134,12 @@ function Level:mousepressed(x, y, button)
     self.player.vy = 0
     self.world:update(self.player, wx, wy)
     self.cameraFocus = self.player
+end
+
+function Level:addEntity(entity)
+    table.insert(self.entities, entity)
+
+    return entity
 end
 
 function Level:addParticleInRect(x, y, w, h, particleClass)
