@@ -88,41 +88,214 @@ return {
         height = 16
       },
       properties = {},
-      wangsets = {},
+      wangsets = {
+        {
+          name = "Unnamed Set",
+          tile = -1,
+          properties = {},
+          colors = {
+            {
+              color = { 255, 0, 0 },
+              name = "wall",
+              probability = 1,
+              tile = -1,
+              properties = {}
+            }
+          },
+          wangtiles = {
+            {
+              wangid = { 0, 0, 0, 0, 1, 0, 0, 0 },
+              tileid = 0
+            },
+            {
+              wangid = { 0, 0, 1, 1, 1, 0, 0, 0 },
+              tileid = 1
+            },
+            {
+              wangid = { 0, 0, 1, 1, 1, 1, 1, 0 },
+              tileid = 2
+            },
+            {
+              wangid = { 0, 0, 0, 0, 1, 1, 1, 0 },
+              tileid = 3
+            },
+            {
+              wangid = { 1, 0, 1, 1, 1, 1, 1, 0 },
+              tileid = 4
+            },
+            {
+              wangid = { 1, 1, 1, 0, 1, 0, 1, 1 },
+              tileid = 5
+            },
+            {
+              wangid = { 1, 0, 1, 1, 1, 0, 1, 1 },
+              tileid = 6
+            },
+            {
+              wangid = { 1, 0, 1, 1, 1, 0, 1, 0 },
+              tileid = 7
+            },
+            {
+              wangid = { 1, 0, 1, 0, 1, 1, 1, 0 },
+              tileid = 8
+            },
+            {
+              wangid = { 1, 0, 0, 0, 1, 0, 0, 0 },
+              tileid = 9
+            },
+            {
+              wangid = { 1, 1, 1, 1, 1, 0, 0, 0 },
+              tileid = 10
+            },
+            {
+              wangid = { 1, 1, 1, 1, 1, 1, 1, 1 },
+              tileid = 11
+            },
+            {
+              wangid = { 1, 0, 0, 0, 1, 1, 1, 1 },
+              tileid = 12
+            },
+            {
+              wangid = { 1, 1, 1, 1, 1, 0, 1, 0 },
+              tileid = 13
+            },
+            {
+              wangid = { 1, 0, 1, 0, 1, 1, 1, 1 },
+              tileid = 14
+            },
+            {
+              wangid = { 1, 1, 1, 0, 1, 1, 1, 0 },
+              tileid = 15
+            },
+            {
+              wangid = { 1, 1, 1, 0, 1, 0, 1, 0 },
+              tileid = 16
+            },
+            {
+              wangid = { 1, 0, 1, 0, 1, 0, 1, 1 },
+              tileid = 17
+            },
+            {
+              wangid = { 1, 0, 0, 0, 0, 0, 0, 0 },
+              tileid = 18
+            },
+            {
+              wangid = { 1, 1, 1, 0, 0, 0, 0, 0 },
+              tileid = 19
+            },
+            {
+              wangid = { 1, 1, 1, 0, 0, 0, 1, 1 },
+              tileid = 20
+            },
+            {
+              wangid = { 1, 0, 0, 0, 0, 0, 1, 1 },
+              tileid = 21
+            },
+            {
+              wangid = { 1, 1, 1, 1, 1, 1, 1, 0 },
+              tileid = 23
+            },
+            {
+              wangid = { 1, 0, 1, 1, 1, 1, 1, 1 },
+              tileid = 24
+            },
+            {
+              wangid = { 0, 0, 1, 0, 1, 0, 0, 0 },
+              tileid = 25
+            },
+            {
+              wangid = { 0, 0, 0, 0, 1, 0, 1, 0 },
+              tileid = 26
+            },
+            {
+              wangid = { 0, 0, 1, 0, 0, 0, 0, 0 },
+              tileid = 28
+            },
+            {
+              wangid = { 0, 0, 1, 0, 0, 0, 1, 0 },
+              tileid = 29
+            },
+            {
+              wangid = { 0, 0, 0, 0, 0, 0, 1, 0 },
+              tileid = 30
+            },
+            {
+              wangid = { 1, 0, 1, 0, 1, 0, 1, 0 },
+              tileid = 31
+            },
+            {
+              wangid = { 1, 1, 1, 1, 1, 0, 1, 1 },
+              tileid = 32
+            },
+            {
+              wangid = { 1, 1, 1, 0, 1, 1, 1, 1 },
+              tileid = 33
+            },
+            {
+              wangid = { 1, 0, 1, 0, 0, 0, 0, 0 },
+              tileid = 34
+            },
+            {
+              wangid = { 1, 0, 0, 0, 0, 0, 1, 0 },
+              tileid = 35
+            },
+            {
+              wangid = { 0, 0, 1, 1, 1, 0, 1, 0 },
+              tileid = 36
+            },
+            {
+              wangid = { 0, 0, 1, 0, 1, 1, 1, 0 },
+              tileid = 37
+            },
+            {
+              wangid = { 0, 0, 1, 0, 1, 0, 1, 0 },
+              tileid = 38
+            },
+            {
+              wangid = { 1, 0, 1, 1, 1, 0, 0, 0 },
+              tileid = 39
+            },
+            {
+              wangid = { 1, 0, 0, 0, 1, 1, 1, 0 },
+              tileid = 40
+            },
+            {
+              wangid = { 1, 1, 1, 0, 1, 0, 0, 0 },
+              tileid = 41
+            },
+            {
+              wangid = { 1, 0, 0, 0, 1, 0, 1, 1 },
+              tileid = 42
+            },
+            {
+              wangid = { 1, 0, 1, 0, 1, 0, 0, 0 },
+              tileid = 43
+            },
+            {
+              wangid = { 1, 0, 0, 0, 1, 0, 1, 0 },
+              tileid = 44
+            },
+            {
+              wangid = { 1, 1, 1, 0, 0, 0, 1, 0 },
+              tileid = 45
+            },
+            {
+              wangid = { 1, 0, 1, 0, 0, 0, 1, 1 },
+              tileid = 46
+            },
+            {
+              wangid = { 1, 0, 1, 0, 0, 0, 1, 0 },
+              tileid = 47
+            }
+          }
+        }
+      },
       tilecount = 54,
       tiles = {
         {
           id = 0,
           properties = {
             ["collidable"] = true
-          },
-          objectGroup = {
-            type = "objectgroup",
-            draworder = "index",
-            id = 2,
-            name = "",
-            visible = true,
-            opacity = 1,
-            offsetx = 0,
-            offsety = 0,
-            parallaxx = 1,
-            parallaxy = 1,
-            properties = {},
-            objects = {
-              {
-                id = 1,
-                name = "",
-                type = "",
-                shape = "rectangle",
-                x = 0,
-                y = 0,
-                width = 16.0514,
-                height = 3.41897,
-                rotation = 0,
-                visible = true,
-                properties = {}
-              }
-            }
           }
         },
         {

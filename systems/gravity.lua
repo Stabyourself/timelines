@@ -1,9 +1,9 @@
 local tiny = require("lib.tiny")
 
-local physics = tiny.processingSystem()
-physics.filter = tiny.requireAll("gravity")
+local gravity = tiny.processingSystem()
+gravity.filter = tiny.requireAll("gravity")
 
-function physics:process(e, dt)
+function gravity:process(e, dt)
     local gravity = e.gravity
 
     if e.ascending and e.jumpGravity and e.vy < 0 then
@@ -11,8 +11,6 @@ function physics:process(e, dt)
     end
 
     e.vy = math.min(e.maxYSpeed, e.vy + gravity*dt)
-
-
 end
 
-return physics
+return gravity

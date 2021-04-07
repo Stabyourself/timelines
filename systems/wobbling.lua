@@ -2,13 +2,13 @@ local tiny = require("lib.tiny")
 
 local pi2 = math.pi*2
 
-local bobbing = tiny.processingSystem()
-bobbing.filter = tiny.requireAll("bobStart", "bobDistance", "bobTime", "bobTimer")
+local wobbling = tiny.processingSystem()
+wobbling.filter = tiny.requireAll("wobbleTime", "wobbleDistance", "wobbleTimer")
 
-function bobbing:process(e, dt)
-    e.bobTimer = (e.bobTimer + dt) % e.bobTime
+function wobbling:process(e, dt)
+    e.wobbleTimer = (e.wobbleTimer + dt) % e.wobbleTime
 
-    e.goalY = e.bobStart + math.sin(e.bobTimer / e.bobTime * pi2) * e.bobDistance
+    e.r = math.sin(e.wobbleTimer / e.wobbleTime * pi2) * e.wobbleDistance
 end
 
-return bobbing
+return wobbling
