@@ -55,8 +55,6 @@ function game:die()
 end
 
 function game:useAltar(altar)
-    gamestate.push(timetable)
-
     if not altar.used then
         altar:use()
 
@@ -66,6 +64,8 @@ function game:useAltar(altar)
         local node = Node:new(self.activeNode, self.activeNode.timeline)
 
         self.activeNode = node
+    else
+        gamestate.push(timetable)
     end
 end
 
