@@ -4,6 +4,12 @@ local physics = tiny.processingSystem()
 physics.filter = tiny.requireAll("x", "y", "vx", "vy", "w", "h")
 
 function physics:process(e, dt)
+    if e.worldRemove then
+        e:removeFromWorld()
+        e:removeFromECS()
+        return
+    end
+
     if e.physics and e.active and dt > 0 then
         local wasOnGround = e.onGround
 
