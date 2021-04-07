@@ -4,7 +4,7 @@ function AnimationMachine:initialize(img, animations)
     self.img = img
     self.animations = animations
 
-    self.dir = "right"
+    self.dir = 1
     self.x = 0
     self.y = 0
     self.r = 0

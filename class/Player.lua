@@ -36,7 +36,7 @@ Player.gravity = 950
 Player.jumpGravity = 480
 Player.maxYSpeed = 400
 
-Player.sandSpawnTime = 0.01
+Player.sandSpawnTimes = {0.05, 0.1, 0.1, 0.2}
 Player.sandSpawnTimer = 0
 
 combineArrays(Player.serializeTable, {
@@ -50,11 +50,11 @@ local playerImg = love.graphics.newImage("img/player.png")
 local grid = anim8.newGrid(16, 16, playerImg:getWidth(), playerImg:getHeight())
 
 Player.animations = {
-    right = {},
-    left = {},
+    [1] = {},
+    [-1] = {},
 }
 
-for i, dir in ipairs({"right", "left"}) do
+for i, dir in ipairs({1, -1}) do
     Player.animations[dir] = {
         idle = anim8.newAnimation(grid(1, i), math.huge),
         fall = anim8.newAnimation(grid(3, i), math.huge),
@@ -135,7 +135,7 @@ function Player:collide(other, nx, ny)
 end
 
 function Player:jump()
-    for _, dir in ipairs({"right", "left"}) do
+    for _, dir in ipairs({-1, 1}) do
         self.animations[dir].jump:gotoFrame(1)
         self.animations[dir].doublejump:gotoFrame(1)
     end

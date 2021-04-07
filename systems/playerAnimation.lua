@@ -5,9 +5,9 @@ playerAnimation.filter = tiny.requireAll("runAccel")
 
 function playerAnimation:process(e, dt)
     if controls:down("left") then
-        e.drawable.dir = "left"
+        e.drawable.dir = -1
     elseif controls:down("right") then
-        e.drawable.dir = "right"
+        e.drawable.dir = 1
     end
 
     if e.onGround then
