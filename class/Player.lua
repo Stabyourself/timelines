@@ -36,7 +36,7 @@ Player.gravity = 950
 Player.jumpGravity = 480
 Player.maxYSpeed = 400
 
-Player.sandSpawnTimes = {0.05, 0.1, 0.1, 0.2}
+Player.sandSpawnTimes = {0.03, 0.05, 0.05, 0.1, 0.1, 0.2}
 Player.sandSpawnTimer = 0
 
 combineArrays(Player.serializeTable, {
