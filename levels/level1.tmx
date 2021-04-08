@@ -262,7 +262,16 @@
   <tile id="48">
    <properties>
     <property name="collidable" type="bool" value="true"/>
-    <property name="spikes" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="49">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="50">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="51">
@@ -276,6 +285,60 @@
    </properties>
   </tile>
   <tile id="53">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="54">
+   <properties>
+    <property name="collidable" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="55">
+   <properties>
+    <property name="collidable" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="56">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="57">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="spikes" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="58">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="spikes" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="59">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="spikes" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="60">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="spikes" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="63">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="64">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="65">
    <properties>
     <property name="collidable" type="bool" value="true"/>
    </properties>
@@ -334,7 +397,7 @@
  </tileset>
  <layer id="3" name="world" width="120" height="116">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup color="#00aa00" id="7" name="markers">
