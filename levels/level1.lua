@@ -721,7 +721,9 @@ return {
           rotation = 0,
           gid = 4,
           visible = true,
-          properties = {}
+          properties = {
+            ["used"] = true
+          }
         },
         {
           id = 28,

@@ -94,4 +94,6 @@ function Entity:removeFromECS()
     self.level.ecs:remove(self)
 end
 
+function Entity:postAdd() end
+
 return Entity

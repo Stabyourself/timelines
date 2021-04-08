@@ -23,18 +23,23 @@ Altar.particleW = 10
 Altar.particleH = 10
 
 Altar.platform = true
+Altar.used = false
 
 combineArrays(Altar.serializeTable, {
     "used",
 })
 
 function Altar:initialize(level, x, y)
-    self.used = false
-
     Entity.initialize(self, level, x, y, 32, 63)
 
     self.particleTimes = {0.1, 0.3, 0.3, 0.5}
     self.particleTimer = 0
+end
+
+function Altar:postAdd()
+    if self.used then
+        self:use()
+    end
 end
 
 function Altar:use()

@@ -45,7 +45,12 @@ function Level:initialize(gamestate, path)
         end
 
         if type == "altar" then
-            self:addEntity(Altar:new(self, object.x, object.y-63))
+            local altar = Altar:new(self, object.x, object.y-63)
+            if object.properties.used then
+                altar:use()
+            end
+
+            self:addEntity(altar)
         end
     end
 
@@ -191,7 +196,10 @@ end
 
 function Level:loadState(entities)
     for _, entity in ipairs(entities) do
-        table.insert(self.entities, entity.class.fromState(self, entity))
+        local newEntity = entity.class.fromState(self, entity)
+        newEntity:postAdd()
+
+        table.insert(self.entities, newEntity)
     end
 
     self.player = self:getEntities(Player)[1]

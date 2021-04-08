@@ -351,7 +351,11 @@
     <property name="transcendent" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="27" gid="4" x="288" y="384" width="16" height="16"/>
+  <object id="27" gid="4" x="288" y="384" width="16" height="16">
+   <properties>
+    <property name="used" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="28" gid="4" x="1664" y="480" width="16" height="16"/>
  </objectgroup>
 </map>
