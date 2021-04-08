@@ -6,7 +6,7 @@ local Level = require "class.Level"
 function game:init()
     self.transcendentState = {
         state = {},
-        keys = 0,
+        keyCount = 0,
     }
     self.rootNode = Node:new(nil, 0, 1)
 
@@ -44,6 +44,7 @@ function game:draw()
 
     -- UI!
     love.graphics.print("Keys: " .. self.level.player.keyCount)
+    love.graphics.print("Meta-Keys: " .. self.transcendentState.keyCount, 0, 10)
     love.graphics.pop()
 end
 
@@ -56,6 +57,7 @@ end
 
 function game:die()
     self.activeNode.ended = true
+    gamestate.push(timetable)
 end
 
 function game:useAltar(altar)

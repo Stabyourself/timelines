@@ -117,18 +117,33 @@ function Player:collide(other, nx, ny)
     if other.isInstanceOf then
         if other:isInstanceOf(Key) then
             other:queueRemove()
-            self.keyCount = self.keyCount + 1
+            if other.transcendent then
+                game.transcendentState.keyCount = game.transcendentState.keyCount + 1
+            else
+                self.keyCount = self.keyCount + 1
+            end
         end
 
         if other:isInstanceOf(Door) then
-            if self.keyCount > 0 then
-                other:queueRemove()
+            local open = false
+
+            if game.transcendentState.keyCount > 0 then
+                game.transcendentState.keyCount = game.transcendentState.keyCount - 1
+                open = true
+
+            elseif self.keyCount > 0 then
                 self.keyCount = self.keyCount - 1
+                open = true
+
+            end
+
+            if open then
+                other:queueRemove()
             end
         end
     else -- world tile
         if other.properties.spikes and ny < 0  then
-            game:die()
+            self:die()
             self.active = false
         end
     end
@@ -143,6 +158,11 @@ end
 
 function Player:grounded()
     self.jumping = false
+end
+
+function Player:die()
+    self:remove()
+    game:die()
 end
 
 function Player:draw()

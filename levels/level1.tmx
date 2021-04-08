@@ -259,6 +259,12 @@
     <property name="collidable" type="bool" value="true"/>
    </properties>
   </tile>
+  <tile id="48">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="spikes" type="bool" value="true"/>
+   </properties>
+  </tile>
   <tile id="51">
    <properties>
     <property name="collidable" type="bool" value="true"/>
@@ -328,7 +334,7 @@
  </tileset>
  <layer id="3" name="world" width="120" height="116">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup color="#00aa00" id="7" name="markers">
@@ -347,18 +353,5 @@
   </object>
   <object id="27" gid="4" x="288" y="384" width="16" height="16"/>
   <object id="28" gid="4" x="1664" y="480" width="16" height="16"/>
-  <object id="29" gid="4" x="384" y="352" width="16" height="16"/>
-  <object id="30" gid="2" x="352" y="352" width="16" height="16">
-   <properties>
-    <property name="transcendent" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="31" gid="3" x="368" y="368" width="16" height="16">
-   <properties>
-    <property name="transcendent" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="35" gid="2" x="272" y="352" width="16" height="16"/>
-  <object id="36" gid="3" x="256" y="384" width="16" height="16"/>
  </objectgroup>
 </map>
