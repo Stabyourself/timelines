@@ -15,7 +15,7 @@ function Player:filter(other)
     end
 
     if other.class and other.class.name == "Door" then
-        if self.keyCount > 0 then
+        if self:openDoor(other, false) then
             return "cross"
         end
     end
@@ -125,19 +125,7 @@ function Player:collide(other, nx, ny)
         end
 
         if other:isInstanceOf(Door) then
-            local open = false
-
-            if game.transcendentState.keyCount > 0 then
-                game.transcendentState.keyCount = game.transcendentState.keyCount - 1
-                open = true
-
-            elseif self.keyCount > 0 then
-                self.keyCount = self.keyCount - 1
-                open = true
-
-            end
-
-            if open then
+            if self:openDoor(other, true) then
                 other:queueRemove()
             end
         end
@@ -163,6 +151,23 @@ end
 function Player:die()
     self:remove()
     game:die()
+end
+
+function Player:openDoor(door, forReal)
+    if game.transcendentState.keyCount > 0 then
+        if forReal then
+            game.transcendentState.keyCount = game.transcendentState.keyCount - 1
+        end
+
+        return true
+
+    elseif self.keyCount > 0 then
+        if forReal then
+            self.keyCount = self.keyCount - 1
+        end
+
+        return true
+    end
 end
 
 function Player:draw()
