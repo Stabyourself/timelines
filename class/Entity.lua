@@ -60,7 +60,7 @@ function Entity:toState()
 end
 
 function Entity.fromState(level, state)
-    local entity = state.class:new(level, state.x, state.y, state.w, state.h, state.physics)
+    local entity = state.class:new(level, state.x, state.y)
 
     for k, v in pairs(state) do
         entity[k] = v

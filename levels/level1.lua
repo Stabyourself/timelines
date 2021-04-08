@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 35,
+  nextobjectid = 37,
   backgroundcolor = { 85, 170, 255 },
   properties = {},
   tilesets = {
@@ -90,7 +90,7 @@ return {
       properties = {},
       wangsets = {
         {
-          name = "Unnamed Set",
+          name = "wall",
           tile = 27,
           properties = {},
           colors = {
@@ -756,7 +756,9 @@ return {
           rotation = 0,
           gid = 2,
           visible = true,
-          properties = {}
+          properties = {
+            ["transcendent"] = true
+          }
         },
         {
           id = 31,
@@ -765,6 +767,36 @@ return {
           shape = "rectangle",
           x = 368,
           y = 368,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {
+            ["transcendent"] = true
+          }
+        },
+        {
+          id = 35,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 272,
+          y = 352,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 2,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 36,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 256,
+          y = 384,
           width = 16,
           height = 16,
           rotation = 0,

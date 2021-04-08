@@ -167,13 +167,15 @@ function Level:makeState()
     }
 
     for _, entity in ipairs(self.entities) do
-        table.insert(state.entities, entity:toState())
+        if not entity.transcendent then -- transcendent items are stored differently
+            table.insert(state.entities, entity:toState())
+        end
     end
 
     return state
 end
 
-function Level:loadState(state)
+function Level:clear()
     -- remove all ecs from the world
     self.ecs:clearEntities()
 
@@ -185,8 +187,10 @@ function Level:loadState(state)
     end
 
     self.entities = {}
+end
 
-    for _, entity in ipairs(state.entities) do
+function Level:loadState(entities)
+    for _, entity in ipairs(entities) do
         table.insert(self.entities, entity.class.fromState(self, entity))
     end
 

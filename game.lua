@@ -4,6 +4,10 @@ game = gamestate.new()
 local Level = require "class.Level"
 
 function game:init()
+    self.transcendentState = {
+        state = {},
+        keys = 0,
+    }
     self.rootNode = Node:new(nil, 0, 1)
 
     self.level = Level:new(self, "levels/level1.lua")
@@ -85,7 +89,18 @@ function game:startOnNode(parentNode)
 
     self.activeNode = node
 
-    if parentNode.state then
-        self.level:loadState(parentNode.state)
+    self:updateTranscendentState()
+    self.level:clear()
+    self.level:loadState(parentNode.state.entities)
+    self.level:loadState(self.transcendentState.entities)
+end
+
+function game:updateTranscendentState()
+    self.transcendentState.entities = {}
+
+    for _, entity in ipairs(self.level.entities) do
+        if entity.transcendent then -- only store transcendent items
+            table.insert(self.transcendentState.entities, entity:toState())
+        end
     end
 end
