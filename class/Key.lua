@@ -32,12 +32,12 @@ combineArrays(Key.serializeTable, {
     "bobStart",
     "bobTimer",
     "wobbleTimer",
-    "transcendent",
+    "meta",
 })
 
-function Key:initialize(level, x, y, transcendent)
+function Key:initialize(level, x, y, meta)
     Entity.initialize(self, level, x, y, 14, 8)
-    self.transcendent = transcendent
+    self.meta = meta
 
     self.goalX = self.x
     self.goalY = self.y
@@ -49,7 +49,7 @@ function Key:initialize(level, x, y, transcendent)
 end
 
 function Key:draw()
-    if self.transcendent then
+    if self.meta then
         love.graphics.setColor(1, 0, 1)
     end
 

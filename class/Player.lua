@@ -117,8 +117,8 @@ function Player:collide(other, nx, ny)
     if other.isInstanceOf then
         if other:isInstanceOf(Key) then
             other:queueRemove()
-            if other.transcendent then
-                game.transcendentState.keyCount = game.transcendentState.keyCount + 1
+            if other.meta then
+                game.metaState.keyCount = game.metaState.keyCount + 1
             else
                 self.keyCount = self.keyCount + 1
             end
@@ -154,9 +154,9 @@ function Player:die()
 end
 
 function Player:openDoor(door, forReal)
-    if game.transcendentState.keyCount > 0 then
+    if game.metaState.keyCount > 0 then
         if forReal then
-            game.transcendentState.keyCount = game.transcendentState.keyCount - 1
+            game.metaState.keyCount = game.metaState.keyCount - 1
         end
 
         return true

@@ -5,16 +5,16 @@ local Door = class("Door", Entity)
 Door.drawable = Sprite:new(love.graphics.newImage("img/door.png"))
 
 combineArrays(Door.serializeTable, {
-    "transcendent",
+    "meta",
 })
 
-function Door:initialize(level, x, y, transcendent)
+function Door:initialize(level, x, y, meta)
     Entity.initialize(self, level, x, y, 8, 32)
-    self.transcendent = transcendent
+    self.meta = meta
 end
 
 function Door:draw()
-    if self.transcendent then
+    if self.meta then
         love.graphics.setColor(1, 0, 1)
     end
 

@@ -37,11 +37,11 @@ function Level:initialize(gamestate, path)
         end
 
         if type == "key" then
-            self:addEntity(Key:new(self, object.x+1, object.y-12, object.properties.transcendent))
+            self:addEntity(Key:new(self, object.x+1, object.y-12, object.properties.meta))
         end
 
         if type == "door" then
-            self:addEntity(Door:new(self, object.x+4, object.y-32, object.properties.transcendent))
+            self:addEntity(Door:new(self, object.x+4, object.y-32, object.properties.meta))
         end
 
         if type == "altar" then
@@ -172,7 +172,7 @@ function Level:makeState()
     }
 
     for _, entity in ipairs(self.entities) do
-        if not entity.transcendent then -- transcendent items are stored differently
+        if not entity.meta then -- meta items are stored differently
             table.insert(state.entities, entity:toState())
         end
     end

@@ -12,12 +12,12 @@
   </tile>
   <tile id="1" type="key">
    <properties>
-    <property name="transcendent" type="bool" value="false"/>
+    <property name="meta" type="bool" value="false"/>
    </properties>
   </tile>
   <tile id="2" type="door">
    <properties>
-    <property name="transcendent" type="bool" value="false"/>
+    <property name="meta" type="bool" value="false"/>
    </properties>
   </tile>
   <tile id="3" type="altar"/>
@@ -341,14 +341,14 @@
   <object id="21" gid="1" x="288" y="384" width="16" height="16"/>
   <object id="22" gid="2" x="1280" y="608" width="16" height="16">
    <properties>
-    <property name="transcendent" type="bool" value="true"/>
+    <property name="meta" type="bool" value="true"/>
    </properties>
   </object>
   <object id="24" gid="2" x="848" y="352" width="16" height="16"/>
   <object id="25" gid="3" x="1024" y="352" width="16" height="16"/>
   <object id="26" gid="3" x="1552" y="480" width="16" height="16">
    <properties>
-    <property name="transcendent" type="bool" value="true"/>
+    <property name="meta" type="bool" value="true"/>
    </properties>
   </object>
   <object id="27" gid="4" x="288" y="384" width="16" height="16">

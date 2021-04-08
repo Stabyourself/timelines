@@ -50,14 +50,14 @@ return {
           id = 1,
           type = "key",
           properties = {
-            ["transcendent"] = false
+            ["meta"] = false
           }
         },
         {
           id = 2,
           type = "door",
           properties = {
-            ["transcendent"] = false
+            ["meta"] = false
           }
         },
         {
@@ -662,7 +662,7 @@ return {
           gid = 2,
           visible = true,
           properties = {
-            ["transcendent"] = true
+            ["meta"] = true
           }
         },
         {
@@ -706,7 +706,7 @@ return {
           gid = 3,
           visible = true,
           properties = {
-            ["transcendent"] = true
+            ["meta"] = true
           }
         },
         {

@@ -4,7 +4,7 @@ game = gamestate.new()
 local Level = require "class.Level"
 
 function game:init()
-    self.transcendentState = {
+    self.metaState = {
         state = {},
         keyCount = 0,
     }
@@ -44,7 +44,7 @@ function game:draw()
 
     -- UI!
     love.graphics.print("Keys: " .. self.level.player.keyCount)
-    love.graphics.print("Meta-Keys: " .. self.transcendentState.keyCount, 0, 10)
+    love.graphics.print("Meta-Keys: " .. self.metaState.keyCount, 0, 10)
     love.graphics.pop()
 end
 
@@ -91,18 +91,18 @@ function game:startOnNode(parentNode)
 
     self.activeNode = node
 
-    self:updateTranscendentState()
+    self:updatemetaState()
     self.level:clear()
     self.level:loadState(parentNode.state.entities)
-    self.level:loadState(self.transcendentState.entities)
+    self.level:loadState(self.metaState.entities)
 end
 
-function game:updateTranscendentState()
-    self.transcendentState.entities = {}
+function game:updatemetaState()
+    self.metaState.entities = {}
 
     for _, entity in ipairs(self.level.entities) do
-        if entity.transcendent then -- only store transcendent items
-            table.insert(self.transcendentState.entities, entity:toState())
+        if entity.meta then -- only store meta items
+            table.insert(self.metaState.entities, entity:toState())
         end
     end
 end
