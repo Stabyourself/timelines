@@ -27,10 +27,10 @@ function love.load()
     gamestate.registerEvents()
     gamestate.switch(game)
 
-    -- gamestate.push(timetable, true)
+    gamestate.push(timetable, true)
 
-    timetable:init()
-    game:startOnNode(game.rootNode)
+    -- timetable:init()
+    -- game:startOnNode(game.rootNode)
 end
 
 function love.update(dt)
