@@ -22,7 +22,7 @@ function Sand:filter(other)
 end
 
 function Sand:initialize(level, x, y)
-    Entity.initialize(self, level, x, y, 2, 2)
+    Entity.initialize(self, level, x, y, 2, 1)
 
     self.gravity = 300
     self.color = self.colors[love.math.random(#self.colors)]
@@ -31,7 +31,7 @@ end
 function Sand:draw()
     love.graphics.setColor(self.color)
 
-    love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
+    love.graphics.rectangle("fill", self.x, self.y, 2, 2)
 
     love.graphics.setColor(1, 1, 1)
 end

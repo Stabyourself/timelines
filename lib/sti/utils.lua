@@ -42,6 +42,35 @@ function utils.compensate(tile, tileX, tileY, tileW, tileH)
 	return tileX, tileY
 end
 
+-- stop löve camera flickering
+function addBordersImage(path)
+	local img = love.graphics.newImage(path)
+
+	local canvas = love.graphics.newCanvas(img:getWidth(), img:getHeight())
+
+	love.graphics.setCanvas{canvas, stencil=true}
+
+	love.graphics.stencil(function()
+		for x = 1, img:getWidth()/18 do
+			for y = 1, img:getHeight()/18 do
+				love.graphics.rectangle("fill", (x-1)*18+1, (y-1)*18+1, 16, 16)
+			end
+		end
+	end, "replace", 1, false)
+	love.graphics.setStencilTest("equal", 0)
+
+	love.graphics.draw(img, -1, 0)
+	love.graphics.draw(img, 1, 0)
+	love.graphics.draw(img, 0, -1)
+	love.graphics.draw(img, 0, 1)
+	love.graphics.setStencilTest()
+	love.graphics.draw(img)
+	love.graphics.setCanvas()
+
+	return canvas
+end
+
+
 -- Cache images in main STI module
 function utils.cache_image(sti, path, image)
 	image = image or love.graphics.newImage(path)
@@ -192,14 +221,15 @@ function utils.pixel_function(_, _, r, g, b, a)
 end
 
 function utils.fix_transparent_color(tileset, path)
-	local image_data = love.image.newImageData(path)
-	tileset.image = love.graphics.newImage(image_data)
 
 	if tileset.transparentcolor then
+		local image_data = love.image.newImageData(path)
 		utils._TC = utils.hex_to_color(tileset.transparentcolor)
 
 		image_data:mapPixel(utils.pixel_function)
-		tileset.image = love.graphics.newImage(image_data)
+		tileset.image = addBordersImage(image_data)
+	else
+		tileset.image = addBordersImage(path)
 	end
 end
 
