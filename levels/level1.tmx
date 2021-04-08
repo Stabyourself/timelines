@@ -22,8 +22,8 @@
   </tile>
   <tile id="3" type="altar"/>
  </tileset>
- <tileset firstgid="5" name="tiles" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="54" columns="9">
-  <image source="../img/tiles.png" width="162" height="108"/>
+ <tileset firstgid="5" name="tiles" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="72" columns="9">
+  <image source="../img/tiles.png" width="162" height="144"/>
   <tile id="0">
    <properties>
     <property name="collidable" type="bool" value="true"/>
