@@ -8,8 +8,6 @@ require "run"
 class = require("lib.middleclass")
 inspect = function(v, o) print(require "lib.inspect"(v, o)) end -- good code
 
-local tiny = require("lib.tiny")
-
 local baton = require "lib.baton"
 local frameDebug3 = require "lib.frameDebug3"
 
@@ -24,6 +22,9 @@ timer = require "lib.timer"
 
 
 function love.load()
+    local imageFont = love.graphics.newImageFont("img/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?\"%()/+-=", 1)
+    love.graphics.setFont(imageFont)
+
     gamestate.registerEvents()
     gamestate.switch(game)
 
