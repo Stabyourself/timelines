@@ -6,6 +6,7 @@ sandTimer.filter = tiny.requireAll("sand")
 
 function sandTimer:process(e, dt)
     local absVX = math.abs(e.vx)
+    local absVY = math.abs(e.vy)
 
     if absVX > 0 then
         e.sand = e.sand - dt*(absVX/e.maxSpeed)*0.05

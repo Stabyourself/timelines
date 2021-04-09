@@ -1,2 +1,2 @@
-DEBUG = true
+DEBUG = false
 TIMETABLEDEBUG = false
