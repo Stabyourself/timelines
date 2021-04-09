@@ -54,11 +54,16 @@ function timetable:init()
         node.ended = true
         node.nodeTime = love.math.random(60, 150)
 
-        for i = 3, 4 do
+        for i = 5, 6 do
             local node = Node:new(game.rootNode.children[1], i)
             node.nodeTime = love.math.random(60, 150)
 
             game.activeNode = node
+        end
+
+        for i = 8, 9 do
+            local node = Node:new(game.rootNode, i)
+            node.nodeTime = love.math.random(60, 150)
         end
     end
 end
@@ -91,6 +96,11 @@ function timetable:enter(from, booted)
 
         if node.y+9 > self.panWindow[4] then
             self.panWindow[4] = node.y+9
+        end
+
+        if node.node == game.activeNode then
+            -- focus on the active node
+            self.camera:lookAt(node.x+9, node.y+9)
         end
     end
 end
@@ -234,6 +244,7 @@ end
 
 function timetable:buildNodeTable()
     local function walkNode(t, node, x, y, sandW, sandH, isVerticalStart, isVerticalEnd) -- god I hate recursion
+        local lastY = 0
         for i, childNode in ipairs(node.children) do
             if childNode.nodeTime > 0 then
                 local nodeTimeOffset = childNode.nodeTime
@@ -245,7 +256,9 @@ function timetable:buildNodeTable()
                 local isVerticalStart = (i == 2)
                 local isVerticalEnd = (i == #node.children)
 
-                walkNode(t, childNode, x+w, y+h, w, h, isVerticalStart, isVerticalEnd)
+                walkNode(t, childNode, x+w, y+h, w, h-lastY, isVerticalStart, isVerticalEnd)
+
+                lastY = y+h
             end
         end
 
@@ -326,7 +339,7 @@ end
 
 local lineVerticalTop = love.graphics.newImage("img/timetable_line_vertical_top.png")
 local lineVertical = love.graphics.newImage("img/timetable_line_vertical.png")
-lineVertical:setWrap("repeat")
+lineVertical:setWrap("repeat", "repeat")
 local lineVerticalQuad = love.graphics.newQuad(0, 0, 18, 18, 18, 18)
 
 local lineHorizontalLeft = love.graphics.newImage("img/timetable_line_horizontal_left.png")
@@ -340,15 +353,20 @@ local lineHorizontalQuad = love.graphics.newQuad(0, 0, 36, 18, 36, 18)
 
 function timetable:drawSandLine(x, y, w, h, isVerticalStart, isVerticalEnd)
     -- vertical
-    if isVerticalStart then
-        if h > 18 then
-            -- top
-            love.graphics.draw(lineVerticalTop, x, y+18)
+    if h > 18 then
+        local verticalH = h-18
+        local verticalY = y+18
 
-            -- vertical
-            lineHorizontalQuad:setViewport(0, 0, 18, h-18)
-            love.graphics.draw(lineVertical, lineVerticalQuad, x, y+36)
+        -- top
+        if isVerticalStart then
+            love.graphics.draw(lineVerticalTop, x, y+18)
+            verticalH = verticalH - 18
+            verticalY = verticalY + 18
         end
+
+        -- vertical
+        lineVerticalQuad:setViewport(0, 0, 18, verticalH)
+        love.graphics.draw(lineVertical, lineVerticalQuad, x, verticalY)
     end
 
     local middleW = w-36
