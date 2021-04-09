@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 48,
+  nextobjectid = 49,
   backgroundcolor = { 85, 170, 255 },
   properties = {},
   tilesets = {
@@ -759,7 +759,9 @@ return {
           rotation = 0,
           gid = 2,
           visible = true,
-          properties = {}
+          properties = {
+            ["meta"] = false
+          }
         },
         {
           id = 25,
