@@ -163,7 +163,6 @@ function timetable:mousepressed(x, y, button)
     end
 
     self.dragging = true
-    love.mouse.setRelativeMode(true)
 end
 
 function timetable:mousereleased(x, y, button)
@@ -177,7 +176,6 @@ function timetable:mousereleased(x, y, button)
     end
 
     self.dragging = false
-    love.mouse.setRelativeMode(false)
 end
 
 function timetable:mousemoved(_, _, x, y)
@@ -192,7 +190,7 @@ end
 function timetable:wheelmoved(_, y)
     self.camera:zoom(1.1^y)
 
-    self.camera.scale = math.min(1, math.max(0.2, self.camera.scale))
+    self.camera.scale = math.min(1, math.max(1/SCALE, self.camera.scale))
 end
 
 function timetable:close()
