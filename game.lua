@@ -26,9 +26,9 @@ function game:update(dt)
         self.activeNode.nodeTime = self.activeNode.nodeTime + dt
     end
 
-    local altar = self.level.player:nearAltar()
-    if controls:pressed("use") and altar then
-        self:useAltar(altar)
+    local shrine = self.level.player:nearShrine()
+    if controls:pressed("use") and shrine then
+        self:useShrine(shrine)
     end
 
     if controls:pressed("debug1") then
@@ -60,9 +60,9 @@ function game:die()
     gamestate.push(timetable)
 end
 
-function game:useAltar(altar)
-    if not altar.used then
-        altar:use()
+function game:useShrine(shrine)
+    if not shrine.used then
+        shrine:use()
 
         -- make new state
         self.activeNode.state = self.level:makeState()

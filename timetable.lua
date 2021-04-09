@@ -24,7 +24,7 @@ local nodeAnimation = anim8.newAnimation(grid("1-4", 1), 0.1)
 local nodeAnimationActive = anim8.newAnimation(grid("1-4", 1), 0.05)
 
 local timelineHeight = 18
-local timelineSecondWidth = 1
+local timelineSecondWidth = 2
 
 function timetable:init()
     timetable.timelines = 0

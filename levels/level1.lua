@@ -62,7 +62,7 @@ return {
         },
         {
           id = 3,
-          type = "altar"
+          type = "shrine"
         }
       }
     },

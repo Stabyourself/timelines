@@ -7,7 +7,7 @@ local camera = require "lib.camera"
 local Player = require "class.Player"
 local Key = require "class.Key"
 local Door = require "class.Door"
-local Altar = require "class.Altar"
+local Shrine = require "class.Shrine"
 
 local tiny = require "lib.tiny"
 
@@ -44,13 +44,13 @@ function Level:initialize(gamestate, path)
             self:addEntity(Door:new(self, object.x+4, object.y-32, object.properties.meta))
         end
 
-        if type == "altar" then
-            local altar = Altar:new(self, object.x, object.y-63)
+        if type == "shrine" then
+            local shrine = Shrine:new(self, object.x, object.y-63)
             if object.properties.used then
-                altar:use()
+                shrine:use()
             end
 
-            self:addEntity(altar)
+            self:addEntity(shrine)
         end
     end
 

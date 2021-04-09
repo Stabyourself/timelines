@@ -99,10 +99,10 @@ function Player:initialize(level, x, y)
     self.sand = 1
 end
 
-function Player:nearAltar()
+function Player:nearShrine()
     if self.onGround then
         local items, len = self.level.world:queryRect(self.x, self.y, self.w, self.h, function(item)
-            return item.class and item.class.name == "Altar"
+            return item.class and item.class.name == "Shrine"
         end)
 
         if len > 0 then
@@ -154,7 +154,7 @@ function Player:die()
 end
 
 function Player:openDoor(door, forReal)
-    if game.metaState.keyCount > 0 then
+    if game.metaState.keyCount > 0 and door.meta then -- don't open regular doors with meta keys, softlock!
         if forReal then
             game.metaState.keyCount = game.metaState.keyCount - 1
         end
@@ -185,7 +185,7 @@ function Player:draw()
 
     Entity.draw(self)
 
-    if self:nearAltar() then
+    if self:nearShrine() then
         love.graphics.draw(useBubble, self.x-6, self.y-26)
     end
 end
