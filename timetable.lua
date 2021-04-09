@@ -24,7 +24,7 @@ local nodeAnimation = anim8.newAnimation(grid("1-4", 1), 0.1)
 local nodeAnimationActive = anim8.newAnimation(grid("1-4", 1), 0.05)
 
 local timelineHeight = 18
-local timelineSecondWidth = 30
+local timelineSecondWidth = 0.2
 
 function timetable:init()
     timetable.timelines = 0
@@ -49,6 +49,7 @@ function timetable:init()
         end
 
         local node = Node:new(game.rootNode.children[1], 0)
+        bla = node
         node.ended = true
         node.nodeTime = love.math.random(60, 150)
 
@@ -77,6 +78,7 @@ function timetable:enter(from, booted)
 end
 
 function timetable:update(dt)
+    bla.nodeTime = bla.nodeTime + dt*30
     nodeAnimation:update(dt)
     nodeAnimationActive:update(dt)
 
@@ -261,7 +263,9 @@ function timetable:drawSandLine(x, y, w, h, isVerticalStart, isVerticalEnd)
         middleW = w-54
         middleX = 18
         -- left
-        love.graphics.draw(lineHorizontalLeft, x+18, y+h)
+        if w > 40 then
+            love.graphics.draw(lineHorizontalLeft, x+18, y+h)
+        end
     else
         if isVerticalEnd then
             -- left corner
@@ -272,13 +276,17 @@ function timetable:drawSandLine(x, y, w, h, isVerticalStart, isVerticalEnd)
         end
     end
 
-    -- horizontal
-    lineHorizontalQuad:setViewport(0, 0, middleW, 18)
-    love.graphics.draw(lineHorizontal, lineHorizontalQuad, x+18+middleX, y+h)
+    if middleW > 0 then
+        -- horizontal
+        lineHorizontalQuad:setViewport(0, 0, middleW, 18)
+        love.graphics.draw(lineHorizontal, lineHorizontalQuad, x+18+middleX, y+h)
+    end
 
     -- bullshit right alignment math
     local yOff = -math.sin(middleW%36/36*math.pi*2+math.pi*.5)+1
 
     -- right
-    love.graphics.draw(lineHorizontalRight, x+w-18, y+h+yOff)
+    if w > 30 then
+        love.graphics.draw(lineHorizontalRight, x+w-18, y+h+yOff)
+    end
 end
