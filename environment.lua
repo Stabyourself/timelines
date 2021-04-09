@@ -1,1 +1,2 @@
-DEBUG = false
+DEBUG = true
+TIMETABLEDEBUG = false

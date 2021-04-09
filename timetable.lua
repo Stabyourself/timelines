@@ -45,7 +45,7 @@ function timetable:init()
 
 
 
-    if DEBUG then
+    if TIMETABLEDEBUG then
         -- create some fake nodes for visual testing
         for i = 0, 2 do
             local node = Node:new(game.rootNode, i)
@@ -87,7 +87,7 @@ function timetable:enter(from, booted, allowBack)
     self.offY = 0
 
     if self.from == game and not booted then
-        self.offY = 225
+        self.offY = -255
         timer.tween(0.3, self, {offY = 0}, 'out-quad')
     end
 
@@ -245,7 +245,7 @@ function timetable:close()
         gamestate.pop()
     end
 
-    timer.tween(0.3, self, {offY = 255}, 'out-quad', backToGame)
+    timer.tween(0.3, self, {offY = -255}, 'out-quad', backToGame)
 end
 
 
