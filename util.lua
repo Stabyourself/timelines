@@ -30,3 +30,22 @@ function updateGroup(group, dt)
 		end
 	end
 end
+
+function printShadow(shadowR, shadowG, shadowB, text, x, y, r, sx, sy, ox, oy, kx, ky)
+    local sr, sg, sb, sa = love.graphics.getColor()
+    love.graphics.setColor(shadowR, shadowG, shadowB)
+    love.graphics.print(text, x, y+1, r, sx, sy, ox, oy, kx, ky)
+
+    love.graphics.setColor(sr, sg, sb, sa)
+    love.graphics.print(text, x, y, r, sx, sy, ox, oy, kx, ky)
+end
+
+function printfShadow(shadowR, shadowG, shadowB, text, x, y, limit, align, r, sx, sy, ox, oy, kx, ky)
+    local sr, sg, sb, sa = love.graphics.getColor()
+    love.graphics.setColor(shadowR, shadowG, shadowB)
+    love.graphics.printf(text, x, y+1, limit, align, r, sx, sy, ox, oy, kx, ky)
+
+    love.graphics.setColor(sr, sg, sb, sa)
+    love.graphics.printf(text, x, y, limit, align, r, sx, sy, ox, oy, kx, ky)
+end
+

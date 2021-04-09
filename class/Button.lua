@@ -55,8 +55,6 @@ function Button:draw()
 
 
     -- TEXT
-    love.graphics.setColor(shadowColor:rgb())
-    love.graphics.printf(self.text, self.x, self.y+6, self.w, "center")
 
     love.graphics.setColor(activeColor:rgb())
     if self.disabled then
@@ -65,7 +63,9 @@ function Button:draw()
         love.graphics.setColor(hoverColor:rgb())
     end
 
-    love.graphics.printf(self.text, self.x, self.y+5, self.w, "center")
+    local r, g, b = shadowColor:rgb()
+
+    printfShadow(r, g, b, self.text, self.x, self.y+5, self.w, "center")
 
 
 

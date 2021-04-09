@@ -48,12 +48,12 @@ function game:draw()
     -- UI!
     love.graphics.translate(4, 4)
     love.graphics.draw(keyUi, 0, 0)
-    love.graphics.print("x", 16, 1)
-    love.graphics.printf(self.level.player.keyCount, 24, 1, 10, "center")
+    printShadow(0.1, 0.1, 0.1, "x", 16, 1)
+    printfShadow(0.1, 0.1, 0.1, self.level.player.keyCount, 24, 1, 10, "center")
 
     love.graphics.draw(keyUiMeta, 0, 16)
-    love.graphics.print("x", 16, 17)
-    love.graphics.printf(self.metaState.keyCount, 24, 17, 10, "center")
+    printShadow(0.1, 0.1, 0.1, "x", 16, 17)
+    printfShadow(0.1, 0.1, 0.1, self.metaState.keyCount, 24, 17, 10, "center")
 
     love.graphics.pop()
 end
