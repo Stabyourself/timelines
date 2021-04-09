@@ -85,8 +85,8 @@ function Level:update(dt)
         ) --todo: some kind of SMW camera thing maybe
     else
         local x, y = controls:get("camera")
-        self.camera.x = self.camera.x + x*dt*400
-        self.camera.y = self.camera.y + y*dt*400
+        self.camera.x = self.camera.x + x*dt*2000
+        self.camera.y = self.camera.y + y*dt*2000
     end
 end
 

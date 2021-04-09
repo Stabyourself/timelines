@@ -28,7 +28,7 @@ local nodeAnimationActive = anim8.newAnimation(grid("1-4", 1), 0.05)
 
 
 local timelineHeight = 18
-local timelineSecondWidth = 10--1
+local timelineSecondWidth = 1
 
 function timetable:init()
     timetable.timelines = 0
@@ -59,12 +59,20 @@ function timetable:init()
         for i = 5, 6 do
             local node = Node:new(game.rootNode.children[1], i)
             node.nodeTime = love.math.random(60, 150)
-
-            game.activeNode = node
         end
+
+        local node = Node:new(game.rootNode.children[1].children[#game.rootNode.children[1].children-1], 5)
+        node.ended = true
+        node.nodeTime = love.math.random(60, 150)
 
         for i = 8, 9 do
             local node = Node:new(game.rootNode, i)
+            node.nodeTime = love.math.random(60, 150)
+            game.activeNode = node
+        end
+
+        for i = 10, 11 do
+            local node = Node:new(game.rootNode.children[1].children[2], i)
             node.nodeTime = love.math.random(60, 150)
         end
     end
@@ -143,7 +151,7 @@ function timetable:draw()
     -- intro text stuff
 
     if self.booted then
-        local t = "A game by Maurice and Hans\n\nSelect the node with the mouse to start"
+        local t = "A game by Maurice and Hans\n\nSelect the node with the mouse to begin"
         love.graphics.setColor(textBackground:rgb())
         love.graphics.printf(t, 0, 51, WIDTH, "center")
 
@@ -246,21 +254,25 @@ end
 
 function timetable:buildNodeTable()
     local function walkNode(t, node, x, y, sandW, sandH, isVerticalStart, isVerticalEnd) -- god I hate recursion
-        local lastY = 0
+        local lastTimeline = 0
         for i, childNode in ipairs(node.children) do
             if childNode.nodeTime > 0 then
                 local nodeTimeOffset = childNode.nodeTime
                 local timelineOffset = childNode.timeline - node.timeline
 
+
                 local w = math.floor(nodeTimeOffset*timelineSecondWidth)
-                local h = timelineHeight*timelineOffset
+                local h = timelineHeight*(timelineOffset-lastTimeline)
+
+                local newX = x + w
+                local newY = y + timelineHeight*timelineOffset
 
                 local isVerticalStart = (i == 2)
                 local isVerticalEnd = (i == #node.children)
 
-                walkNode(t, childNode, x+w, y+h, w, h-lastY, isVerticalStart, isVerticalEnd)
+                walkNode(t, childNode, newX, newY, w, h, isVerticalStart, isVerticalEnd)
 
-                lastY = y+h
+                lastTimeline = timelineOffset
             end
         end
 
