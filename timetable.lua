@@ -115,7 +115,7 @@ function timetable:draw()
     -- intro text stuff
 
     if self.booted then
-        local t = "A game by Maurice and Hans\n\nSelect the node to start"
+        local t = "A game by Maurice and Hans\n\nSelect the node in the top left to start"
         love.graphics.setColor(textBackground:rgb())
         love.graphics.printf(t, 0, 61, WIDTH, "center")
 

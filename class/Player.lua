@@ -73,12 +73,12 @@ for i = 1, 9 do
 end
 
 local sandOffsets = {
-    jump = {
-        [1] = {0, 1}
-    },
-    doublejump = {
-        [1] = {0, 1}
-    },
+    -- jump = {
+    --     [1] = {0, 1}
+    -- },
+    -- doublejump = {
+    --     [1] = {0, 1}
+    -- },
 }
 
 Player.drawable = AnimationMachine:new(playerImg, Player.animations)
