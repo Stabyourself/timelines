@@ -10,6 +10,7 @@ function game:init()
     self.metaState = {
         state = {},
         keyCount = 0,
+        sand = 0.5,
     }
     self.rootNode = Node:new(nil, 0, 1)
 

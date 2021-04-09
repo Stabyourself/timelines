@@ -90,7 +90,7 @@ function Player:initialize(level, x, y)
     self.animationState = "idle"
     self.coyoteTimer = 0
 
-    self.sand = 1
+    self.sand = game.metaState.sand
 
 
     self.drawable = AnimationMachine:new(playerImg, Player.animations)

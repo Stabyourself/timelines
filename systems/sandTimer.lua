@@ -7,7 +7,7 @@ function sandTimer:process(e, dt)
     local absVX = math.abs(e.vx)
 
     if absVX > 0 then
-        e.sand = e.sand - dt*0.2*(absVX/e.maxSpeed)
+        e.sand = e.sand - dt*(absVX/e.maxSpeed)*0.05
 
         if e.sand < 0 then
             e.sand = 0
