@@ -8,6 +8,7 @@ local Player = require "class.Player"
 local Key = require "class.Key"
 local Door = require "class.Door"
 local Shrine = require "class.Shrine"
+local ArrowShooter = require "class.ArrowShooter"
 
 local tiny = require "lib.tiny"
 
@@ -51,6 +52,10 @@ function Level:initialize(gamestate, path)
             end
 
             self:addEntity(shrine)
+        end
+
+        if type == "arrow-right" then
+            self:addEntity(ArrowShooter:new(self, object.x, object.y))
         end
     end
 

@@ -11,6 +11,7 @@ Sand.colors = {
     {1  , 0.54, 0   },
 }
 
+Sand.gravity = 300
 Sand.dampening = 0.5
 
 function Sand:filter(other)
@@ -24,7 +25,6 @@ end
 function Sand:initialize(level, x, y)
     Entity.initialize(self, level, x, y, 2, 1)
 
-    self.gravity = 300
     self.color = self.colors[love.math.random(#self.colors)]
 end
 

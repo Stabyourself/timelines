@@ -60,7 +60,7 @@ function Entity:toState()
 end
 
 function Entity.fromState(level, state)
-    local entity = state.class:new(level, state.x, state.y)
+    local entity = state.class:new(level, state.x, state.y, state.w, state.h, state.physics)
 
     for k, v in pairs(state) do
         entity[k] = v
@@ -70,7 +70,9 @@ function Entity.fromState(level, state)
 end
 
 function Entity:draw()
-    self.drawable:draw(self)
+    if self.drawable then
+        self.drawable:draw(self)
+    end
 end
 
 function Entity:queueRemove()

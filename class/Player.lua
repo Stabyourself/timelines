@@ -1,5 +1,6 @@
 local anim8 = require 'lib.anim8'
 local AnimationMachine = require "class.drawables.AnimationMachine"
+local Sand = require "class.Sand"
 
 local Entity = require "class.Entity"
 local Key = require "class.Key"
@@ -36,14 +37,28 @@ Player.gravity = 950
 Player.jumpGravity = 480
 Player.maxYSpeed = 400
 
-Player.sandSpawnTimes = {0.03, 0.05, 0.05, 0.1, 0.1, 0.2}
-Player.sandSpawnTimer = 0
+
+
+Player.entitySpawnTimes = {0.03, 0.05, 0.05, 0.1, 0.1, 0.2}
+Player.entitySpawnTimer = 0
+Player.entitySpawnEntity = Sand
+Player.entitySpawnFunction = function(self)
+    local x = self.x + 5 - self.drawable.dir*6
+    local y = self.y + 10
+
+    local vx = self.vx * 0.5 - self.drawable.dir*20 + love.math.random(-5, 5)
+    local vy = self.vy * 0.5 + love.math.random(-5, 5)
+
+    return x, y, vx, vy
+end
+
+
 
 combineArrays(Player.serializeTable, {
     "airJumpsLeft",
     "keyCount",
     "animationState",
-    "coyoteTimer",
+    "coyoteTimer"
 })
 
 local playerImg = love.graphics.newImage("img/player.png")
