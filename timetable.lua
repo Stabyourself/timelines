@@ -70,7 +70,7 @@ function timetable:init()
     end
 end
 
-function timetable:enter(from, booted)
+function timetable:enter(from, booted, allowBack)
     -- note: nodes should not be changed during this gamestate, because their position is cached.
 
     self.selectedNode = nil
@@ -84,7 +84,7 @@ function timetable:enter(from, booted)
     end
 
     self.buttons[1].disabled = true
-    self.buttons[2].disabled = self.booted
+    self.buttons[2].disabled = not allowBack
     self.dragging = false
 
     self.nodeTable = self:buildNodeTable()

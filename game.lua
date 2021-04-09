@@ -68,7 +68,7 @@ end
 function game:die()
     self.activeNode.ended = true
     self.activeNode.died = true
-    gamestate.push(timetable)
+    gamestate.push(timetable, false, false)
 end
 
 function game:useShrine(shrine)
@@ -82,7 +82,7 @@ function game:useShrine(shrine)
 
         self.activeNode = node
     else
-        gamestate.push(timetable)
+        gamestate.push(timetable, false, true)
     end
 end
 
