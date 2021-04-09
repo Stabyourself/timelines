@@ -64,6 +64,8 @@ function timetable:init()
 end
 
 function timetable:enter(from, booted)
+    -- note: nodes should not be changed during this gamestate, because their position is cached.
+
     self.selectedNode = nil
     self.booted = booted or false
     self.from = from
@@ -79,6 +81,18 @@ function timetable:enter(from, booted)
     self.dragging = false
 
     self.nodeTable = self:buildNodeTable()
+
+    self.panWindow = {9, 9, 0, 0}
+
+    for _, node in ipairs(self.nodeTable) do
+        if node.x+9 > self.panWindow[3] then
+            self.panWindow[3] = node.x+9
+        end
+
+        if node.y+9 > self.panWindow[4] then
+            self.panWindow[4] = node.y+9
+        end
+    end
 end
 
 function timetable:update(dt)
@@ -194,7 +208,11 @@ function timetable:mousemoved(_, _, x, y)
         self.camera:move(-x/self.camera.scale, -y/self.camera.scale)
 
         -- don't let the player move the timetable offscreen (what a dummy)
+        self.camera.x = math.max(self.camera.x, self.panWindow[1])
+        self.camera.y = math.max(self.camera.y, self.panWindow[2])
 
+        self.camera.x = math.min(self.camera.x, self.panWindow[3])
+        self.camera.y = math.min(self.camera.y, self.panWindow[4])
     end
 end
 
