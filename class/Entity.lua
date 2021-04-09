@@ -76,6 +76,7 @@ function Entity:draw()
 end
 
 function Entity:queueRemove()
+    self.active = false
     self.removeMe = true
 end
 
