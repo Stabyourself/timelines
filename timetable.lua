@@ -117,6 +117,10 @@ function timetable:mousepressed(x, y, button)
 
     y = y - self.offY
 
+    for _, button in ipairs(self.buttons) do
+        button:mousepressed(x, y)
+    end
+
     y = y - 16
 
     for _, nodeLocation in ipairs(self.nodeLocations) do
@@ -124,10 +128,6 @@ function timetable:mousepressed(x, y, button)
             self.selectedNode = nodeLocation.node
             self.buttons[1].active = true
         end
-    end
-
-    for _, button in ipairs(self.buttons) do
-        button:mousepressed(x, y)
     end
 end
 

@@ -40,11 +40,17 @@ function Button:draw()
     love.graphics.setColor(1, 1, 1)
 end
 
+function Button:getHover(x, y)
+    if x >= self.x and x < self.x+self.w and y >= self.y and y < self.y+self.h then
+        return true
+    end
+
+    return false
+end
+
 function Button:mousepressed(x, y, button)
-    if self.active then
-        if x >= self.x and x < self.x+self.w and y >= self.y and y < self.y+self.h then
-            self.func()
-        end
+    if self.active and self:getHover(x, y) then
+        self.func()
     end
 end
 
