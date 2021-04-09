@@ -81,12 +81,6 @@ local sandOffsets = {
     -- },
 }
 
-Player.drawable = AnimationMachine:new(playerImg, Player.animations)
-
-Player.drawable.x = 6
-Player.drawable.oy = 0
-Player.drawable.ox = 8
-
 function Player:initialize(level, x, y)
     Entity.initialize(self, level, x, y, 12, 14)
 
@@ -97,6 +91,13 @@ function Player:initialize(level, x, y)
     self.coyoteTimer = 0
 
     self.sand = 1
+
+
+    self.drawable = AnimationMachine:new(playerImg, Player.animations)
+
+    self.drawable.x = 6
+    self.drawable.oy = 0
+    self.drawable.ox = 8
 end
 
 function Player:nearShrine()

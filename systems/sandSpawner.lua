@@ -2,10 +2,10 @@ local tiny = require("lib.tiny")
 local Sand = require "class.Sand"
 
 local sandSpawner = tiny.processingSystem()
-sandSpawner.filter = tiny.requireAll("sandSpawnTimes", "sandSpawnTimer")
+sandSpawner.filter = tiny.requireAll("sandSpawnTimes", "sandSpawnTimer", "sand")
 
 function sandSpawner:process(e, dt)
-    if math.abs(e.vx) > 0 or math.abs(e.vy) > 0 then
+    if (math.abs(e.vx) > 0 or math.abs(e.vy) > 0) and e.sand > 0 then
         if not e.sandSpawnTime then
             e.sandSpawnTime = randomSpawnTime(e)
         end
