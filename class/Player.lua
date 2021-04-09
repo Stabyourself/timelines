@@ -1,6 +1,7 @@
 local anim8 = require 'lib.anim8'
 local AnimationMachine = require "class.drawables.AnimationMachine"
 local Sand = require "class.Sand"
+local Arrow = require "class.Arrow"
 
 local Entity = require "class.Entity"
 local Key = require "class.Key"
@@ -40,8 +41,6 @@ Player.maxYSpeed = 400
 
 
 Player.entitySpawnTimes = {0.03, 0.05, 0.05, 0.1, 0.1, 0.2}
-Player.entitySpawnTimer = 0
-Player.entitySpawnEntity = Sand
 Player.entitySpawnFunction = function(self)
     local x = self.x + 5 - self.drawable.dir*6
     local y = self.y + 10
@@ -113,6 +112,9 @@ function Player:initialize(level, x, y)
     self.drawable.x = 6
     self.drawable.oy = 0
     self.drawable.ox = 8
+
+    self.entitySpawnTimer = 0
+    self.entitySpawnEntity = nil
 end
 
 function Player:nearShrine()
@@ -144,6 +146,10 @@ function Player:collide(other, nx, ny)
             if self:openDoor(other, true) then
                 other:queueRemove()
             end
+        end
+
+        if other:isInstanceOf(Arrow) then
+            self:die()
         end
     else -- world tile
         if other.properties.spike then

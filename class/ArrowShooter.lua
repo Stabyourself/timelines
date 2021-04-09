@@ -6,10 +6,10 @@ local ArrowShooter = class("ArrowShooter", Entity)
 ArrowShooter.entitySpawnTimes = {2}
 ArrowShooter.entitySpawnEntity = Arrow
 ArrowShooter.entitySpawnFunction = function(self)
-    local x = self.x+16
-    local y = self.y-13
+    local x = self.x+5
+    local y = self.y-6
 
-    local vx = 300
+    local vx = 130
     local vy = 0
 
     return x, y, vx, vy
