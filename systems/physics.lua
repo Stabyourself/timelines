@@ -37,10 +37,6 @@ function physics:process(e, dt)
                 e:collide(col.other, col.normal.x, col.normal.y)
             end
 
-            if col.other.collide then
-                col.other:collide(e, -col.normal.x, -col.normal.y)
-            end
-
             if col.type ~= "cross" then
                 physics.resolveCollision(e, col.normal.x, col.normal.y)
             end

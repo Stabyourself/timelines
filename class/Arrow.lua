@@ -28,6 +28,10 @@ end
 
 function Arrow:collide(other, nx, ny)
     self:queueRemove()
+
+    if other.collide then
+        other:collide(self, -nx, -ny)
+    end
 end
 
 return Arrow
