@@ -34,8 +34,8 @@ function timetable:init()
     self.nodeLocations = {}
 
     self.buttons = {
-        Button:new(self, 20, 200, 121, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
-        Button:new(self, WIDTH-60, 200, 40, 20, "Back", function() self:close() end),
+        Button:new(self, 15, 200, 121, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
+        Button:new(self, WIDTH-55, 200, 40, 20, "Back", function() self:close() end),
     }
 
     self.camera = camera()
