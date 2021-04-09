@@ -2,6 +2,7 @@ local Button = require "class.Button"
 local anim8 = require "lib.anim8"
 local Node = require "class.Node"
 local Color3 = require "lib.Color3"
+local camera = require "lib.camera"
 
 timetable = gamestate.new()
 
@@ -37,8 +38,8 @@ function timetable:init()
         Button:new(self, WIDTH-60, 200, 40, 20, "Back", function() self:close() end),
     }
 
-
-
+    self.camera = camera()
+    self.camera:lookAt(9, 9)
 
 
 
@@ -75,6 +76,7 @@ function timetable:enter(from, booted)
 
     self.buttons[1].disabled = true
     self.buttons[2].disabled = self.booted
+    self.dragging = false
 end
 
 function timetable:update(dt)
@@ -99,21 +101,22 @@ function timetable:draw()
     self.nodeLocations = {}
 
     love.graphics.push()
-    love.graphics.translate(16, 32)
+    self.camera:attach()
 
-    self:drawNodeAndChildren(game.rootNode, 16, 16)
+    self:drawNodeAndChildren(game.rootNode, 0, 0)
 
+    self.camera:detach()
     love.graphics.pop()
 
     -- intro text stuff
 
     if self.booted then
-        local t = "A game by Maurice and Hans\n\nSelect the node in the top left to start"
+        local t = "A game by Maurice and Hans\n\nSelect the node to start"
         love.graphics.setColor(textBackground:rgb())
-        love.graphics.printf(t, 0, 61, WIDTH, "center")
+        love.graphics.printf(t, 0, 51, WIDTH, "center")
 
         love.graphics.setColor(textForeground:rgb())
-        love.graphics.printf(t, 0, 60, WIDTH, "center")
+        love.graphics.printf(t, 0, 50, WIDTH, "center")
 
         love.graphics.setColor(1, 1, 1)
     end
@@ -145,17 +148,22 @@ function timetable:mousepressed(x, y, button)
     y = y - self.offY
 
     for _, button in ipairs(self.buttons) do
-        button:mousepressed(x, y)
+        if button:mousepressed(x, y) then
+            return
+        end
     end
 
-    y = y - 16
+    x, y = self.camera:worldCoords(x, y)
 
     for _, nodeLocation in ipairs(self.nodeLocations) do
-        if x > nodeLocation.x and x <= nodeLocation.x+18 and y > nodeLocation.y and y <= nodeLocation.y+18 then
+        if x >= nodeLocation.x and x < nodeLocation.x+18 and y >= nodeLocation.y and y < nodeLocation.y+18 then
             self.selectedNode = nodeLocation.node
             self.buttons[1].disabled = false
         end
     end
+
+    self.dragging = true
+    love.mouse.setRelativeMode(true)
 end
 
 function timetable:mousereleased(x, y, button)
@@ -167,6 +175,24 @@ function timetable:mousereleased(x, y, button)
     for _, button in ipairs(self.buttons) do
         button:mousereleased(x, y)
     end
+
+    self.dragging = false
+    love.mouse.setRelativeMode(false)
+end
+
+function timetable:mousemoved(_, _, x, y)
+    x = x/SCALE
+    y = y/SCALE
+
+    if self.dragging then
+        self.camera:move(-x/self.camera.scale, -y/self.camera.scale)
+    end
+end
+
+function timetable:wheelmoved(_, y)
+    self.camera:zoom(1.1^y)
+
+    self.camera.scale = math.min(1, math.max(0.2, self.camera.scale))
 end
 
 function timetable:close()

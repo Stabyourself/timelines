@@ -83,6 +83,7 @@ end
 function Button:mousepressed(x, y, button)
     if not self.disabled and self:getHover(x, y) then
         self.clicking = true
+        return true
     end
 end
 
