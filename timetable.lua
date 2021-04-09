@@ -28,11 +28,11 @@ function timetable:init()
     self.nodeLocations = {}
 
     self.buttons = {
-        Button:new(20, 200, 121, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
-        Button:new(WIDTH-60, 200, 40, 20, "Back", function() self:close() end),
+        Button:new(self, 20, 200, 121, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
+        Button:new(self, WIDTH-60, 200, 40, 20, "Back", function() self:close() end),
     }
 
-    self.buttons[1].active = false
+    self.buttons[1].disabled = true
 
 
 
@@ -71,7 +71,7 @@ function timetable:enter(from, booted)
         timer.tween(0.3, self, {offY = 0}, 'out-quad')
     end
 
-    self.buttons[2].active = not booted
+    self.buttons[2].disabled = booted
 end
 
 function timetable:update(dt)
@@ -111,6 +111,15 @@ function timetable:draw()
     love.graphics.pop()
 end
 
+function timetable:getMousePosition()
+    local x, y = love.mouse.getPosition()
+
+    x = x/SCALE
+    y = y/SCALE-self.offY
+
+    return x, y
+end
+
 function timetable:mousepressed(x, y, button)
     x = x/SCALE
     y = y/SCALE
@@ -126,8 +135,19 @@ function timetable:mousepressed(x, y, button)
     for _, nodeLocation in ipairs(self.nodeLocations) do
         if x > nodeLocation.x and x <= nodeLocation.x+18 and y > nodeLocation.y and y <= nodeLocation.y+18 then
             self.selectedNode = nodeLocation.node
-            self.buttons[1].active = true
+            self.buttons[1].disabled = false
         end
+    end
+end
+
+function timetable:mousereleased(x, y, button)
+    x = x/SCALE
+    y = y/SCALE
+
+    y = y - self.offY
+
+    for _, button in ipairs(self.buttons) do
+        button:mousereleased(x, y)
     end
 end
 
