@@ -32,20 +32,32 @@ function timetable:init()
         Button:new(275, 200, 105, 20, "Back", function() self:close() end),
     }
 
+    self.buttons[1].active = false
+
+
+
+
+
+
+
+    -- debug stuff
+
+
     for i = 0, 2 do
         local node = Node:new(game.rootNode, i)
         node.nodeTime = love.math.random(60, 150)
     end
 
     local node = Node:new(game.rootNode.children[1], 0)
+    node.ended = true
     node.nodeTime = love.math.random(60, 150)
 
     for i = 3, 4 do
         local node = Node:new(game.rootNode.children[1], i)
         node.nodeTime = love.math.random(60, 150)
-    end
 
-    self.buttons[1].active = false
+        game.activeNode = node
+    end
 end
 
 function timetable:enter(from, booted)
@@ -152,20 +164,29 @@ function timetable:drawNodeAndChildren(node, x, y)
 
     local img = timetableNode
     local animation = nodeAnimation
+    local clickable = true
 
     if node == self.selectedNode then
         img = timetableNodeSelected
         animation = nodeAnimationActive
     elseif node == game.activeNode then
         img = timetableNodeActive
+        animation = nil
+        clickable = false
     elseif node.ended then
         img = timetableNodeEnded
+        animation = nil
+        clickable = false
     end
 
-    animation:draw(img)
-    love.graphics.draw(timetableNodeOverlay)
+    if animation then
+        animation:draw(img)
+    else
+        love.graphics.draw(img)
+    end
 
-    if not node.ended then
+    if clickable then
+        love.graphics.draw(timetableNodeOverlay)
         table.insert(self.nodeLocations, {node=node, x=x, y=y})
     end
 end
