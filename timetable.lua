@@ -40,23 +40,23 @@ function timetable:init()
 
 
 
-    -- debug stuff
+    if DEBUG then
+        -- create some fake nodes for visual testing
+        for i = 0, 2 do
+            local node = Node:new(game.rootNode, i)
+            node.nodeTime = love.math.random(60, 150)
+        end
 
-
-    for i = 0, 2 do
-        local node = Node:new(game.rootNode, i)
-        node.nodeTime = love.math.random(60, 150)
-    end
-
-    local node = Node:new(game.rootNode.children[1], 0)
-    node.ended = true
-    node.nodeTime = love.math.random(60, 150)
-
-    for i = 3, 4 do
-        local node = Node:new(game.rootNode.children[1], i)
+        local node = Node:new(game.rootNode.children[1], 0)
+        node.ended = true
         node.nodeTime = love.math.random(60, 150)
 
-        game.activeNode = node
+        for i = 3, 4 do
+            local node = Node:new(game.rootNode.children[1], i)
+            node.nodeTime = love.math.random(60, 150)
+
+            game.activeNode = node
+        end
     end
 end
 

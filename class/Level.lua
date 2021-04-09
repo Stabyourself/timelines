@@ -37,7 +37,7 @@ function Level:initialize(gamestate, path)
         end
 
         if type == "key" then
-            self:addEntity(Key:new(self, object.x+1, object.y-12, object.properties.meta))
+            self:addEntity(Key:new(self, object.x+1, object.y-13, object.properties.meta))
         end
 
         if type == "door" then

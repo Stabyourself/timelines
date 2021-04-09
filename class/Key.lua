@@ -8,6 +8,12 @@ Key.drawable.y = 4
 Key.drawable.ox = 7
 Key.drawable.oy = 4
 
+Key.metaDrawable = Sprite:new(love.graphics.newImage("img/key_meta.png"))
+Key.metaDrawable.x = 7
+Key.metaDrawable.y = 4
+Key.metaDrawable.ox = 7
+Key.metaDrawable.oy = 4
+
 function Key:filter(other)
     if other.properties and other.properties.platform and self.y + self.h > other.y then
         return false
@@ -36,7 +42,7 @@ combineArrays(Key.serializeTable, {
 })
 
 function Key:initialize(level, x, y, meta)
-    Entity.initialize(self, level, x, y, 14, 8)
+    Entity.initialize(self, level, x, y, 14, 10)
     self.meta = meta
 
     self.goalX = self.x
@@ -48,11 +54,13 @@ function Key:initialize(level, x, y, meta)
     self.wobbleTimer = 0
 end
 
-function Key:draw()
+function Key:postAdd()
     if self.meta then
-        love.graphics.setColor(1, 0, 1)
+        self.drawable = self.metaDrawable
     end
+end
 
+function Key:draw()
     Entity.draw(self)
 
     love.graphics.setColor(1, 1, 1)

@@ -3,6 +3,7 @@ local Sprite = require "class.drawables.Sprite"
 local Door = class("Door", Entity)
 
 Door.drawable = Sprite:new(love.graphics.newImage("img/door.png"))
+Door.metaDrawable = Sprite:new(love.graphics.newImage("img/door_meta.png"))
 
 combineArrays(Door.serializeTable, {
     "meta",
@@ -13,14 +14,10 @@ function Door:initialize(level, x, y, meta)
     self.meta = meta
 end
 
-function Door:draw()
+function Door:postAdd()
     if self.meta then
-        love.graphics.setColor(1, 0, 1)
+        self.drawable = self.metaDrawable
     end
-
-    Entity.draw(self)
-
-    love.graphics.setColor(1, 1, 1)
 end
 
 return Door
