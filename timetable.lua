@@ -24,7 +24,7 @@ local nodeAnimation = anim8.newAnimation(grid("1-4", 1), 0.1)
 local nodeAnimationActive = anim8.newAnimation(grid("1-4", 1), 0.05)
 
 local timelineHeight = 18
-local timelineSecondWidth = 2
+local timelineSecondWidth = 30
 
 function timetable:init()
     timetable.timelines = 0
@@ -35,9 +35,6 @@ function timetable:init()
         Button:new(self, 20, 200, 121, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
         Button:new(self, WIDTH-60, 200, 40, 20, "Back", function() self:close() end),
     }
-
-    self.buttons[1].disabled = true
-
 
 
 
@@ -75,7 +72,8 @@ function timetable:enter(from, booted)
         timer.tween(0.3, self, {offY = 0}, 'out-quad')
     end
 
-    self.buttons[2].disabled = booted
+    self.buttons[1].disabled = true
+    self.buttons[2].disabled = self.booted
 end
 
 function timetable:update(dt)

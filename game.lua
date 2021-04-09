@@ -46,13 +46,14 @@ function game:draw()
     love.graphics.push()
 
     -- UI!
-    love.graphics.draw(keyUi, 4, 4)
-    love.graphics.print("x", 20, 5)
-    love.graphics.printf(self.level.player.keyCount, 28, 5, 10, "center")
+    love.graphics.translate(4, 4)
+    love.graphics.draw(keyUi, 0, 0)
+    love.graphics.print("x", 16, 1)
+    love.graphics.printf(self.level.player.keyCount, 24, 1, 10, "center")
 
-    love.graphics.draw(keyUiMeta, 4, 20)
-    love.graphics.print("x", 20, 21)
-    love.graphics.printf(self.metaState.keyCount, 28, 21, 10, "center")
+    love.graphics.draw(keyUiMeta, 0, 16)
+    love.graphics.print("x", 16, 17)
+    love.graphics.printf(self.metaState.keyCount, 24, 17, 10, "center")
 
     love.graphics.pop()
 end
@@ -92,8 +93,8 @@ function game:startOnNode(parentNode)
     local timeline = parentNode.timeline
 
     if #parentNode.children > 0 then
-        timeline = timetable.timelines
         timetable.timelines = timetable.timelines + 1
+        timeline = timetable.timelines
     end
 
     local node = Node:new(parentNode, timeline)
