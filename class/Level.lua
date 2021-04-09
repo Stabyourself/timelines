@@ -204,6 +204,7 @@ function Level:loadState(entities)
 
     self.player = self:getEntities(Player)[1]
     self.cameraFocus = self.player
+    self.camera:lookAt(self.cameraFocus.x+self.cameraFocus.w/2, self.cameraFocus.y+self.cameraFocus.h/2)
 end
 
 

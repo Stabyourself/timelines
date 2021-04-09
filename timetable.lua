@@ -10,7 +10,8 @@ local textBackground = Color3.fromOldRGB(93, 70, 98)
 
 local timetable_title = love.graphics.newImage("img/title.png")
 
-local timetable_back = love.graphics.newImage("img/timetable_back.png")
+local timetableBack = love.graphics.newImage("img/timetable_back.png")
+local timetableOverlay = love.graphics.newImage("img/timetable_overlay.png")
 
 local timetableNode = love.graphics.newImage("img/timetable_node.png")
 local timetableNodeSelected = love.graphics.newImage("img/timetable_node_selected.png")
@@ -49,7 +50,6 @@ function timetable:init()
         end
 
         local node = Node:new(game.rootNode.children[1], 0)
-        bla = node
         node.ended = true
         node.nodeTime = love.math.random(60, 150)
 
@@ -78,7 +78,6 @@ function timetable:enter(from, booted)
 end
 
 function timetable:update(dt)
-    bla.nodeTime = bla.nodeTime + dt*30
     nodeAnimation:update(dt)
     nodeAnimationActive:update(dt)
 
@@ -95,9 +94,7 @@ function timetable:draw()
     love.graphics.push()
     love.graphics.translate(0, self.offY)
 
-    love.graphics.draw(timetable_back)
-
-    love.graphics.draw(timetable_title, (WIDTH-timetable_title:getWidth())*.5, 2)
+    love.graphics.draw(timetableBack)
 
     self.nodeLocations = {}
 
@@ -107,10 +104,6 @@ function timetable:draw()
     self:drawNodeAndChildren(game.rootNode, 16, 16)
 
     love.graphics.pop()
-
-    for _, button in ipairs(self.buttons) do
-        button:draw()
-    end
 
     -- intro text stuff
 
@@ -123,6 +116,14 @@ function timetable:draw()
         love.graphics.printf(t, 0, 60, WIDTH, "center")
 
         love.graphics.setColor(1, 1, 1)
+    end
+
+    love.graphics.draw(timetableOverlay)
+
+    love.graphics.draw(timetable_title, (WIDTH-timetable_title:getWidth())*.5, 2)
+
+    for _, button in ipairs(self.buttons) do
+        button:draw()
     end
 
     love.graphics.pop()
