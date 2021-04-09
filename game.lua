@@ -67,6 +67,7 @@ end
 
 function game:die()
     self.activeNode.ended = true
+    self.activeNode.died = true
     gamestate.push(timetable)
 end
 

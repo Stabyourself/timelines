@@ -14,19 +14,21 @@ local timetable_title = love.graphics.newImage("img/title.png")
 local timetableBack = love.graphics.newImage("img/timetable_back.png")
 local timetableOverlay = love.graphics.newImage("img/timetable_overlay.png")
 
+
 local timetableNode = love.graphics.newImage("img/timetable_node.png")
 local timetableNodeSelected = love.graphics.newImage("img/timetable_node_selected.png")
 local timetableNodeActive = love.graphics.newImage("img/timetable_node_active.png")
-local timetableNodeEnded = love.graphics.newImage("img/timetable_node_ended.png")
-local timetableNodeObandoned = love.graphics.newImage("img/timetable_node_abandoned.png")
+local timetableNodeDied = love.graphics.newImage("img/timetable_node_died.png")
+local timetableNodeWarped = love.graphics.newImage("img/timetable_node_warped.png")
 local timetableNodeOverlay = love.graphics.newImage("img/timetable_node_overlay.png")
 
 local grid = anim8.newGrid(18, 18, timetableNode:getWidth(), timetableNode:getHeight())
 local nodeAnimation = anim8.newAnimation(grid("1-4", 1), 0.1)
 local nodeAnimationActive = anim8.newAnimation(grid("1-4", 1), 0.05)
 
+
 local timelineHeight = 18
-local timelineSecondWidth = 1
+local timelineSecondWidth = 10--1
 
 function timetable:init()
     timetable.timelines = 0
@@ -266,8 +268,15 @@ function timetable:buildNodeTable()
         local clickable = true
 
         if node.ended then
-            nodeType = "ended"
             clickable = false
+
+            if node.died then
+                nodeType = "died"
+
+            else
+                nodeType = "warped"
+            end
+
         elseif node == game.activeNode then
             nodeType = "active"
             clickable = false
@@ -295,11 +304,6 @@ function timetable:buildNodeTable()
 end
 
 
-
-function timetable:drawSand(node)
-    self:drawSandLine(node.x-node.sandW, node.y-node.sandH, node.sandW, node.sandH, node.isVerticalStart, node.isVerticalEnd)
-end
-
 function timetable:drawNode(node)
     local img
     local animation
@@ -315,8 +319,13 @@ function timetable:drawNode(node)
         animation = nodeAnimation
         clickable = true
 
-    elseif node.nodeType == "ended" then
-        img = timetableNodeEnded
+    elseif node.nodeType == "warped" then
+        img = timetableNodeWarped
+        animation = false
+        clickable = false
+
+    elseif node.nodeType == "died" then
+        img = timetableNodeDied
         animation = false
         clickable = false
 
@@ -351,6 +360,11 @@ local lineHorizontal = love.graphics.newImage("img/timetable_line_horizontal.png
 lineHorizontal:setWrap("repeat")
 local lineHorizontalQuad = love.graphics.newQuad(0, 0, 36, 18, 36, 18)
 
+
+function timetable:drawSand(node)
+    self:drawSandLine(node.x-node.sandW, node.y-node.sandH, node.sandW, node.sandH, node.isVerticalStart, node.isVerticalEnd)
+end
+
 function timetable:drawSandLine(x, y, w, h, isVerticalStart, isVerticalEnd)
     -- vertical
     if h > 18 then
@@ -371,6 +385,7 @@ function timetable:drawSandLine(x, y, w, h, isVerticalStart, isVerticalEnd)
 
     local middleW = w-36
     local middleX = 0
+
     if h == 0 then
         middleW = w-54
         middleX = 18

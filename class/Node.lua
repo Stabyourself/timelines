@@ -6,6 +6,7 @@ function Node:initialize(parent, timeline)
 
     self.nodeTime = 0
     self.ended = false
+    self.died = false
 
     self.children = {}
 
