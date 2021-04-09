@@ -1,8 +1,12 @@
 local Button = require "class.Button"
 local anim8 = require "lib.anim8"
 local Node = require "class.Node"
+local Color3 = require "lib.Color3"
 
 timetable = gamestate.new()
+
+local textForeground = Color3.fromOldRGB(168, 150, 142)
+local textBackground = Color3.fromOldRGB(93, 70, 98)
 
 local timetable_title = love.graphics.newImage("img/title.png")
 
@@ -108,6 +112,19 @@ function timetable:draw()
         button:draw()
     end
 
+    -- intro text stuff
+
+    if self.booted then
+        local t = "A game by Maurice and Hans\n\nSelect the node to start"
+        love.graphics.setColor(textBackground:rgb())
+        love.graphics.printf(t, 0, 61, WIDTH, "center")
+
+        love.graphics.setColor(textForeground:rgb())
+        love.graphics.printf(t, 0, 60, WIDTH, "center")
+
+        love.graphics.setColor(1, 1, 1)
+    end
+
     love.graphics.pop()
 end
 
@@ -163,23 +180,25 @@ end
 
 function timetable:drawNodeAndChildren(node, x, y)
     for i, childNode in ipairs(node.children) do
-        local nodeTimeOffset = childNode.nodeTime
-        local timelineOffset = childNode.timeline - node.timeline
+        if childNode.nodeTime > 0 then
+            local nodeTimeOffset = childNode.nodeTime
+            local timelineOffset = childNode.timeline - node.timeline
 
-        local w = math.floor(nodeTimeOffset*timelineSecondWidth)
-        local h = timelineHeight*timelineOffset
+            local w = math.floor(nodeTimeOffset*timelineSecondWidth)
+            local h = timelineHeight*timelineOffset
 
-        local isVerticalStart = (i == 2)
-        local isVerticalEnd = (i == #node.children)
+            local isVerticalStart = (i == 2)
+            local isVerticalEnd = (i == #node.children)
 
-        self:drawSandLine(0, 0, w, h, isVerticalStart, isVerticalEnd)
+            self:drawSandLine(0, 0, w, h, isVerticalStart, isVerticalEnd)
 
-        love.graphics.push()
-        love.graphics.translate(w, h)
+            love.graphics.push()
+            love.graphics.translate(w, h)
 
-        self:drawNodeAndChildren(childNode, x+w, y+h)
+            self:drawNodeAndChildren(childNode, x+w, y+h)
 
-        love.graphics.pop()
+            love.graphics.pop()
+        end
     end
 
     local img = timetableNode
