@@ -3,6 +3,9 @@ game = gamestate.new()
 
 local Level = require "class.Level"
 
+local keyUi = love.graphics.newImage("img/key_ui.png")
+local keyUiMeta = love.graphics.newImage("img/key_ui_meta.png")
+
 function game:init()
     self.metaState = {
         state = {},
@@ -43,8 +46,14 @@ function game:draw()
     love.graphics.push()
 
     -- UI!
-    love.graphics.print("Keys: " .. self.level.player.keyCount)
-    love.graphics.print("Meta-Keys: " .. self.metaState.keyCount, 0, 10)
+    love.graphics.draw(keyUi, 4, 4)
+    love.graphics.print("x", 20, 5)
+    love.graphics.printf(self.level.player.keyCount, 28, 5, 10, "center")
+
+    love.graphics.draw(keyUiMeta, 4, 20)
+    love.graphics.print("x", 20, 21)
+    love.graphics.printf(self.metaState.keyCount, 28, 21, 10, "center")
+
     love.graphics.pop()
 end
 
