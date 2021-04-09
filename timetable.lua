@@ -26,7 +26,7 @@ local nodeAnimation = anim8.newAnimation(grid("1-4", 1), 0.1)
 local nodeAnimationActive = anim8.newAnimation(grid("1-4", 1), 0.05)
 
 local timelineHeight = 18
-local timelineSecondWidth = 0.2
+local timelineSecondWidth = 1
 
 function timetable:init()
     timetable.timelines = 0
@@ -77,6 +77,8 @@ function timetable:enter(from, booted)
     self.buttons[1].disabled = true
     self.buttons[2].disabled = self.booted
     self.dragging = false
+
+    self.nodeTable = self:buildNodeTable()
 end
 
 function timetable:update(dt)
@@ -98,12 +100,16 @@ function timetable:draw()
 
     love.graphics.draw(timetableBack)
 
-    self.nodeLocations = {}
-
     love.graphics.push()
     self.camera:attach()
 
-    self:drawNodeAndChildren(game.rootNode, 0, 0)
+    for _, node in ipairs(self.nodeTable) do
+        self:drawSand(node)
+    end
+
+    for _, node in ipairs(self.nodeTable) do
+        self:drawNode(node)
+    end
 
     self.camera:detach()
     love.graphics.pop()
@@ -111,7 +117,7 @@ function timetable:draw()
     -- intro text stuff
 
     if self.booted then
-        local t = "A game by Maurice and Hans\n\nSelect the node to start"
+        local t = "A game by Maurice and Hans\n\nSelect the node with the mouse to start"
         love.graphics.setColor(textBackground:rgb())
         love.graphics.printf(t, 0, 51, WIDTH, "center")
 
@@ -155,10 +161,12 @@ function timetable:mousepressed(x, y, button)
 
     x, y = self.camera:worldCoords(x, y)
 
-    for _, nodeLocation in ipairs(self.nodeLocations) do
-        if x >= nodeLocation.x and x < nodeLocation.x+18 and y >= nodeLocation.y and y < nodeLocation.y+18 then
-            self.selectedNode = nodeLocation.node
-            self.buttons[1].disabled = false
+    for _, nodeLocation in ipairs(self.nodeTable) do
+        if nodeLocation.clickable then
+            if x >= nodeLocation.x and x < nodeLocation.x+18 and y >= nodeLocation.y and y < nodeLocation.y+18 then
+                self.selectedNode = nodeLocation.node
+                self.buttons[1].disabled = false
+            end
         end
     end
 
@@ -184,6 +192,9 @@ function timetable:mousemoved(_, _, x, y)
 
     if self.dragging then
         self.camera:move(-x/self.camera.scale, -y/self.camera.scale)
+
+        -- don't let the player move the timetable offscreen (what a dummy)
+
     end
 end
 
@@ -203,55 +214,95 @@ end
 
 
 
-function timetable:drawNodeAndChildren(node, x, y)
-    for i, childNode in ipairs(node.children) do
-        if childNode.nodeTime > 0 then
-            local nodeTimeOffset = childNode.nodeTime
-            local timelineOffset = childNode.timeline - node.timeline
+function timetable:buildNodeTable()
+    local function walkNode(t, node, x, y, sandW, sandH, isVerticalStart, isVerticalEnd) -- god I hate recursion
+        for i, childNode in ipairs(node.children) do
+            if childNode.nodeTime > 0 then
+                local nodeTimeOffset = childNode.nodeTime
+                local timelineOffset = childNode.timeline - node.timeline
 
-            local w = math.floor(nodeTimeOffset*timelineSecondWidth)
-            local h = timelineHeight*timelineOffset
+                local w = math.floor(nodeTimeOffset*timelineSecondWidth)
+                local h = timelineHeight*timelineOffset
 
-            local isVerticalStart = (i == 2)
-            local isVerticalEnd = (i == #node.children)
+                local isVerticalStart = (i == 2)
+                local isVerticalEnd = (i == #node.children)
 
-            self:drawSandLine(0, 0, w, h, isVerticalStart, isVerticalEnd)
-
-            love.graphics.push()
-            love.graphics.translate(w, h)
-
-            self:drawNodeAndChildren(childNode, x+w, y+h)
-
-            love.graphics.pop()
+                walkNode(t, childNode, x+w, y+h, w, h, isVerticalStart, isVerticalEnd)
+            end
         end
+
+        local nodeType = "regular"
+        local clickable = true
+
+        if node.ended then
+            nodeType = "ended"
+            clickable = false
+        elseif node == game.activeNode then
+            nodeType = "active"
+            clickable = false
+        end
+
+
+        table.insert(t, {
+            node=node,
+            x=x,
+            y=y,
+            sandW=sandW,
+            sandH=sandH,
+            isVerticalStart=isVerticalStart,
+            isVerticalEnd=isVerticalEnd,
+            nodeType=nodeType,
+            clickable=clickable,
+        })
     end
 
-    local img = timetableNode
-    local animation = nodeAnimation
-    local clickable = true
+    local out = {}
 
-    if node == self.selectedNode then
+    walkNode(out, game.rootNode, 0, 0, 0, 0, false, false)
+
+    return out
+end
+
+
+
+function timetable:drawSand(node)
+    self:drawSandLine(node.x-node.sandW, node.y-node.sandH, node.sandW, node.sandH, node.isVerticalStart, node.isVerticalEnd)
+end
+
+function timetable:drawNode(node)
+    local img
+    local animation
+    local clickable
+
+    if node.node == self.selectedNode then
         img = timetableNodeSelected
         animation = nodeAnimationActive
-    elseif node == game.activeNode then
-        img = timetableNodeActive
-        animation = nil
-        clickable = false
-    elseif node.ended then
+        clickable = true
+
+    elseif node.nodeType == "regular" then
+        img = timetableNode
+        animation = nodeAnimation
+        clickable = true
+
+    elseif node.nodeType == "ended" then
         img = timetableNodeEnded
-        animation = nil
+        animation = false
+        clickable = false
+
+    elseif node.nodeType == "active" then
+        img = timetableNodeActive
+        animation = false
         clickable = false
     end
 
     if animation then
-        animation:draw(img)
+        animation:draw(img, node.x, node.y)
     else
-        love.graphics.draw(img)
+        love.graphics.draw(img, node.x, node.y)
     end
 
     if clickable then
-        love.graphics.draw(timetableNodeOverlay)
-        table.insert(self.nodeLocations, {node=node, x=x, y=y})
+        love.graphics.draw(timetableNodeOverlay, node.x, node.y)
     end
 end
 
