@@ -130,9 +130,24 @@ function Player:collide(other, nx, ny)
             end
         end
     else -- world tile
-        if other.properties.spikes and ny < 0  then
-            self:die()
-            self.active = false
+        if other.properties.spike then
+            local dir = other.properties.spike
+            local rip = false
+
+            if dir == "up" and ny < 0  then
+                rip = true
+            elseif dir == "right" and nx > 0 then
+                rip = true
+            elseif dir == "down" and ny > 0 then
+                rip = true
+            elseif dir == "left" and nx < 0 then
+                rip = true
+            end
+
+            if rip then
+                self:die()
+                self.active = false
+            end
         end
     end
 end
