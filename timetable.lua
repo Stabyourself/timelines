@@ -28,8 +28,8 @@ function timetable:init()
     self.nodeLocations = {}
 
     self.buttons = {
-        Button:new(20, 200, 105, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
-        Button:new(275, 200, 105, 20, "Back", function() self:close() end),
+        Button:new(20, 200, 121, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
+        Button:new(WIDTH-60, 200, 40, 20, "Back", function() self:close() end),
     }
 
     self.buttons[1].active = false

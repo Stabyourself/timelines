@@ -6,6 +6,10 @@ function Color.fromRGB(r, g, b, a)
     return Color:new(r, g, b, a or 1)
 end
 
+function Color.fromOldRGB(r, g, b, a)
+    return Color:new(r/255, g/255, b/255, a or 1)
+end
+
 function Color.fromHSV(h, s, v, a)
     return Color:new(Color.HSVtoRGB(h, s, v, a or 1))
 end
