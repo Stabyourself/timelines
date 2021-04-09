@@ -443,6 +443,5 @@
   </object>
   <object id="42" gid="3" x="2864" y="528" width="16" height="16"/>
   <object id="43" gid="2" x="2560" y="480" width="16" height="16"/>
-  <object id="49" gid="2" x="320" y="352" width="16" height="16"/>
  </objectgroup>
 </map>
