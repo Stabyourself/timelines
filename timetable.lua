@@ -14,6 +14,7 @@ local timetable_title = love.graphics.newImage("img/title.png")
 local timetableBack = love.graphics.newImage("img/timetable_back.png")
 local timetableOverlay = love.graphics.newImage("img/timetable_overlay.png")
 
+local settingsIcon = love.graphics.newImage("img/settings.png")
 
 local timetableNode = love.graphics.newImage("img/timetable_node.png")
 local timetableNodeSelected = love.graphics.newImage("img/timetable_node_selected.png")
@@ -36,8 +37,9 @@ function timetable:init()
     self.nodeLocations = {}
 
     self.buttons = {
-        Button:new(self, 15, 200, 121, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
-        Button:new(self, WIDTH-55, 200, 40, 20, "Back", function() self:close() end),
+        Button:new(self, 15, 200, nil, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
+        Button:new(self, WIDTH-83, 200, nil, 20, "Back", function() self:close() end),
+        Button:new(self, WIDTH-35, 200, 20, 20, settingsIcon, function()  end),
     }
 
     self.camera = camera()

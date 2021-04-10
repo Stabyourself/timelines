@@ -22,12 +22,17 @@ local hoverColor = Color3.fromOldRGB(255, 255, 255)
 local disabledColor = Color3.fromOldRGB(92, 62, 66)
 
 function Button:initialize(parent, x, y, w, h, text, func)
+    if type(text) == "string" then
+        self.text = text
+    else
+        self.img = text
+    end
+
     self.parent = parent
     self.x = x
     self.y = y
-    self.w = w
+    self.w = w or imageFont:getWidth(text)+16
     self.h = h
-    self.text = text
     self.func = func
 
     self.clicking = false
@@ -65,8 +70,15 @@ function Button:draw()
 
     local r, g, b = shadowColor:rgb()
 
-    printfShadow(r, g, b, self.text, self.x, self.y+5, self.w, "center")
-
+    if self.text then
+        printfShadow(r, g, b, self.text, self.x, self.y+5, self.w, "center")
+    else
+        local cr, cg, cb = love.graphics.getColor()
+        love.graphics.setColor(r, g, b)
+        love.graphics.draw(self.img, self.x+(self.w-self.img:getWidth())/2, self.y+(self.h-self.img:getHeight())/2+1)
+        love.graphics.setColor(cr, cg, cb)
+        love.graphics.draw(self.img, self.x+(self.w-self.img:getWidth())/2, self.y+(self.h-self.img:getHeight())/2)
+    end
 
 
     love.graphics.setColor(1, 1, 1)
