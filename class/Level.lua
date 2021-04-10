@@ -1,3 +1,4 @@
+local Background = require "class.Background"
 local Level = class("Level")
 
 local bump = require "lib.bump"
@@ -65,6 +66,9 @@ function Level:initialize(gamestate, path)
     self.ecs:update(0)
 
     self.particles = {}
+
+    -- background
+    self.background = Background:new({{},{},{},{},{},{},{},{},{},{}}, "img/background/")
 end
 
 function Level:update(dt)
@@ -93,9 +97,12 @@ function Level:update(dt)
         self.camera.x = self.camera.x + x*dt*2000
         self.camera.y = self.camera.y + y*dt*2000
     end
+
+    self.background:moveTo(self.camera.x)
 end
 
 function Level:draw()
+    self.background:draw()
     self.camera:attach()
 
     self.map:drawLayer(self.map.layers.world)
