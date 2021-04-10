@@ -3,13 +3,13 @@ local Entity = require "class.Entity"
 local Shrine = class("Shrine", Entity)
 
 local img = love.graphics.newImage("img/shrine.png")
-local imgInactive = love.graphics.newImage("img/shrine_inactive.png")
+local imgActivated = love.graphics.newImage("img/shrine_activated.png")
 
 Shrine.drawable = Sprite:new(function(self)
     if not self.used then
         return img
     else
-        return imgInactive
+        return imgActivated
     end
 end)
 
