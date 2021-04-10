@@ -13,7 +13,7 @@ function BackgroundSlice:initialize(img, depth)
 end
 
 function BackgroundSlice:updateQuad()
-    self.quad = love.graphics.newQuad(self.x*self.depth, 0, WIDTH, self.h, self.w, self.h)
+    self.quad = love.graphics.newQuad(self.x*self.depth, 0, WIDTH, self.h+HEIGHT, self.w, self.h)
 end
 
 function BackgroundSlice:draw(y)

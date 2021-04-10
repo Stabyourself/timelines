@@ -82,6 +82,8 @@ function Level:update(dt)
         self.cameraFocus = false
     end
 
+    local oldY = self.camera.y
+
     if self.cameraFocus then
         self.camera:lockWindow(
             self.cameraFocus.x+self.cameraFocus.w/2,
@@ -99,6 +101,8 @@ function Level:update(dt)
     end
 
     self.background:moveTo(self.camera.x)
+    self.background:moveY(self.camera.y-oldY)
+    self.background:update(dt)
 end
 
 function Level:draw()
