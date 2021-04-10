@@ -257,7 +257,8 @@ function timetable:buildNodeTable()
         local lastTimeline = 0
         for i, childNode in ipairs(node.children) do
             if childNode.nodeTime > 0 then
-                local nodeTimeOffset = childNode.nodeTime
+                local nodeTime = math.max(18/timelineSecondWidth, childNode.nodeTime)
+                local nodeTimeOffset = nodeTime
                 local timelineOffset = childNode.timeline - node.timeline
 
 
