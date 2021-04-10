@@ -40,7 +40,7 @@ Player.maxYSpeed = 400
 
 
 
-Player.entitySpawnTimes = {0.03, 0.05, 0.05, 0.1, 0.1, 0.2}
+Player.entitySpawnTimes = {0.01, 0.03, 0.03, 0.05, 0.05, 0.1}
 Player.entitySpawnFunction = function(self)
     local x = self.x + 5 - self.drawable.dir*6
     local y = self.y + 10
