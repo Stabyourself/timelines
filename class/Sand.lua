@@ -30,6 +30,10 @@ function Sand:filter(other)
         return false
     end
 
+    if (other.properties and other.properties.spike) then
+        return false
+    end
+
     return "bounce"
 end
 
@@ -57,7 +61,7 @@ function Sand:collide(other, nx, ny)
     if ny ~= 0 then
         self.vy = -self.vy*self.dampening
 
-        if math.abs(self.vx) < 2 then
+        if math.abs(self.vx) < 2 and math.abs(self.vy) < 2 then
             self.vx = 0
             self.vy = 0
 

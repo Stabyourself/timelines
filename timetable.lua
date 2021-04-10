@@ -9,19 +9,19 @@ timetable = gamestate.new()
 local textForeground = Color3.fromOldRGB(168, 150, 142)
 local textBackground = Color3.fromOldRGB(93, 70, 98)
 
-local timetable_title = love.graphics.newImage("img/title.png")
-
-local timetableBack = love.graphics.newImage("img/timetable_back.png")
-local timetableOverlay = love.graphics.newImage("img/timetable_overlay.png")
+local titleImg = love.graphics.newImage("img/title.png")
 
 local settingsIcon = love.graphics.newImage("img/settings.png")
 
-local timetableNode = love.graphics.newImage("img/timetable_node.png")
-local timetableNodeSelected = love.graphics.newImage("img/timetable_node_selected.png")
-local timetableNodeActive = love.graphics.newImage("img/timetable_node_active.png")
-local timetableNodeDied = love.graphics.newImage("img/timetable_node_died.png")
-local timetableNodeWarped = love.graphics.newImage("img/timetable_node_warped.png")
-local timetableNodeOverlay = love.graphics.newImage("img/timetable_node_overlay.png")
+local timetableBack = love.graphics.newImage("img/timetable/back.png")
+local timetableOverlay = love.graphics.newImage("img/timetable/overlay.png")
+
+local timetableNode = love.graphics.newImage("img/timetable/node.png")
+local timetableNodeSelected = love.graphics.newImage("img/timetable/node_selected.png")
+local timetableNodeActive = love.graphics.newImage("img/timetable/node_active.png")
+local timetableNodeDied = love.graphics.newImage("img/timetable/node_died.png")
+local timetableNodeWarped = love.graphics.newImage("img/timetable/node_warped.png")
+local timetableNodeOverlay = love.graphics.newImage("img/timetable/node_overlay.png")
 
 local grid = anim8.newGrid(18, 18, timetableNode:getWidth(), timetableNode:getHeight())
 local nodeAnimation = anim8.newAnimation(grid("1-4", 1), 0.1)
@@ -163,7 +163,7 @@ function timetable:draw()
 
     love.graphics.draw(timetableOverlay)
 
-    love.graphics.draw(timetable_title, (WIDTH-timetable_title:getWidth())*.5, 2)
+    love.graphics.draw(titleImg, (WIDTH-titleImg:getWidth())*.5, 2)
 
     for _, button in ipairs(self.buttons) do
         button:draw()
@@ -358,16 +358,16 @@ function timetable:drawNode(node)
     end
 end
 
-local lineVerticalTop = love.graphics.newImage("img/timetable_line_vertical_top.png")
-local lineVertical = love.graphics.newImage("img/timetable_line_vertical.png")
+local lineVerticalTop = love.graphics.newImage("img/timetable/line_vertical_top.png")
+local lineVertical = love.graphics.newImage("img/timetable/line_vertical.png")
 lineVertical:setWrap("repeat", "repeat")
 local lineVerticalQuad = love.graphics.newQuad(0, 0, 18, 18, 18, 18)
 
-local lineHorizontalLeft = love.graphics.newImage("img/timetable_line_horizontal_left.png")
-local lineHorizontalLeftCorner = love.graphics.newImage("img/timetable_line_horizontal_left_corner.png")
-local lineHorizontalLeftT = love.graphics.newImage("img/timetable_line_horizontal_left_t.png")
-local lineHorizontalRight = love.graphics.newImage("img/timetable_line_horizontal_right.png")
-local lineHorizontal = love.graphics.newImage("img/timetable_line_horizontal.png")
+local lineHorizontalLeft = love.graphics.newImage("img/timetable/line_horizontal_left.png")
+local lineHorizontalLeftCorner = love.graphics.newImage("img/timetable/line_horizontal_left_corner.png")
+local lineHorizontalLeftT = love.graphics.newImage("img/timetable/line_horizontal_left_t.png")
+local lineHorizontalRight = love.graphics.newImage("img/timetable/line_horizontal_right.png")
+local lineHorizontal = love.graphics.newImage("img/timetable/line_horizontal.png")
 
 lineHorizontal:setWrap("repeat")
 local lineHorizontalQuad = love.graphics.newQuad(0, 0, 36, 18, 36, 18)
