@@ -49,3 +49,8 @@ function printfShadow(shadowR, shadowG, shadowB, text, x, y, limit, align, r, sx
     love.graphics.printf(text, x, y, limit, align, r, sx, sy, ox, oy, kx, ky)
 end
 
+function getPixelProperties(map, layer, x, y)
+    x, y = map:convertPixelToTile(x, y)
+    x, y = math.floor(x)+1, math.floor(y)+1
+    return map:getTileProperties(layer, x, y)
+end

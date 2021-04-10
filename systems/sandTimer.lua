@@ -18,12 +18,12 @@ function sandTimer:process(e, dt)
 
     -- control the entity spawner
     if e.entitySpawnEntity then
-        if (math.abs(e.vx) == 0 and math.abs(e.vy) == 0) or e.sand == 0 then
+        if math.abs(e.vx) == 0 or e.sand == 0 then
             e.entitySpawnEntity = nil
             e:refreshECS()
         end
     else
-        if (math.abs(e.vx) > 0 or math.abs(e.vy) > 0) and e.sand > 0 then
+        if math.abs(e.vx) > 0 and e.sand > 0 then
             e.entitySpawnEntity = Sand
             e:refreshECS()
         end

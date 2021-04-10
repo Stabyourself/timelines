@@ -4,7 +4,7 @@ local playerJumping = tiny.processingSystem()
 playerJumping.filter = tiny.requireAll("jumpSpeed")
 
 function playerJumping:process(e, dt)
-    if e.onGround then
+    if e.onGround then -- refill air jumps
         e.airJumpsLeft = e.totalAirJumps
         e.coyoteTimer = 0
     else
@@ -21,15 +21,25 @@ function playerJumping:process(e, dt)
     end
 
     if controls:pressed("jump") and (onGround or e.airJumpsLeft > 0) then
-        e:jump()
+        -- jumping through platforms
+        local onPlatform = false
 
-        e.jumping = true
-        e.ascending = true
+        local propertiesLeft = getPixelProperties(e.level.map, "world", e.x, e.y+e.h)
+        local propertiesRight = getPixelProperties(e.level.map, "world", e.x, e.y+e.h)
 
-        e.vy = -e.jumpSpeed
+        if controls:get("down") == 1 and propertiesLeft.platform and propertiesRight.platform then
+            e.y = e.y+0.1
+        else
+            e:jump()
 
-        if not onGround then
-            e.airJumpsLeft = e.airJumpsLeft - 1
+            e.jumping = true
+            e.ascending = true
+
+            e.vy = -e.jumpSpeed
+
+            if not onGround then
+                e.airJumpsLeft = e.airJumpsLeft - 1
+            end
         end
     end
 

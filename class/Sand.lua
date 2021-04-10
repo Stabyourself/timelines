@@ -19,6 +19,10 @@ function Sand:filter(other)
         return false
     end
 
+    if (other.platform or (other.properties and other.properties.platform)) and self.y + self.h > other.y then
+        return false
+    end
+
     return "bounce"
 end
 
