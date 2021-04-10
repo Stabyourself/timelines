@@ -14,6 +14,13 @@ Sand.colors = {
 Sand.gravity = 300
 Sand.dampening = 0.5
 
+Sand.variations = {
+    -- graphic W, graphic H, physics W, physics H
+    {2, 2, 2, 1},
+    {2, 2, 2, 2},
+    {2, 1, 2, 1},
+}
+
 function Sand:filter(other)
     if other.class then
         return false
@@ -27,7 +34,9 @@ function Sand:filter(other)
 end
 
 function Sand:initialize(level, x, y)
-    Entity.initialize(self, level, x, y, 2, 1)
+    self.variation = self.variations[love.math.random(#self.variations)]
+
+    Entity.initialize(self, level, x, y, self.variation[3], self.variation[4])
 
     self.color = self.colors[love.math.random(#self.colors)]
 end
@@ -35,7 +44,7 @@ end
 function Sand:draw()
     love.graphics.setColor(self.color)
 
-    love.graphics.rectangle("fill", self.x, self.y, 2, 2)
+    love.graphics.rectangle("fill", self.x, self.y, self.variation[1], self.variation[2])
 
     love.graphics.setColor(1, 1, 1)
 end

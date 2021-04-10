@@ -21,17 +21,26 @@ local shadowColor = Color3.fromOldRGB(42, 41, 63)
 local hoverColor = Color3.fromOldRGB(255, 255, 255)
 local disabledColor = Color3.fromOldRGB(92, 62, 66)
 
-function Button:initialize(parent, x, y, w, h, text, func)
-    if type(text) == "string" then
-        self.text = text
+function Button:initialize(parent, x, y, w, h, content, func)
+    if type(content) == "string" then
+        self.text = content
     else
-        self.img = text
+        self.img = content
     end
 
     self.parent = parent
     self.x = x
     self.y = y
-    self.w = w or imageFont:getWidth(text)+16
+    if self.text then
+        self.w = w or imageFont:getWidth(content)+16
+    else
+        if self.text then
+            self.w = w or imageFont:getWidth(content)+16
+        else
+            self.w = w or self.img:getWidth()+(h-self.img:getHeight())
+        end
+    end
+
     self.h = h
     self.func = func
 
