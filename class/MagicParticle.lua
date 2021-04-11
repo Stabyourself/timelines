@@ -8,7 +8,7 @@ local grid = anim8.newGrid(9, 9, img:getWidth(), img:getHeight())
 
 local animation = anim8.newAnimation(grid("1-6", 1), 0.07)
 
-local color = Color3:new(1, 0, 1)
+local color = Color3.fromOldRGB(255, 180, 56)
 local lightenRange = 0.7
 
 function MagicParticle:initialize(x, y)
