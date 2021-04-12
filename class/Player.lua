@@ -252,13 +252,56 @@ function Player:startSpawnAnimation()
     -- create particles
     local playerEntities = {}
 
-    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x+2, self.y+2, "shard", 1)))
-    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x+7, self.y+2, "shard", 2)))
-    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x+2, self.y+6, "shard", 3)))
-    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x+7, self.y+6, "shard", 4)))
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(
+        self.level,
+        self.x+2,
+        self.y+2,
+        "shard",
+        1
+    )))
 
-    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x, self.y-1, "top")))
-    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x, self.y+8, "top")))
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(
+        self.level,
+        self.x+7,
+        self.y+2,
+        "shard",
+        2
+    )))
+
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(
+        self.level,
+        self.x+2,
+        self.y+6,
+        "shard",
+        3
+    )))
+
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(
+        self.level,
+        self.x+7,
+        self.y+6,
+        "shard",
+        4
+    )))
+
+
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(
+        self.level,
+        self.x,
+        self.y-1,
+        "top",
+        nil,
+        love.math.random()*math.pi+math.pi
+    )))
+
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(
+        self.level,
+        self.x,
+        self.y+8,
+        "top",
+        nil,
+        love.math.random()*math.pi
+    )))
 
     return playerEntities
 end

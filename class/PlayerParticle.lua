@@ -17,10 +17,10 @@ for x = 1, 4 do
     table.insert(shardQuads, love.graphics.newQuad((x-1)*8, 0, 8, 8, shardImg:getWidth(), shardImg:getHeight()))
 end
 
-function PlayerParticle:initialize(level, x, y, t, shardI)
+function PlayerParticle:initialize(level, x, y, t, shardI, angle)
     local destX, destY = x, y
     local dist = love.math.random(40, 50)
-    local angle = love.math.random()*math.pi*2
+    local angle = angle or love.math.random()*math.pi*2
 
     local offX = math.cos(angle)*dist
     local offY = math.sin(angle)*dist
