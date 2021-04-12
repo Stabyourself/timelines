@@ -109,7 +109,23 @@ end
 function game:die()
     self.activeNode.ended = true
     self.activeNode.died = true
-    gamestate.push(timetable, false, false)
+
+    -- death flow controller
+    local flow = FlowController3:new()
+    table.insert(flowControllers, flow)
+
+    local playerEntities
+
+    -- shard creation
+    flow:addCall(function() self.level.player:startDeathAnimation() end)
+
+    flow:addWait(1)
+
+    flow:addCall(function() self.level.player:explodeAnimation() end)
+
+    flow:addWait(2.5)
+
+    flow:addCall(function() gamestate.push(timetable, false, false) end)
 end
 
 function game:useShrine(shrine)
@@ -148,8 +164,10 @@ function game:startOnNode(parentNode)
     self.level:loadState(parentNode.state.entities)
     self.level:applyState(self.metaState.entities)
 
-    self.level.player.visible = false
-    self.spawnAnimation = true
+    if not SKIPSPAWNANIMATION then
+        self.level.player.visible = false
+        self.spawnAnimation = true
+    end
 end
 
 function game:updatemetaState()

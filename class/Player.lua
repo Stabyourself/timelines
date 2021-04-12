@@ -76,6 +76,7 @@ for i, dir in ipairs({1, -1}) do
         jump = anim8.newAnimation(grid("2-3", i), {0.15, math.huge}),
         doublejump = anim8.newAnimation(grid("4-5", i), {0.15, math.huge}),
         run = anim8.newAnimation(grid("6-9", i), 0.08),
+        die = anim8.newAnimation(grid(10, i), math.huge),
     }
 end
 -- TODO: need to clone this somehow; animations should be instanced
@@ -121,6 +122,7 @@ function Player:initialize(level, x, y)
 
     self.visible = true
     self.glowing = 0
+    self.controlsEnabled = true
 end
 
 function Player:nearShrine()
@@ -192,7 +194,6 @@ function Player:grounded()
 end
 
 function Player:die()
-    self:remove()
     game:die()
 end
 
@@ -249,6 +250,23 @@ function Player:startSpawnAnimation()
     self.onGround = false
     self.level.world:update(self, self.x, self.y)
 
+    return self:createParticles(false)
+end
+
+function Player:startDeathAnimation()
+    self.active = false
+    self.controlsEnabled = false
+    self.animationState = "die"
+    self:removeFromECS()
+end
+
+function Player:explodeAnimation()
+    self.visible = false
+    self:removeFromWorld()
+    return self:createParticles(true)
+end
+
+function Player:createParticles(physics)
     -- create particles
     local playerEntities = {}
 
@@ -257,7 +275,9 @@ function Player:startSpawnAnimation()
         self.x+2,
         self.y+2,
         "shard",
-        1
+        1,
+        physics,
+        love.math.random()*math.pi+math.pi
     )))
 
     table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(
@@ -265,7 +285,9 @@ function Player:startSpawnAnimation()
         self.x+7,
         self.y+2,
         "shard",
-        2
+        2,
+        physics,
+        love.math.random()*math.pi+math.pi
     )))
 
     table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(
@@ -273,7 +295,9 @@ function Player:startSpawnAnimation()
         self.x+2,
         self.y+6,
         "shard",
-        3
+        3,
+        physics,
+        love.math.random()*math.pi
     )))
 
     table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(
@@ -281,7 +305,9 @@ function Player:startSpawnAnimation()
         self.x+7,
         self.y+6,
         "shard",
-        4
+        4,
+        physics,
+        love.math.random()*math.pi
     )))
 
 
@@ -291,6 +317,7 @@ function Player:startSpawnAnimation()
         self.y-1,
         "top",
         1,
+        physics,
         love.math.random()*math.pi+math.pi
     )))
 
@@ -300,6 +327,7 @@ function Player:startSpawnAnimation()
         self.y+8,
         "top",
         2,
+        physics,
         love.math.random()*math.pi
     )))
 
