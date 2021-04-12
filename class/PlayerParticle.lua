@@ -30,7 +30,12 @@ function PlayerParticle:initialize(level, x, y, t, shardI, angle)
     if t == "top" then
         Entity.initialize(self, level, x+offX, y+offY, 12, 4, false)
 
-        self.animation = anim8.newAnimation(grid("1-6", 1), 0.1)
+        if shardI == 1 then
+            self.animation = anim8.newAnimation(grid("1-6", 1), 0.1)
+        else
+            self.animation = anim8.newAnimation(grid("6-1", 1), 0.1)
+        end
+
         self.animation:gotoFrame(3)
 
         self.duration = 1.5

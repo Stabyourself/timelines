@@ -290,7 +290,7 @@ function Player:startSpawnAnimation()
         self.x,
         self.y-1,
         "top",
-        nil,
+        1,
         love.math.random()*math.pi+math.pi
     )))
 
@@ -299,7 +299,7 @@ function Player:startSpawnAnimation()
         self.x,
         self.y+8,
         "top",
-        nil,
+        2,
         love.math.random()*math.pi
     )))
 
