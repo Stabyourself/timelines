@@ -27,7 +27,9 @@ function love.run()
 		if love.timer then dt = love.timer.step() end
 
 		-- fake DT for debug
-		dt = frameDebug3.update(dt)
+		if FRAMEDEBUG then
+			dt = frameDebug3.update(dt)
+		end
 
 		-- Call update and draw
 		if love.update then love.update(dt) end -- will pass 0 if love.timer is disabled

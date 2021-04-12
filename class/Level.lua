@@ -4,6 +4,7 @@ local Level = class("Level")
 local bump = require "lib.bump"
 local sti = require "lib.sti"
 local camera = require "lib.camera"
+local FlowController3 = require "lib.FlowController3"
 
 local Player = require "class.Player"
 local Key = require "class.Key"
@@ -78,9 +79,6 @@ function Level:update(dt)
     updateGroup(self.particles, dt)
 
     -- camera
-    if controls:pressed("camera") then
-        self.cameraFocus = false
-    end
 
     local oldY = self.camera.y
 
@@ -94,7 +92,13 @@ function Level:update(dt)
             HEIGHT*0.5 + 30,
             camera.smooth.damped(dt, 10)
         ) --todo: some kind of SMW camera thing maybe
-    else
+    end
+
+    if FREECAM then
+        if controls:pressed("camera") then
+            self.cameraFocus = false
+        end
+
         local x, y = controls:get("camera")
         self.camera.x = self.camera.x + x*dt*2000
         self.camera.y = self.camera.y + y*dt*2000
@@ -126,7 +130,7 @@ function Level:draw()
     end
 
     -- debug
-    if DEBUG then
+    if PHYSICSDEBUG then
         love.graphics.setColor(1, 1, 1, 0.4)
         self.map:drawLayer(self.map.layers.markers)
         love.graphics.setColor(1, 0, 0, 0.5)
@@ -148,13 +152,15 @@ function Level:draw()
 end
 
 function Level:mousepressed(x, y, button)
-    local wx, wy = self.camera:worldCoords(x, y)
-    self.player.x = wx
-    self.player.y = wy
-    self.player.vx = 0
-    self.player.vy = 0
-    self.world:update(self.player, wx, wy)
-    self.cameraFocus = self.player
+    if TELEPORT then
+        local wx, wy = self.camera:worldCoords(x, y)
+        self.player.x = wx
+        self.player.y = wy
+        self.player.vx = 0
+        self.player.vy = 0
+        self.world:update(self.player, wx, wy)
+        self.cameraFocus = self.player
+    end
 end
 
 function Level:addEntity(entity)
@@ -188,7 +194,7 @@ function Level:makeState()
     }
 
     for _, entity in ipairs(self.entities) do
-        if not entity.meta then -- meta items are stored differently
+        if not entity.meta and not entity.noState then -- meta items are stored differently
             table.insert(state.entities, entity:toState())
         end
     end
@@ -210,18 +216,54 @@ function Level:clear()
     self.entities = {}
 end
 
-function Level:loadState(entities)
+function Level:applyState(entities)
     for _, entity in ipairs(entities) do
         local newEntity = entity.class.fromState(self, entity)
         newEntity:postAdd()
 
         table.insert(self.entities, newEntity)
     end
+end
+
+function Level:loadState(entities)
+    self:applyState(entities)
 
     self.player = self:getEntities(Player)[1]
     self.cameraFocus = self.player
     self.camera:lookAt(self.cameraFocus.x+self.cameraFocus.w/2, self.cameraFocus.y+self.cameraFocus.h/2)
     self.background:moveTo(self.camera.x)
+
+
+    -- spawn flow controller
+    local flow = FlowController3:new()
+    table.insert(flowControllers, flow)
+
+    local playerEntities
+
+    -- shard creation
+    flow:addCall(function() playerEntities = self.player:startSpawnAnimation() end)
+    flow:addCall(function() self.player:disableControls() end)
+
+    flow:addWait(1.6)
+
+    flow:addCall(function()
+        for _, entity in ipairs(playerEntities) do
+            entity.removeMe = true
+        end
+    end)
+
+    -- glowing
+    flow:addCall(function() self.player:startGlowing() end)
+
+    -- drop
+    flow:addCall(function() self.player:stopGlowing() end)
+    flow:addCall(function() self.player.visible = true end)
+    flow:addCall(function() self.player.gravity = nil end)
+    flow:addCondition(function() return self.player.onGround end)
+
+    -- flow:addWait(0.1)
+    -- start
+    flow:addCall(function() self.player:enableControls() end)
 end
 
 

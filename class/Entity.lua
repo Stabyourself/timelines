@@ -81,7 +81,10 @@ function Entity:queueRemove()
 end
 
 function Entity:remove()
-    self.level.world:remove(self)
+    if self.level.world:hasItem(self) then
+        self.level.world:remove(self)
+    end
+
     self.level.ecs:remove(self)
 end
 

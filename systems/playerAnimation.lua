@@ -4,10 +4,12 @@ local playerAnimation = tiny.processingSystem()
 playerAnimation.filter = tiny.requireAll("runAccel")
 
 function playerAnimation:process(e, dt)
-    if controls:down("left") then
-        e.drawable.dir = -1
-    elseif controls:down("right") then
-        e.drawable.dir = 1
+    if e.controlsEnabled then
+        if controls:down("left") then
+            e.drawable.dir = -1
+        elseif controls:down("right") then
+            e.drawable.dir = 1
+        end
     end
 
     if e.onGround then

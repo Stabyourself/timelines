@@ -13,11 +13,6 @@ return {
         camup = {'key:up', 'axis:righty-'},
         camdown = {'key:down', 'axis:righty+'},
 
-        camzoomin = {'key:pageup'},
-        camzoomout = {'key:pagedown'},
-
-        closetimeline = {'key:return'},
-
         debug1 = {'key:k'},
     },
     pairs = {

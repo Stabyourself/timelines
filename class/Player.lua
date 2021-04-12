@@ -2,6 +2,7 @@ local anim8 = require 'lib.anim8'
 local AnimationMachine = require "class.drawables.AnimationMachine"
 local Sand = require "class.Sand"
 local Arrow = require "class.Arrow"
+local PlayerParticle = require "class.PlayerParticle"
 
 local Entity = require "class.Entity"
 local Key = require "class.Key"
@@ -79,6 +80,8 @@ for i, dir in ipairs({1, -1}) do
 end
 -- TODO: need to clone this somehow; animations should be instanced
 
+local glowImg = love.graphics.newImage("img/player_glow.png")
+
 local sandImg = love.graphics.newImage("img/player_sand.png")
 local sandQuads = {}
 
@@ -115,6 +118,9 @@ function Player:initialize(level, x, y)
 
     self.entitySpawnTimer = 0
     self.entitySpawnEntity = nil
+
+    self.visible = true
+    self.glowing = 0
 end
 
 function Player:nearShrine()
@@ -208,23 +214,71 @@ function Player:openDoor(door, forReal)
 end
 
 function Player:draw()
-    -- sand
-    local ox, oy = 0,0
+    if self.visible then
+        -- sand
+        local ox, oy = 0,0
 
-    local animation = self.drawable:getAnimation(self)
-    if sandOffsets[self.animationState] and sandOffsets[self.animationState][animation.position] then
-        ox, oy = unpack(sandOffsets[self.animationState][animation.position])
+        local animation = self.drawable:getAnimation(self)
+        if sandOffsets[self.animationState] and sandOffsets[self.animationState][animation.position] then
+            ox, oy = unpack(sandOffsets[self.animationState][animation.position])
+        end
+
+        local sandQuad = math.floor((1-self.sand)*8)+1
+
+        love.graphics.draw(sandImg, sandQuads[sandQuad], self.x+self.drawable.x+ox, self.y+self.drawable.y+oy, 0, 1, 1, self.drawable.ox, self.drawable.oy)
+
+        Entity.draw(self)
+
+        if self:nearShrine() then
+            love.graphics.draw(useBubble, self.x-6, self.y-26)
+        end
     end
 
-    local sandQuad = math.floor((1-self.sand)*8)+1
+    if self.glowing > 0 then
+        love.graphics.setColor(1, 1, 1, self.glowing)
 
-    love.graphics.draw(sandImg, sandQuads[sandQuad], self.x+self.drawable.x+ox, self.y+self.drawable.y+oy, 0, 1, 1, self.drawable.ox, self.drawable.oy)
+        love.graphics.draw(glowImg, self.x-2, self.y)
 
-    Entity.draw(self)
-
-    if self:nearShrine() then
-        love.graphics.draw(useBubble, self.x-6, self.y-26)
+        love.graphics.setColor(1, 1, 1)
     end
+end
+
+function Player:startSpawnAnimation()
+    self.gravity = 0
+    self.y = self.y - 18
+    self.onGround = false
+    self.level.world:update(self, self.x, self.y)
+
+    self.visible = false
+
+    -- create particles
+    local playerEntities = {}
+
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x+2, self.y+2, "shard", 1)))
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x+7, self.y+2, "shard", 2)))
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x+2, self.y+6, "shard", 3)))
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x+7, self.y+6, "shard", 4)))
+
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x, self.y-1, "top")))
+    table.insert(playerEntities, self.level:addEntity(PlayerParticle:new(self.level, self.x, self.y+8, "top")))
+
+    return playerEntities
+end
+
+function Player:startGlowing()
+    self.glowing = 1
+end
+
+function Player:stopGlowing()
+    timer.tween(0.3, self, {glowing = 0}, 'linear')
+end
+
+function Player:disableControls()
+    self.controlsEnabled = false
+end
+
+function Player:enableControls()
+    self.controlsEnabled = true
 end
 
 return Player

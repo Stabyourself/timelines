@@ -19,6 +19,7 @@ require "game"
 require "timetable"
 controls = baton.new(require "controls")
 timer = require "lib.timer"
+flowControllers = {}
 -------------------------------------------------------
 
 
@@ -30,29 +31,34 @@ function love.load()
     gamestate.registerEvents()
     gamestate.switch(game)
 
-    gamestate.push(timetable, true, false)
+    -- gamestate.push(timetable, true, false)
 
-    -- timetable:init()
-    -- game:startOnNode(game.rootNode)
+    timetable:init()
+    game:startOnNode(game.rootNode)
 end
 
 function love.update(dt)
     timer.update(dt)
+    updateGroup(flowControllers, dt)
     controls:update()
 
     love.window.setTitle("Timelines " .. love.timer.getFPS())
 end
 
 function love.keypressed(key)
-    if key == "escape" then
-        love.event.quit()
+    if ESCTOQUIT then
+        if key == "escape" then
+            love.event.quit()
+        end
     end
 
-    if key == "#" then
-        frameDebug3.frameAdvance()
-    end
+    if FRAMEDEBUG then
+        if key == "#" then
+            frameDebug3.frameAdvance()
+        end
 
-    if key == "pause" then
-        frameDebug3.pausePlay()
+        if key == "pause" then
+            frameDebug3.pausePlay()
+        end
     end
 end

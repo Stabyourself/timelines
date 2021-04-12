@@ -99,7 +99,7 @@ function timetable:enter(from, booted, allowBack)
 
     self.nodeTable = self:buildNodeTable()
 
-    self.panWindow = {9, 9, 0, 0}
+    self.panWindow = {9, 9, 9, 9}
 
     for _, node in ipairs(self.nodeTable) do
         if node.x+9 > self.panWindow[3] then
@@ -120,10 +120,6 @@ end
 function timetable:update(dt)
     nodeAnimation:update(dt)
     nodeAnimationActive:update(dt)
-
-    if not self.booted and controls:pressed("closetimeline") then
-        self:close()
-    end
 end
 
 function timetable:draw()

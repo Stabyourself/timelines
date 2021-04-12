@@ -26,18 +26,19 @@ end
 function game:update(dt)
     self.level:update(dt)
 
-    if self.level.player.active then
-        self.activeNode.nodeTime = self.activeNode.nodeTime + dt
-    end
+    if self.level.player.controlsEnabled then
+        if self.level.player.active then
+            self.activeNode.nodeTime = self.activeNode.nodeTime + dt
+        end
 
-    local shrine = self.level.player:nearShrine()
-    if controls:pressed("use") and shrine then
-        self:useShrine(shrine)
+        local shrine = self.level.player:nearShrine()
+        if controls:pressed("use") and shrine then
+            self:useShrine(shrine)
+        end
     end
 
     if controls:pressed("debug1") then
-        -- gamestate.push(timetable)
-        self.level:serialize()
+
     end
 end
 
@@ -106,7 +107,7 @@ function game:startOnNode(parentNode)
     self:updatemetaState()
     self.level:clear()
     self.level:loadState(parentNode.state.entities)
-    self.level:loadState(self.metaState.entities)
+    self.level:applyState(self.metaState.entities)
 end
 
 function game:updatemetaState()

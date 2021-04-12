@@ -798,7 +798,7 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 288,
+          x = 224,
           y = 384,
           width = 16,
           height = 16,
@@ -950,20 +950,6 @@ return {
           height = 16,
           rotation = 0,
           gid = 2,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 58,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 384,
-          y = 352,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          gid = 4,
           visible = true,
           properties = {}
         }
