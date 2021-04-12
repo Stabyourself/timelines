@@ -2,7 +2,9 @@ love.graphics.setDefaultFilter("nearest", "nearest")
 
 require "util"
 require "variables"
-require "environment"
+if love.filesystem.getInfo("environment.lua") then
+    require "environment"
+end
 require "run"
 
 class = require("lib.middleclass")
