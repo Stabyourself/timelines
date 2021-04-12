@@ -12,6 +12,8 @@ local useBubble = love.graphics.newImage("img/use_bubble.png")
 
 local Player = class("Player", Entity)
 
+Player.doesntCollideWith = {"Sand"}
+
 function Player:filter(other)
     if other.class and other.class.name == "Key" then
         return "cross"
@@ -194,7 +196,10 @@ function Player:grounded()
 end
 
 function Player:die()
-    game:die()
+    if not self.dead then
+        self.dead = true
+        game:die()
+    end
 end
 
 function Player:openDoor(door, forReal)

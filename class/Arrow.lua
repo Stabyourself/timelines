@@ -8,7 +8,7 @@ Arrow.drawable.y = 2
 Arrow.drawable.ox = 10.5
 Arrow.drawable.oy = 9
 
-
+Arrow.doesntCollideWith = {"Sand", "Key", "PlayerParticle"}
 
 function Arrow:filter(other)
     if not other.class and self.x >= other.x then

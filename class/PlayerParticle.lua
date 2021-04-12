@@ -18,13 +18,7 @@ for x = 1, 4 do
     table.insert(shardQuads, love.graphics.newQuad((x-1)*8, 0, 8, 8, shardImg:getWidth(), shardImg:getHeight()))
 end
 
-function PlayerParticle:filter(other)
-    if other.class and other.class.name == "PlayerParticle" then
-        return false
-    end
-
-    return Entity.filter(self, other)
-end
+PlayerParticle.doesntCollideWith = {"PlayerParticle", "Arrow", "Sand", "Key"}
 
 function PlayerParticle:initialize(level, x, y, t, shardI, physics, angle)
     local destX, destY = x, y

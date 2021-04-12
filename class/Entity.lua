@@ -17,11 +17,13 @@ function Entity:filter(other)
         return false
     end
 
-    if other.class and other.class.name == "Sand" then
-        return false
+    if other.class and self.doesntCollideWith then
+        if intablei(self.doesntCollideWith, other.class.name) then
+            return false
+        end
     end
 
-    return "slide"
+    return self.defaultFilter or "slide"
 end
 
 function Entity:initialize(level, x, y, w, h, physics)
@@ -93,7 +95,9 @@ function Entity:refreshECS()
 end
 
 function Entity:removeFromWorld()
-    self.level.world:remove(self)
+    if self.level.world:hasItem(self) then
+        self.level.world:remove(self)
+    end
 end
 
 function Entity:removeFromECS()

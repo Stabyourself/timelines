@@ -14,11 +14,9 @@ Key.metaDrawable.y = 4
 Key.metaDrawable.ox = 7
 Key.metaDrawable.oy = 4
 
-function Key:filter(other)
-    if other.properties and other.properties.platform and self.y + self.h > other.y then
-        return false
-    end
+Key.doesntCollideWith = {"Sand", "Arrow", "Door"}
 
+function Key:filter(other)
     if other.class and other.class.name == "Player" then
         return "cross"
     end

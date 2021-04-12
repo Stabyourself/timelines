@@ -21,20 +21,15 @@ Sand.variations = {
     {2, 1, 2, 1},
 }
 
+Sand.doesntCollideWith = {"Sand", "Player", "Key", "Arrow", "PlayerParticle"}
+Sand.defaultFilter = "bounce"
+
 function Sand:filter(other)
-    if other.class then
-        return false
-    end
-
-    if (other.platform or (other.properties and other.properties.platform)) and self.y + self.h > other.y then
-        return false
-    end
-
     if (other.properties and other.properties.spike) then
         return false
     end
 
-    return "bounce"
+    return Entity.filter(self, other)
 end
 
 function Sand:initialize(level, x, y)
