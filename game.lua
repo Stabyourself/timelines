@@ -25,36 +25,40 @@ function game:enter(previous)
 end
 
 function game:resume()
-    -- spawn flow controller
-    local flow = FlowController3:new()
-    table.insert(flowControllers, flow)
+    if self.spawnAnimation then
+        -- spawn flow controller
+        local flow = FlowController3:new()
+        table.insert(flowControllers, flow)
 
-    local playerEntities
+        local playerEntities
 
-    -- shard creation
-    flow:addCall(function() playerEntities = self.level.player:startSpawnAnimation() end)
-    flow:addCall(function() self.level.player:disableControls() end)
+        -- shard creation
+        flow:addCall(function() playerEntities = self.level.player:startSpawnAnimation() end)
+        flow:addCall(function() self.level.player:disableControls() end)
 
-    flow:addWait(1.6)
+        flow:addWait(1.6)
 
-    flow:addCall(function()
-        for _, entity in ipairs(playerEntities) do
-            entity.removeMe = true
-        end
-    end)
+        flow:addCall(function()
+            for _, entity in ipairs(playerEntities) do
+                entity.removeMe = true
+            end
+        end)
 
-    -- glowing
-    flow:addCall(function() self.level.player:startGlowing() end)
+        -- glowing
+        flow:addCall(function() self.level.player:startGlowing() end)
 
-    -- drop
-    flow:addCall(function() self.level.player:stopGlowing() end)
-    flow:addCall(function() self.level.player.visible = true end)
-    flow:addCall(function() self.level.player.gravity = nil end)
-    flow:addCondition(function() return self.level.player.onGround end)
+        -- drop
+        flow:addCall(function() self.level.player:stopGlowing() end)
+        flow:addCall(function() self.level.player.visible = true end)
+        flow:addCall(function() self.level.player.gravity = nil end)
+        flow:addCondition(function() return self.level.player.onGround end)
 
-    -- flow:addWait(0.1)
-    -- start
-    flow:addCall(function() self.level.player:enableControls() end)
+        -- flow:addWait(0.1)
+        -- start
+        flow:addCall(function() self.level.player:enableControls() end)
+
+        self.spawnAnimation = false
+    end
 end
 
 
@@ -145,6 +149,7 @@ function game:startOnNode(parentNode)
     self.level:applyState(self.metaState.entities)
 
     self.level.player.visible = false
+    self.spawnAnimation = true
 end
 
 function game:updatemetaState()
