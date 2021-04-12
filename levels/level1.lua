@@ -798,7 +798,7 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 224,
+          x = 288,
           y = 384,
           width = 16,
           height = 16,

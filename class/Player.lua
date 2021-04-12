@@ -245,11 +245,9 @@ end
 
 function Player:startSpawnAnimation()
     self.gravity = 0
-    self.y = self.y - 18
+    self.y = self.y - 17
     self.onGround = false
     self.level.world:update(self, self.x, self.y)
-
-    self.visible = false
 
     -- create particles
     local playerEntities = {}

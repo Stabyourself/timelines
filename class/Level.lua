@@ -232,38 +232,6 @@ function Level:loadState(entities)
     self.cameraFocus = self.player
     self.camera:lookAt(self.cameraFocus.x+self.cameraFocus.w/2, self.cameraFocus.y+self.cameraFocus.h/2)
     self.background:moveTo(self.camera.x)
-
-
-    -- spawn flow controller
-    local flow = FlowController3:new()
-    table.insert(flowControllers, flow)
-
-    local playerEntities
-
-    -- shard creation
-    flow:addCall(function() playerEntities = self.player:startSpawnAnimation() end)
-    flow:addCall(function() self.player:disableControls() end)
-
-    flow:addWait(1.6)
-
-    flow:addCall(function()
-        for _, entity in ipairs(playerEntities) do
-            entity.removeMe = true
-        end
-    end)
-
-    -- glowing
-    flow:addCall(function() self.player:startGlowing() end)
-
-    -- drop
-    flow:addCall(function() self.player:stopGlowing() end)
-    flow:addCall(function() self.player.visible = true end)
-    flow:addCall(function() self.player.gravity = nil end)
-    flow:addCondition(function() return self.player.onGround end)
-
-    -- flow:addWait(0.1)
-    -- start
-    flow:addCall(function() self.player:enableControls() end)
 end
 
 

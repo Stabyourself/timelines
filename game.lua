@@ -1,4 +1,5 @@
 local Node = require "class.Node"
+local FlowController3 = require "lib.FlowController3"
 game = gamestate.new()
 
 local Level = require "class.Level"
@@ -22,6 +23,40 @@ end
 function game:enter(previous)
 
 end
+
+function game:resume()
+    -- spawn flow controller
+    local flow = FlowController3:new()
+    table.insert(flowControllers, flow)
+
+    local playerEntities
+
+    -- shard creation
+    flow:addCall(function() playerEntities = self.level.player:startSpawnAnimation() end)
+    flow:addCall(function() self.level.player:disableControls() end)
+
+    flow:addWait(1.6)
+
+    flow:addCall(function()
+        for _, entity in ipairs(playerEntities) do
+            entity.removeMe = true
+        end
+    end)
+
+    -- glowing
+    flow:addCall(function() self.level.player:startGlowing() end)
+
+    -- drop
+    flow:addCall(function() self.level.player:stopGlowing() end)
+    flow:addCall(function() self.level.player.visible = true end)
+    flow:addCall(function() self.level.player.gravity = nil end)
+    flow:addCondition(function() return self.level.player.onGround end)
+
+    -- flow:addWait(0.1)
+    -- start
+    flow:addCall(function() self.level.player:enableControls() end)
+end
+
 
 function game:update(dt)
     self.level:update(dt)
@@ -108,6 +143,8 @@ function game:startOnNode(parentNode)
     self.level:clear()
     self.level:loadState(parentNode.state.entities)
     self.level:applyState(self.metaState.entities)
+
+    self.level.player.visible = false
 end
 
 function game:updatemetaState()

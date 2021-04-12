@@ -44,7 +44,6 @@ function PlayerParticle:initialize(level, x, y, t, shardI)
         self.duration = 1
     end
 
-
     timer.tween(self.duration, self, {x = destX, y = destY, a = 1}, 'in-out-quad', function() self.animating = false end)
 end
 
