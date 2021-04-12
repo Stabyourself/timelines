@@ -445,6 +445,5 @@
   <object id="43" gid="2" x="2560" y="480" width="16" height="16"/>
   <object id="53" gid="2" x="2544" y="768" width="16" height="16"/>
   <object id="54" gid="2" x="2544" y="768" width="16" height="16"/>
-  <object id="59" gid="5" x="240" y="352" width="16" height="16"/>
  </objectgroup>
 </map>

@@ -268,6 +268,20 @@ end
 function Player:explodeAnimation()
     self.visible = false
     self:removeFromWorld()
+
+    -- lots of sand
+    local count = self.sand * 100
+
+    for i = 1, count do
+        local x = love.math.random(self.x, self.x+self.w)
+        local y = love.math.random(self.y, self.y+self.h)
+
+        local entity = self.level:addEntity(Sand:new(self.level, x, y))
+
+        entity.vx = love.math.random(-50, 50)
+        entity.vy = love.math.random(-50, 0)
+    end
+
     return self:createParticles(true)
 end
 

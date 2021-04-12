@@ -152,7 +152,7 @@ function Level:draw()
 end
 
 function Level:mousepressed(x, y, button)
-    if TELEPORT then
+    if TELEPORT and self.world:hasItem(self.player) then
         local wx, wy = self.camera:worldCoords(x, y)
         self.player.x = wx
         self.player.y = wy

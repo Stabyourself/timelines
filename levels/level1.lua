@@ -952,20 +952,6 @@ return {
           gid = 2,
           visible = true,
           properties = {}
-        },
-        {
-          id = 59,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 240,
-          y = 352,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          gid = 5,
-          visible = true,
-          properties = {}
         }
       }
     }
