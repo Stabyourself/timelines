@@ -22,6 +22,7 @@ local timetableNodeActive = love.graphics.newImage("img/timetable/node_active.pn
 local timetableNodeDied = love.graphics.newImage("img/timetable/node_died.png")
 local timetableNodeWarped = love.graphics.newImage("img/timetable/node_warped.png")
 local timetableNodeOverlay = love.graphics.newImage("img/timetable/node_overlay.png")
+local timetableNodeOverlayHighlight = love.graphics.newImage("img/timetable/node_overlay_highlight.png")
 
 local grid = anim8.newGrid(18, 18, timetableNode:getWidth(), timetableNode:getHeight())
 local nodeAnimation = anim8.newAnimation(grid("1-4", 1), 0.1)
@@ -193,7 +194,7 @@ function timetable:mousepressed(x, y, button)
 
     for _, nodeLocation in ipairs(self.nodeTable) do
         if nodeLocation.clickable then
-            if x >= nodeLocation.x and x < nodeLocation.x+18 and y >= nodeLocation.y and y < nodeLocation.y+18 then
+            if self:nodeCollision(nodeLocation, x, y) then
                 self.selectedNode = nodeLocation.node
                 self.buttons[1].disabled = false
             end
@@ -201,6 +202,10 @@ function timetable:mousepressed(x, y, button)
     end
 
     self.dragging = true
+end
+
+function timetable:nodeCollision(nodeLocation, x, y)
+    return x >= nodeLocation.x and x < nodeLocation.x+18 and y >= nodeLocation.y and y < nodeLocation.y+18
 end
 
 function timetable:mousereleased(x, y, button)
@@ -351,7 +356,15 @@ function timetable:drawNode(node)
     end
 
     if clickable then
-        love.graphics.draw(timetableNodeOverlay, node.x, node.y)
+        local img = timetableNodeOverlay
+
+        local x, y = self.camera:worldCoords(self:getMousePosition())
+
+        if self:nodeCollision(node, x, y) then
+            img = timetableNodeOverlayHighlight
+        end
+
+        love.graphics.draw(img, node.x, node.y)
     end
 end
 
