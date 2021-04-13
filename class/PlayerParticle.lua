@@ -71,7 +71,7 @@ function PlayerParticle:initialize(level, x, y, t, shardI, physics, angle)
 
         self.shardImg = topImg
 
-        self.duration = 1.2
+        self.duration = 1
     end
 
     if physics then -- send flying!
