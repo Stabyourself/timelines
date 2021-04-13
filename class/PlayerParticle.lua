@@ -10,13 +10,10 @@ PlayerParticle.dampening = 0.5
 
 
 local topImg = love.graphics.newImage("img/player_top.png")
-local grid = anim8.newGrid(16, 16, topImg:getWidth(), topImg:getHeight())
+local topGrid = anim8.newGrid(16, 16, topImg:getWidth(), topImg:getHeight())
 
 local shardImg = love.graphics.newImage("img/player_shards.png")
-local shardQuads = {}
-for x = 1, 4 do
-    table.insert(shardQuads, love.graphics.newQuad((x-1)*8, 0, 8, 8, shardImg:getWidth(), shardImg:getHeight()))
-end
+local sharedGrid = anim8.newGrid(8, 8, shardImg:getWidth(), shardImg:getHeight())
 
 PlayerParticle.doesntCollideWith = {"PlayerParticle", "Arrow", "Sand", "Key"}
 
@@ -42,12 +39,16 @@ function PlayerParticle:initialize(level, x, y, t, shardI, physics, angle)
         end
 
         if shardI == 1 then
-            self.animation = anim8.newAnimation(grid("1-6", 1), 0.1)
+            self.animation = anim8.newAnimation(topGrid("1-6", 1), 0.1)
+            self.animation:gotoFrame(3)
         else
-            self.animation = anim8.newAnimation(grid("6-1", 1), 0.1)
+            self.animation = anim8.newAnimation(topGrid("6-1", 1), 0.1)
+            self.animation:gotoFrame(2)
         end
 
-        self.animation:gotoFrame(3)
+        self.img = topImg
+        self.offsets = {6, 2, 8, 8}
+
 
         self.duration = 1.5
 
@@ -61,7 +62,14 @@ function PlayerParticle:initialize(level, x, y, t, shardI, physics, angle)
             self.level = level
         end
 
-        self.quad = shardQuads[shardI]
+        self.animation = anim8.newAnimation(sharedGrid("1-4", shardI), 0.1)
+        self.animation.timer = love.math.random()*.4
+        self.animating = true
+        self.img = shardImg
+
+        self.offsets = {2, 2, 4, 4}
+
+        self.shardImg = topImg
 
         self.duration = 1.2
     end
@@ -85,7 +93,7 @@ end
 function PlayerParticle:draw()
     love.graphics.setColor(1, 1, 1, self.a)
     if self.animation then
-        self.animation:draw(topImg, self.x+6, self.y+2, 0, 1, 1, 8, 8)
+        self.animation:draw(self.img, self.x+self.offsets[1], self.y+self.offsets[2], 0, 1, 1, self.offsets[3], self.offsets[4])
     else
         love.graphics.draw(shardImg, self.quad, self.x+2, self.y+2, 0, 1, 1, 4, 4)
     end
