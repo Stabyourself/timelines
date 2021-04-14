@@ -1,4 +1,5 @@
-local tiny = require("lib.tiny")
+local tiny = require "lib.tiny"
+local easing = require "lib.easing"
 
 local moving = tiny.processingSystem()
 moving.filter = tiny.requireAll("startX", "startY", "differenceX", "differenceY", "moveTimer", "moveTimes", "moveStep")
@@ -19,9 +20,7 @@ function moving:process(e, dt)
     e.goalX, e.goalY = self:getPosition(e)
 end
 
-function easingFunction(t, begin, change, duration) -- placeholder
-    return change * t / duration + begin
-end
+local easingFunction = easing.inOutQuad
 
 function moving:getPosition(e)
     if e.moveStep == 1 then
