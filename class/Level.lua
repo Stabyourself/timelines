@@ -88,6 +88,17 @@ function Level:initialize(gamestate, path)
             movingPlatform.differenceX = object.properties.differenceX or 0
             movingPlatform.differenceY = object.properties.differenceY or 0
 
+            movingPlatform.moveTimes = {
+                object.properties.travelTime or 2,
+                object.properties.waitTime or 1,
+                object.properties.travelTime or 2,
+                object.properties.waitTime or 1,
+            }
+
+            movingPlatform.w = object.width
+            movingPlatform.h = object.height
+
+
             self:addEntity(movingPlatform)
         end
     end

@@ -1,5 +1,7 @@
 local Entity = require "class.Entity"
 local Sprite = require "class.drawables.Sprite"
+local boxDraws = require("lib.boxDrawing")
+
 local MovingPlatform = class("MovingPlatform", Entity)
 
 MovingPlatform.drawable = Sprite:new(love.graphics.newImage("img/door.png"))
@@ -10,7 +12,8 @@ combineArrays(MovingPlatform.serializeTable, {
     "differenceX",
     "differenceY",
     "moveTimer",
-    "moveStep"
+    "moveStep",
+    "moveTimes",
 })
 
 MovingPlatform.doesntCollideWith = {"Sand", "Player"}
@@ -32,7 +35,7 @@ function MovingPlatform:initialize(level, x, y)
 end
 
 function MovingPlatform:draw()
-    love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
+    boxDraws.regular:draw(self.x, self.y, self.w, self.h)
 end
 
 return MovingPlatform

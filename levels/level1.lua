@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 85,
+  nextobjectid = 87,
   backgroundcolor = { 72, 72, 252 },
   properties = {},
   tilesets = {
@@ -84,7 +84,9 @@ return {
           type = "moving-platform",
           properties = {
             ["differenceX"] = 0,
-            ["differenceY"] = 0
+            ["differenceY"] = 0,
+            ["travelTime"] = 2,
+            ["waitTime"] = 1
           }
         }
       }
@@ -1118,15 +1120,48 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 368,
+          x = 360,
           y = 368,
-          width = 16,
+          width = 32,
           height = 16,
           rotation = 0,
           gid = 7,
           visible = true,
           properties = {
-            ["differenceX"] = 64
+            ["differenceX"] = 64,
+            ["differenceY"] = -64,
+            ["travelTime"] = 1,
+            ["waitTime"] = 0
+          }
+        },
+        {
+          id = 85,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 272,
+          y = 384,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 6,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 86,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 288,
+          y = 384,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 6,
+          visible = true,
+          properties = {
+            ["meta"] = true
           }
         }
       }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="1020" height="100" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#4848fc" nextlayerid="9" nextobjectid="85">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="1020" height="100" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#4848fc" nextlayerid="9" nextobjectid="87">
  <editorsettings>
   <export target="level1.lua" format="lua"/>
  </editorsettings>
@@ -36,6 +36,8 @@
    <properties>
     <property name="differenceX" type="float" value="0"/>
     <property name="differenceY" type="float" value="0"/>
+    <property name="travelTime" type="float" value="2"/>
+    <property name="waitTime" type="float" value="1"/>
    </properties>
   </tile>
  </tileset>
@@ -516,9 +518,18 @@
     <property name="meta" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="84" gid="7" x="368" y="368" width="16" height="16">
+  <object id="84" gid="7" x="360" y="368" width="32" height="16">
    <properties>
     <property name="differenceX" type="float" value="64"/>
+    <property name="differenceY" type="float" value="-64"/>
+    <property name="travelTime" type="float" value="1"/>
+    <property name="waitTime" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="85" gid="6" x="272" y="384" width="16" height="16"/>
+  <object id="86" gid="6" x="288" y="384" width="16" height="16">
+   <properties>
+    <property name="meta" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

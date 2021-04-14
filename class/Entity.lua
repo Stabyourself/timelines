@@ -56,7 +56,17 @@ function Entity:toState()
     }
 
     for _, key in ipairs(self.serializeTable) do
-        out[key] = self[key]
+        if type(self[key]) == "table" then -- only 1 level of copying
+            local t = {}
+
+            for k, v in pairs(self[key]) do
+                t[k] = v
+            end
+
+            out[key] = t
+        else
+            out[key] = self[key]
+        end
     end
 
     return out
