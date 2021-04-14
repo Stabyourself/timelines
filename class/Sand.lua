@@ -22,7 +22,7 @@ Sand.variations = {
 }
 
 Sand.doesntCollideWith = {"Sand", "Player", "Key", "Arrow", "PlayerParticle"}
-Sand.defaultFilter = "bounce"
+Sand.defaultFilter = "slide"
 
 function Sand:filter(other)
     if (other.properties and other.properties.spike) then
@@ -60,11 +60,13 @@ function Sand:collide(other, nx, ny)
             self.vx = 0
             self.vy = 0
 
-            self.worldRemove = true
+            if (not other.class) or other.class.name ~= "Box" then
+                self.worldRemove = true
+            end
         end
-    end
 
-    self.vx = self.vx * self.dampening
+        self.vx = self.vx * self.dampening
+    end
 end
 
 return Sand

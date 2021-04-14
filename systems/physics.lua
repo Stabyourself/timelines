@@ -33,11 +33,15 @@ function physics:process(e, dt)
         local nextX, nextY, cols = e.level.world:move(e, goalX, goalY, e.filter)
 
         for _, col in ipairs(cols) do
+            local resetSpeed = true
+
             if e.collide then
-                e:collide(col.other, col.normal.x, col.normal.y)
+                if e:collide(col.other, col.normal.x, col.normal.y) then
+                    resetSpeed = false
+                end
             end
 
-            if col.type ~= "cross" then
+            if col.type ~= "cross" and resetSpeed then
                 physics.resolveCollision(e, col.normal.x, col.normal.y)
             end
         end

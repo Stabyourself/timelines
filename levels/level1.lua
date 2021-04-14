@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 75,
+  nextobjectid = 76,
   backgroundcolor = { 72, 72, 252 },
   properties = {},
   tilesets = {
@@ -1030,67 +1030,36 @@ return {
           }
         },
         {
-          id = 70,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 240,
-          y = 352,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          gid = 5,
-          visible = true,
-          properties = {
-            ["dir"] = "right",
-            ["spawnTime"] = 2
-          }
-        },
-        {
-          id = 71,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 384,
-          y = 368,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          gid = 5,
-          visible = true,
-          properties = {
-            ["dir"] = "left"
-          }
-        },
-        {
-          id = 73,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 320,
-          y = 320,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          gid = 5,
-          visible = true,
-          properties = {
-            ["spawnTime"] = 0.1
-          }
-        },
-        {
           id = 74,
           name = "",
           type = "",
           shape = "rectangle",
-          x = 448,
+          x = 768,
           y = 384,
-          width = 16,
+          width = 32,
           height = 32,
           rotation = 0,
           gid = 6,
           visible = true,
-          properties = {}
+          properties = {
+            ["meta"] = true
+          }
+        },
+        {
+          id = 75,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 896,
+          y = 384,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 6,
+          visible = true,
+          properties = {
+            ["meta"] = false
+          }
         }
       }
     }

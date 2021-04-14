@@ -1,12 +1,9 @@
 local anim8 = require 'lib.anim8'
 local AnimationMachine = require "class.drawables.AnimationMachine"
 local Sand = require "class.Sand"
-local Arrow = require "class.Arrow"
 local PlayerParticle = require "class.PlayerParticle"
 
 local Entity = require "class.Entity"
-local Key = require "class.Key"
-local Door = require "class.Door"
 
 local useBubble = love.graphics.newImage("img/use_bubble.png")
 
@@ -143,7 +140,7 @@ end
 
 function Player:collide(other, nx, ny)
     if other.isInstanceOf then
-        if other:isInstanceOf(Key) then
+        if other.class.name == "Key" then
             other:queueRemove()
             if other.meta then
                 game.metaState.keyCount = game.metaState.keyCount + 1
@@ -152,15 +149,21 @@ function Player:collide(other, nx, ny)
             end
         end
 
-        if other:isInstanceOf(Door) then
+        if other.class.name == "Door" then
             if self:openDoor(other, true) then
                 other:queueRemove()
             end
         end
 
-        if other:isInstanceOf(Arrow) then
+        if other.class.name == "Arrow" then
             self:die()
         end
+
+        if other.class.name == "Box" and ny == 0 then
+            other.vx = self.vx
+            return true
+        end
+
     else -- world tile
         if other.properties.spike then
             local dir = other.properties.spike

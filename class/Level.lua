@@ -73,13 +73,13 @@ function Level:initialize(gamestate, path)
         if type == "box" then
             local w, h = object.width, object.height
 
-            local box = Box:new(self, object.x-16+w, object.y-16-h)
+            local box = Box:new(self, object.x, object.y-h)
 
             box.w = w
             box.h = h
             box.meta = object.properties.meta
 
-            self:addEntity()
+            self:addEntity(box)
         end
     end
 
@@ -242,6 +242,8 @@ function Level:applyState(entities)
     for _, entity in ipairs(entities) do
         local newEntity = entity.class.fromState(self, entity)
 
+        print(newEntity)
+
         newEntity:postAdd()
 
         table.insert(self.entities, newEntity)
@@ -255,8 +257,6 @@ function Level:loadState(entities)
     self.cameraFocus = self.player
     self.camera:lookAt(self.cameraFocus.x+self.cameraFocus.w/2, self.cameraFocus.y+self.cameraFocus.h/2)
     self.background:moveTo(self.camera.x)
-
-    print("STATE LOADED")
 end
 
 

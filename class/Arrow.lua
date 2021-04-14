@@ -1,6 +1,6 @@
 local Entity = require "class.Entity"
 local Sprite = require "class.drawables.Sprite"
-local Arrow = class("Key", Entity)
+local Arrow = class("Arrow", Entity)
 
 Arrow.drawable = Sprite:new(love.graphics.newImage("img/arrow.png"))
 Arrow.drawable.x = 5.5
@@ -8,7 +8,7 @@ Arrow.drawable.y = 2
 Arrow.drawable.ox = 10.5
 Arrow.drawable.oy = 9
 
-Arrow.doesntCollideWith = {"Sand", "Key", "PlayerParticle"}
+Arrow.doesntCollideWith = {"Sand", "Key", "Arrow", "PlayerParticle"}
 
 function Arrow:filter(other)
     if self.vx > 0 then

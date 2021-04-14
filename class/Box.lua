@@ -2,15 +2,16 @@ local Entity = require "class.Entity"
 local Sprite = require "class.drawables.Sprite"
 local Box = class("Box", Entity)
 
-Box.drawable = Sprite:new(love.graphics.newImage("img/door.png"))
-Box.metaDrawable = Sprite:new(love.graphics.newImage("img/door_meta.png"))
+Box.doesntCollideWith = {"Sand"}
 
 combineArrays(Box.serializeTable, {
     "meta",
 })
 
+Box.friction = 10
+
 function Box:initialize(level, x, y)
-    Entity.initialize(self, level, x, y, 8, 32)
+    Entity.initialize(self, level, x, y)
 end
 
 function Box:postAdd()
@@ -19,6 +20,10 @@ function Box:postAdd()
     end
 
     Entity.postAdd(self)
+end
+
+function Box:draw()
+    love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
 end
 
 return Box
