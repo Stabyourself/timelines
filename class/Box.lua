@@ -60,7 +60,7 @@ function Box:postAdd()
 end
 
 function Box:draw()
-    love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
+    -- love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
 
     love.graphics.draw(self.corners, cornerQuads[1], self.x, self.y)
     love.graphics.draw(self.corners, cornerQuads[2], self.x+self.w-4, self.y)

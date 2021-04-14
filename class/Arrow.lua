@@ -46,6 +46,10 @@ end
 function Arrow:collide(other, nx, ny)
     self:queueRemove()
 
+    if other.class and other.class.name == "Box" then
+        other.vx = other.vx + self.vx
+    end
+
     if other.collide then
         other:collide(self, -nx, -ny)
     end
