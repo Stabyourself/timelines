@@ -6,6 +6,7 @@ local systemOrder = {
     "entitySpawner",
     "friction",
     "gravity",
+    "moving",
     "particleSpawner",
     "physics",
     "playerAnimation",

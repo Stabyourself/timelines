@@ -5,9 +5,9 @@ playerMovement.filter = tiny.requireAll("runAccel", "brakeAccel", "maxSpeed")
 
 function playerMovement:process(e, dt)
     if e.controlsEnabled then
-        if controls:down("left") then
+        if controls:down("left") and e.vx > -e.maxSpeed then
             e.vx = math.max(-e.maxSpeed, e.vx - dt * (e.vx > 0 and e.brakeAccel or e.runAccel))
-        elseif controls:down("right") then
+        elseif controls:down("right") and e.vx < e.maxSpeed then
             e.vx = math.min(e.maxSpeed, e.vx + dt * (e.vx < 0 and e.brakeAccel or e.runAccel))
         else
             local brake = dt * (e.vx < 0 and e.brakeAccel or -e.brakeAccel)

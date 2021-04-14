@@ -21,7 +21,7 @@ Sand.variations = {
     {2, 1, 2, 1},
 }
 
-Sand.doesntCollideWith = {"Sand", "Player", "Key", "Arrow", "PlayerParticle"}
+Sand.doesntCollideWith = {"Sand", "Player", "Key", "Arrow", "PlayerParticle", "MovingPlatform"}
 Sand.defaultFilter = "slide"
 
 function Sand:filter(other)

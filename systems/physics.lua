@@ -15,6 +15,9 @@ function physics:process(e, dt)
 
         e.onGround = false
 
+        local previousX = e.x
+        local previousY = e.y
+
         local goalX
         local goalY
 
@@ -26,7 +29,15 @@ function physics:process(e, dt)
             goalY = e.y + e.vy * dt
         end
 
+        if e.onTopOf and e.onTopOf.movedByX then
+            goalX = goalX + e.onTopOf.movedByX
+            goalY = goalY + e.onTopOf.movedByY
+            e.onTopOf = nil
+        end
+
         if goalX == e.x and goalY == e.y then
+            e.movedByX = 0
+            e.movedByY = 0
             return
         end
 
@@ -42,7 +53,7 @@ function physics:process(e, dt)
             end
 
             if col.type ~= "cross" and resetSpeed then
-                physics.resolveCollision(e, col.normal.x, col.normal.y)
+                physics.resolveCollision(e, col.other, col.normal.x, col.normal.y)
             end
         end
 
@@ -56,16 +67,20 @@ function physics:process(e, dt)
         if wasOnGround and not e.onGround then
             if e.aired then e:aired() end
         end
+
+        e.movedByX = e.x - previousX
+        e.movedByY = e.y - previousY
     end
 end
 
-function physics.resolveCollision(e, nx, ny) -- default collision resolvement only sets speed to 0
+function physics.resolveCollision(e, other, nx, ny) -- default collision resolvement only sets speed to 0
     if (nx < 0 and e.vx > 0) or (nx > 0 and e.vx < 0) then
         e.vx = 0
     end
 
     if (ny < 0 and e.vy > 0) then
         e.onGround = true
+        e.onTopOf = other
     end
 
     if (ny < 0 and e.vy > 0) or (ny > 0 and e.vy < 0) then

@@ -1,5 +1,6 @@
 local Background = require "class.Background"
 local Box = require "class.Box"
+local MovingPlatform = require "class.MovingPlatform"
 local Level = class("Level")
 
 local bump = require "lib.bump"
@@ -80,6 +81,14 @@ function Level:initialize(gamestate, path)
             box.meta = object.properties.meta
 
             self:addEntity(box)
+        end
+
+        if type == "moving-platform" then
+            local movingPlatform = MovingPlatform:new(self, object.x, object.y-16)
+            movingPlatform.differenceX = object.properties.differenceX or 0
+            movingPlatform.differenceY = object.properties.differenceY or 0
+
+            self:addEntity(movingPlatform)
         end
     end
 
