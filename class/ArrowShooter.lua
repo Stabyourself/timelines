@@ -3,26 +3,40 @@ local Arrow = require "class.Arrow"
 local ArrowShooter = class("ArrowShooter", Entity)
 
 
-ArrowShooter.entitySpawnTimes = {2}
 ArrowShooter.entitySpawnEntity = Arrow
-ArrowShooter.entitySpawnFunction = function(self)
-    local x = self.x+5
-    local y = self.y-6
-
-    local vx = 130
-    local vy = 0
-
-    return x, y, vx, vy
-end
 
 combineArrays(ArrowShooter.serializeTable, {
-    "entitySpawnTimer"
+    "entitySpawnTimer",
+    "entitySpawnTime",
+    "dir"
 })
 
-function ArrowShooter:initialize(level, x, y)
+function ArrowShooter:initialize(level, x, y, dir, spawnTime)
     Entity.initialize(self, level, x, y, 16, 16, false)
 
+    self.dir = dir
+    self.entitySpawnTime = spawnTime
+
     self.entitySpawnTimer = 0
+end
+
+
+function ArrowShooter:entitySpawnFunction()
+    local y = self.y-6
+
+    local vy = 0
+
+    local x, vx
+
+    if self.dir == "right" then
+        x = self.x+5
+        vx = 130
+    else
+        x = self.x
+        vx = -130
+    end
+
+    return x, y, vx, vy
 end
 
 return ArrowShooter

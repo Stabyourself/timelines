@@ -36,7 +36,7 @@ function game:resume()
         flow:addCall(function() playerEntities = self.level.player:startSpawnAnimation() end)
         flow:addCall(function() self.level.player:disableControls() end)
 
-        flow:addWait(1.6)
+        flow:addWait(1.3)
 
         flow:addCall(function()
             for _, entity in ipairs(playerEntities) do

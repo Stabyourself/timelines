@@ -11,9 +11,16 @@ Arrow.drawable.oy = 9
 Arrow.doesntCollideWith = {"Sand", "Key", "PlayerParticle"}
 
 function Arrow:filter(other)
-    if not other.class and self.x >= other.x then
-        return false
+    if self.vx > 0 then
+        if not other.class and self.x >= other.x then
+            return false
+        end
+    else
+        if not other.class and self.x <= other.x+16 then
+            return false
+        end
     end
+
 
     return Entity.filter(self, other)
 end
@@ -24,6 +31,16 @@ combineArrays(Arrow.serializeTable, {
 
 function Arrow:initialize(level, x, y)
     Entity.initialize(self, level, x, y, 11, 4)
+end
+
+function Arrow:draw()
+    self.r = 0
+
+    if self.vx < 0 then
+        self.r = math.pi
+    end
+
+    Entity.draw(self)
 end
 
 function Arrow:collide(other, nx, ny)

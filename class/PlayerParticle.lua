@@ -40,17 +40,17 @@ function PlayerParticle:initialize(level, x, y, t, shardI, physics, angle)
 
         if shardI == 1 then
             self.animation = anim8.newAnimation(topGrid("1-6", 1), 0.1)
-            self.animation:gotoFrame(3)
+            self.animation:gotoFrame(6)
         else
             self.animation = anim8.newAnimation(topGrid("6-1", 1), 0.1)
-            self.animation:gotoFrame(2)
+            self.animation:gotoFrame(5)
         end
 
         self.img = topImg
         self.offsets = {6, 2, 8, 8}
 
 
-        self.duration = 1.5
+        self.duration = 1.2
 
         self.animating = true
     elseif t == "shard" then

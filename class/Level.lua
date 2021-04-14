@@ -56,8 +56,15 @@ function Level:initialize(gamestate, path)
             self:addEntity(shrine)
         end
 
-        if type == "arrow-right" then
-            self:addEntity(ArrowShooter:new(self, object.x, object.y))
+        if type == "arrow-shooter" then
+            -- print(object.properties.dir)
+            self:addEntity(ArrowShooter:new(
+                self,
+                object.x,
+                object.y,
+                object.properties.dir or "right",
+                object.properties.spawnTime or 2
+            ))
         end
     end
 
