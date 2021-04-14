@@ -34,10 +34,10 @@ function Arrow:initialize(level, x, y)
 end
 
 function Arrow:draw()
-    self.r = 0
+    self.drawable.sx = 1
 
     if self.vx < 0 then
-        self.r = math.pi
+        self.drawable.sx = -1
     end
 
     Entity.draw(self)
