@@ -28,7 +28,6 @@ end
 
 function Entity:initialize(level, x, y, w, h, physics)
     self.level = level
-    self.world = level.world
     self.x = x
     self.y = y
     self.w = w
@@ -39,14 +38,16 @@ function Entity:initialize(level, x, y, w, h, physics)
 
     self.physics = physics ~= false
 
-    if self.physics then
-        self.world:add(self, x, y, w, h)
-    end
+    self.level.ecs:addEntity(self)
 
     self.active = true
     self.onGround = true
+end
 
-    self.level.ecs:addEntity(self)
+function Entity:postAdd()
+    if self.physics then
+        self.level.world:add(self, self.x, self.y, self.w, self.h)
+    end
 end
 
 function Entity:toState()
@@ -103,7 +104,5 @@ end
 function Entity:removeFromECS()
     self.level.ecs:remove(self)
 end
-
-function Entity:postAdd() end
 
 return Entity

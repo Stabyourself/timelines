@@ -40,6 +40,8 @@ function Shrine:postAdd()
     if self.used then
         self:use()
     end
+
+    Entity.postAdd(self)
 end
 
 function Shrine:use()

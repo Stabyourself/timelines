@@ -19,6 +19,7 @@ function entitySpawner:process(e, dt)
             entity.vx = vx
             entity.vy = vy
 
+            entity:postAdd()
 
             e.entitySpawnTimer = e.entitySpawnTimer - e.currentSpawnTime
             e.currentSpawnTime = randomSpawnTime(e)

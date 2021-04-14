@@ -9,15 +9,16 @@ combineArrays(Door.serializeTable, {
     "meta",
 })
 
-function Door:initialize(level, x, y, meta)
+function Door:initialize(level, x, y)
     Entity.initialize(self, level, x, y, 8, 32)
-    self.meta = meta
 end
 
 function Door:postAdd()
     if self.meta then
         self.drawable = self.metaDrawable
     end
+
+    Entity.postAdd(self)
 end
 
 return Door

@@ -11,11 +11,8 @@ combineArrays(ArrowShooter.serializeTable, {
     "dir"
 })
 
-function ArrowShooter:initialize(level, x, y, dir, spawnTime)
+function ArrowShooter:initialize(level, x, y)
     Entity.initialize(self, level, x, y, 16, 16, false)
-
-    self.dir = dir
-    self.entitySpawnTime = spawnTime
 
     self.entitySpawnTimer = 0
 end

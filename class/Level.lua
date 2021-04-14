@@ -1,4 +1,5 @@
 local Background = require "class.Background"
+local Box = require "class.Box"
 local Level = class("Level")
 
 local bump = require "lib.bump"
@@ -40,31 +41,45 @@ function Level:initialize(gamestate, path)
         end
 
         if type == "key" then
-            self:addEntity(Key:new(self, object.x+1, object.y-13, object.properties.meta))
+            local key = Key:new(self, object.x+1, object.y-13)
+            key.meta = object.properties.meta
+
+            self:addEntity(key)
         end
 
         if type == "door" then
-            self:addEntity(Door:new(self, object.x+4, object.y-32, object.properties.meta))
+            local door = Door:new(self, object.x+4, object.y-32)
+            door.meta = object.properties.meta
+
+            self:addEntity(door)
         end
 
         if type == "shrine" then
             local shrine = Shrine:new(self, object.x, object.y-63)
-            if object.properties.used then
-                shrine:use()
-            end
+            shrine.used = object.properties.used
 
             self:addEntity(shrine)
         end
 
         if type == "arrow-shooter" then
-            -- print(object.properties.dir)
-            self:addEntity(ArrowShooter:new(
-                self,
-                object.x,
-                object.y,
-                object.properties.dir or "right",
-                object.properties.spawnTime or 2
-            ))
+            local arrowShooter = ArrowShooter:new(self, object.x, object.y)
+
+            arrowShooter.dir = object.properties.dir or "right"
+            arrowShooter.entitySpawnTime = object.properties.spawnTime or 2
+
+            self:addEntity(arrowShooter)
+        end
+
+        if type == "box" then
+            local w, h = object.width, object.height
+
+            local box = Box:new(self, object.x-16+w, object.y-16-h)
+
+            box.w = w
+            box.h = h
+            box.meta = object.properties.meta
+
+            self:addEntity()
         end
     end
 
@@ -226,6 +241,7 @@ end
 function Level:applyState(entities)
     for _, entity in ipairs(entities) do
         local newEntity = entity.class.fromState(self, entity)
+
         newEntity:postAdd()
 
         table.insert(self.entities, newEntity)
@@ -239,6 +255,8 @@ function Level:loadState(entities)
     self.cameraFocus = self.player
     self.camera:lookAt(self.cameraFocus.x+self.cameraFocus.w/2, self.cameraFocus.y+self.cameraFocus.h/2)
     self.background:moveTo(self.camera.x)
+
+    print("STATE LOADED")
 end
 
 

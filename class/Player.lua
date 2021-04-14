@@ -280,6 +280,8 @@ function Player:explodeAnimation()
 
         entity.vx = love.math.random(-50, 50)
         entity.vy = love.math.random(-50, 0)
+
+        entity:postAdd()
     end
 
     return self:createParticles(true)
@@ -349,6 +351,10 @@ function Player:createParticles(physics)
         physics,
         love.math.random()*math.pi
     )))
+
+    for _, entity in ipairs(playerEntities) do
+        entity:postAdd()
+    end
 
     return playerEntities
 end

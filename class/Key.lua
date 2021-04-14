@@ -39,9 +39,8 @@ combineArrays(Key.serializeTable, {
     "meta",
 })
 
-function Key:initialize(level, x, y, meta)
+function Key:initialize(level, x, y)
     Entity.initialize(self, level, x, y, 14, 10)
-    self.meta = meta
 
     self.goalX = self.x
     self.goalY = self.y
@@ -56,6 +55,8 @@ function Key:postAdd()
     if self.meta then
         self.drawable = self.metaDrawable
     end
+
+    Entity.postAdd(self)
 end
 
 function Key:draw()

@@ -30,7 +30,7 @@ function physics:process(e, dt)
             return
         end
 
-        local nextX, nextY, cols = e.world:move(e, goalX, goalY, e.filter)
+        local nextX, nextY, cols = e.level.world:move(e, goalX, goalY, e.filter)
 
         for _, col in ipairs(cols) do
             if e.collide then
