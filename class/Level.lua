@@ -34,11 +34,13 @@ function Level:initialize(gamestate, path)
     -- load objects
     self.entities = {}
 
+    local startX, startY
+
     for _, object in ipairs(self.map.layers.markers.objects) do
         local type = self.map.tiles[object.gid].type
 
         if type == "start" then
-            self.player = self:addEntity(Player:new(self, object.x+2, object.y-14))
+            startX, startY = object.x+2, object.y-14
         end
 
         if type == "key" then
@@ -102,6 +104,9 @@ function Level:initialize(gamestate, path)
             self:addEntity(movingPlatform)
         end
     end
+
+    self.player = Player:new(self, startX, startY)
+    table.insert(self.entities, 1, self.player)
 
     self.camera = camera()
     self.cameraFocus = self.player
@@ -236,6 +241,7 @@ function Level:makeState()
     }
 
     for _, entity in ipairs(self.entities) do
+        print(entity)
         if not entity.meta and not entity.noState then -- meta items are stored differently
             table.insert(state.entities, entity:toState())
         end

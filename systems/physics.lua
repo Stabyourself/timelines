@@ -21,6 +21,12 @@ function physics:process(e, dt)
         local goalX
         local goalY
 
+        if e.onTopOf and e.onTopOf.movedByX then
+            self:doMovement(e, e.x + e.onTopOf.movedByX, e.y + e.onTopOf.movedByY)
+
+            e.onTopOf = nil
+        end
+
         if e.goalX then
             goalX = e.goalX
             goalY = e.goalY
@@ -29,36 +35,13 @@ function physics:process(e, dt)
             goalY = e.y + e.vy * dt
         end
 
-        if e.onTopOf and e.onTopOf.movedByX then
-            goalX = goalX + e.onTopOf.movedByX
-            goalY = goalY + e.onTopOf.movedByY
-            e.onTopOf = nil
-        end
-
         if goalX == e.x and goalY == e.y then
             e.movedByX = 0
             e.movedByY = 0
             return
         end
 
-        local nextX, nextY, cols = e.level.world:move(e, goalX, goalY, e.filter)
-
-        for _, col in ipairs(cols) do
-            local resetSpeed = true
-
-            if e.collide then
-                if e:collide(col.other, col.normal.x, col.normal.y) then
-                    resetSpeed = false
-                end
-            end
-
-            if col.type ~= "cross" and resetSpeed then
-                physics.resolveCollision(e, col.other, col.normal.x, col.normal.y)
-            end
-        end
-
-        e.x = nextX
-        e.y = nextY
+        self:doMovement(e, goalX, goalY)
 
         if not wasOnGround and e.onGround then
             if e.grounded then e:grounded() end
@@ -71,6 +54,27 @@ function physics:process(e, dt)
         e.movedByX = e.x - previousX
         e.movedByY = e.y - previousY
     end
+end
+
+function physics:doMovement(e, goalX, goalY)
+    local nextX, nextY, cols = e.level.world:move(e, goalX, goalY, e.filter)
+
+    for _, col in ipairs(cols) do
+        local resetSpeed = true
+
+        if e.collide then
+            if e:collide(col.other, col.normal.x, col.normal.y) then
+                resetSpeed = false
+            end
+        end
+
+        if col.type ~= "cross" and resetSpeed then
+            physics.resolveCollision(e, col.other, col.normal.x, col.normal.y)
+        end
+    end
+
+    e.x = nextX
+    e.y = nextY
 end
 
 function physics.resolveCollision(e, other, nx, ny) -- default collision resolvement only sets speed to 0
