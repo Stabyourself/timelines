@@ -242,8 +242,6 @@ function Level:applyState(entities)
     for _, entity in ipairs(entities) do
         local newEntity = entity.class.fromState(self, entity)
 
-        print(newEntity)
-
         newEntity:postAdd()
 
         table.insert(self.entities, newEntity)

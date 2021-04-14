@@ -160,6 +160,11 @@ function Player:collide(other, nx, ny)
         end
 
         if other.class.name == "Box" and ny == 0 then
+            if self.vx > self.maxSpeed*.5 then
+                self.vx = self.maxSpeed*.5
+            elseif self.vx < -self.maxSpeed*.5 then
+                self.vx = -self.maxSpeed*.5
+            end
             other.vx = self.vx
             return true
         end
