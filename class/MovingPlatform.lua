@@ -18,6 +18,17 @@ combineArrays(MovingPlatform.serializeTable, {
 
 MovingPlatform.doesntCollideWith = {"Sand", "Player"}
 
+function MovingPlatform:filter(other)
+    -- hack to stop falling through platforms that go up while jumping
+    if other.class and other.class.name == "Player" then
+        if other.onTopOf ~= self then
+            other.onTopOf = self
+        end
+    end
+
+    return Entity.filter(self, other)
+end
+
 MovingPlatform.moveTimes = {
     -- forth, wait, back, wait
     2, 1, 2, 1
