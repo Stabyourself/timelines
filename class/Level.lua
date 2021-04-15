@@ -241,7 +241,6 @@ function Level:makeState()
     }
 
     for _, entity in ipairs(self.entities) do
-        print(entity)
         if not entity.meta and not entity.noState then -- meta items are stored differently
             table.insert(state.entities, entity:toState())
         end

@@ -41,10 +41,6 @@ function love.load()
 end
 
 function love.update(dt)
-
-    if dt > 0 then
-        print("========= FRAME START ========")
-    end
     timer.update(dt)
     updateGroup(flowControllers, dt)
     controls:update()

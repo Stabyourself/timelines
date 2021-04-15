@@ -3,6 +3,14 @@ local tiny = require("lib.tiny")
 local physics = tiny.processingSystem()
 physics.filter = tiny.requireAll("x", "y", "vx", "vy", "w", "h")
 
+function onTopFilter(e, other)
+    if e.onTopOf == other then
+        return false
+    else
+        return e:filter(other)
+    end
+end
+
 function physics:process(e, dt)
     if e.worldRemove then
         e:removeFromWorld()
@@ -22,7 +30,7 @@ function physics:process(e, dt)
         local goalY
 
         if e.onTopOf and e.onTopOf.movedByX then
-            self:doMovement(e, e.x + e.onTopOf.movedByX, e.y + e.onTopOf.movedByY)
+            self:doMovement(e, e.x + e.onTopOf.movedByX, e.y + e.onTopOf.movedByY, onTopFilter)
 
             e.onTopOf = nil
         end
@@ -56,8 +64,8 @@ function physics:process(e, dt)
     end
 end
 
-function physics:doMovement(e, goalX, goalY)
-    local nextX, nextY, cols = e.level.world:move(e, goalX, goalY, e.filter)
+function physics:doMovement(e, goalX, goalY, filter)
+    local nextX, nextY, cols = e.level.world:move(e, goalX, goalY, filter or e.filter)
 
     for _, col in ipairs(cols) do
         local resetSpeed = true
