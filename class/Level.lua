@@ -6,13 +6,13 @@ local Level = class("Level")
 local bump = require "lib.bump"
 local sti = require "lib.sti"
 local camera = require "lib.camera"
-local FlowController3 = require "lib.FlowController3"
 
 local Player = require "class.Player"
 local Key = require "class.Key"
 local Door = require "class.Door"
 local Shrine = require "class.Shrine"
 local ArrowShooter = require "class.ArrowShooter"
+local SandUpgrade = require "class.SandUpgrade"
 
 local tiny = require "lib.tiny"
 
@@ -102,6 +102,12 @@ function Level:initialize(gamestate, path)
 
 
             self:addEntity(movingPlatform)
+        end
+
+        if type == "sand-upgrade" then
+            local sandUpgrade = SandUpgrade:new(self, object.x+1, object.y-13)
+
+            self:addEntity(sandUpgrade)
         end
     end
 

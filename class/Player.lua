@@ -12,7 +12,7 @@ local Player = class("Player", Entity)
 Player.doesntCollideWith = {"Sand"}
 
 function Player:filter(other)
-    if other.class and other.class.name == "Key" then
+    if other.class and (other.class.name == "Key" or other.class.name == "SandUpgrade") then
         return "cross"
     end
 
@@ -167,6 +167,12 @@ function Player:collide(other, nx, ny)
             end
             other.vx = self.vx
             return true
+        end
+
+        if other.class.name == "SandUpgrade" then
+            other:queueRemove()
+            game.metaState.sand = 1
+            self.sand = 1
         end
 
     else -- world tile
