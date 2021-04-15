@@ -451,7 +451,7 @@
   </data>
  </layer>
  <objectgroup color="#00aa00" id="7" name="markers">
-  <object id="21" gid="1" x="232" y="400" width="16" height="16"/>
+  <object id="21" gid="1" x="368" y="144" width="16" height="16"/>
   <object id="22" gid="2" x="1600" y="608" width="16" height="16">
    <properties>
     <property name="meta" type="bool" value="true"/>
@@ -518,10 +518,10 @@
     <property name="meta" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="84" gid="7" x="352" y="320" width="32" height="16">
+  <object id="84" gid="7" x="352" y="368" width="32" height="16">
    <properties>
     <property name="differenceX" type="float" value="0"/>
-    <property name="differenceY" type="float" value="64"/>
+    <property name="differenceY" type="float" value="-64"/>
     <property name="travelTime" type="float" value="2"/>
     <property name="waitTime" type="float" value="0"/>
    </properties>

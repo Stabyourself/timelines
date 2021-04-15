@@ -776,8 +776,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 232,
-          y = 400,
+          x = 368,
+          y = 144,
           width = 16,
           height = 16,
           rotation = 0,
@@ -1121,7 +1121,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 352,
-          y = 320,
+          y = 368,
           width = 32,
           height = 16,
           rotation = 0,
@@ -1129,7 +1129,7 @@ return {
           visible = true,
           properties = {
             ["differenceX"] = 0,
-            ["differenceY"] = 64,
+            ["differenceY"] = -64,
             ["travelTime"] = 2,
             ["waitTime"] = 0
           }

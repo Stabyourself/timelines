@@ -29,6 +29,7 @@ function love.run()
 		-- fake DT for debug
 		if FRAMEDEBUG then
 			dt = frameDebug3.update(dt)
+			dt = 1/500.6
 		end
 
 		-- Call update and draw
