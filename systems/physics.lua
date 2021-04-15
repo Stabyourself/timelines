@@ -31,9 +31,9 @@ function physics:process(e, dt)
 
         if e.onTopOf and e.onTopOf.movedByX then
             self:doMovement(e, e.x + e.onTopOf.movedByX, e.y + e.onTopOf.movedByY, onTopFilter)
-
-            e.onTopOf = nil
         end
+
+        e.onTopOf = nil
 
         if e.goalX then
             goalX = e.goalX
@@ -67,22 +67,29 @@ end
 function physics:doMovement(e, goalX, goalY, filter)
     local nextX, nextY, cols = e.level.world:move(e, goalX, goalY, filter or e.filter)
 
+    local keepPosition = false
+
     for _, col in ipairs(cols) do
-        local resetSpeed = true
+        local keepSpeed = false
 
         if e.collide then
-            if e:collide(col.other, col.normal.x, col.normal.y) then
-                resetSpeed = false
-            end
+            keepSpeed, keepPosition = e:collide(col.other, col.normal.x, col.normal.y)
         end
 
-        if col.type ~= "cross" and resetSpeed then
+        if col.type ~= "cross" and not keepSpeed then
             physics.resolveCollision(e, col.other, col.normal.x, col.normal.y)
         end
     end
 
-    e.x = nextX
-    e.y = nextY
+    if keepPosition then
+        e.x = goalX
+        e.y = goalY
+
+        e.level.world:update(e, e.x, e.y)
+    else
+        e.x = nextX
+        e.y = nextY
+    end
 end
 
 function physics.resolveCollision(e, other, nx, ny) -- default collision resolvement only sets speed to 0

@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 96,
+  nextobjectid = 98,
   backgroundcolor = { 72, 72, 252 },
   properties = {},
   tilesets = {
@@ -1453,20 +1453,6 @@ return {
           properties = {}
         },
         {
-          id = 53,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 2864,
-          y = 768,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          gid = 2,
-          visible = true,
-          properties = {}
-        },
-        {
           id = 54,
           name = "",
           type = "",
@@ -1680,6 +1666,23 @@ return {
           properties = {
             ["differenceX"] = 96,
             ["waitTime"] = 0
+          }
+        },
+        {
+          id = 96,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 272,
+          y = 368,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 7,
+          visible = true,
+          properties = {
+            ["differenceX"] = 0,
+            ["differenceY"] = -64
           }
         }
       }

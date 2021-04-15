@@ -16,15 +16,10 @@ combineArrays(MovingPlatform.serializeTable, {
     "moveTimes",
 })
 
-MovingPlatform.doesntCollideWith = {"Sand", "Player"}
+MovingPlatform.doesntCollideWith = {"Sand"}
 
 function MovingPlatform:filter(other)
     -- hack to stop falling through platforms that go up while jumping
-    if other.class and other.class.name == "Player" then
-        if other.onTopOf ~= self then
-            other.onTopOf = self
-        end
-    end
 
     return Entity.filter(self, other)
 end
@@ -47,6 +42,16 @@ end
 
 function MovingPlatform:draw()
     boxDraws.regular:draw(self.x, self.y, self.w, self.h)
+end
+
+function MovingPlatform:collide(other, nx, ny)
+    if other.class then
+        if ny > 0 and other.onTopOf ~= self then
+            other.onTopOf = self
+        end
+    end
+
+    return true, true
 end
 
 return MovingPlatform
