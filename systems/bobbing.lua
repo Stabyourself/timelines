@@ -3,10 +3,11 @@ local tiny = require("lib.tiny")
 local pi2 = math.pi*2
 
 local bobbing = tiny.processingSystem()
-bobbing.filter = tiny.requireAll("startX", "startY", "endX", "endY", "moveTimer", "moveTimes")
+bobbing.filter = tiny.requireAll("bobStart", "bobDistance", "bobTime", "bobTimer")
 
 function bobbing:process(e, dt)
-    e.goalX = e.x + 10*dt
+    e.bobTimer = (e.bobTimer + dt) % e.bobTime
+    e.goalY = e.bobStart + math.sin(e.bobTimer / e.bobTime * pi2) * e.bobDistance
 end
 
 return bobbing
