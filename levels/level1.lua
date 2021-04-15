@@ -121,9 +121,16 @@ return {
           colors = {
             {
               color = { 255, 0, 0 },
-              name = "wall",
+              name = "ground",
               probability = 1,
               tile = 27,
+              properties = {}
+            },
+            {
+              color = { 0, 0, 255 },
+              name = "tree",
+              probability = 1,
+              tile = 108,
               properties = {}
             }
           },
@@ -311,6 +318,190 @@ return {
             {
               wangid = { 1, 0, 1, 0, 0, 0, 1, 0 },
               tileid = 47
+            },
+            {
+              wangid = { 0, 0, 0, 0, 2, 0, 0, 0 },
+              tileid = 81
+            },
+            {
+              wangid = { 0, 0, 2, 2, 2, 0, 0, 0 },
+              tileid = 82
+            },
+            {
+              wangid = { 0, 0, 2, 2, 2, 2, 2, 0 },
+              tileid = 83
+            },
+            {
+              wangid = { 0, 0, 0, 0, 2, 2, 2, 0 },
+              tileid = 84
+            },
+            {
+              wangid = { 2, 0, 2, 2, 2, 2, 2, 0 },
+              tileid = 85
+            },
+            {
+              wangid = { 2, 2, 2, 0, 2, 0, 2, 2 },
+              tileid = 86
+            },
+            {
+              wangid = { 2, 0, 2, 2, 2, 0, 2, 2 },
+              tileid = 87
+            },
+            {
+              wangid = { 2, 0, 2, 2, 2, 0, 2, 0 },
+              tileid = 88
+            },
+            {
+              wangid = { 2, 0, 2, 0, 2, 2, 2, 0 },
+              tileid = 89
+            },
+            {
+              wangid = { 2, 0, 0, 0, 2, 0, 0, 0 },
+              tileid = 90
+            },
+            {
+              wangid = { 2, 2, 2, 2, 2, 0, 0, 0 },
+              tileid = 91
+            },
+            {
+              wangid = { 2, 2, 2, 2, 2, 2, 2, 2 },
+              tileid = 92
+            },
+            {
+              wangid = { 2, 0, 0, 0, 2, 2, 2, 2 },
+              tileid = 93
+            },
+            {
+              wangid = { 2, 2, 2, 2, 2, 0, 2, 0 },
+              tileid = 94
+            },
+            {
+              wangid = { 2, 0, 2, 0, 2, 2, 2, 2 },
+              tileid = 95
+            },
+            {
+              wangid = { 2, 2, 2, 0, 2, 2, 2, 0 },
+              tileid = 96
+            },
+            {
+              wangid = { 2, 2, 2, 0, 2, 0, 2, 0 },
+              tileid = 97
+            },
+            {
+              wangid = { 2, 0, 2, 0, 2, 0, 2, 2 },
+              tileid = 98
+            },
+            {
+              wangid = { 2, 0, 0, 0, 0, 0, 0, 0 },
+              tileid = 99
+            },
+            {
+              wangid = { 2, 2, 2, 0, 0, 0, 0, 0 },
+              tileid = 100
+            },
+            {
+              wangid = { 2, 2, 2, 0, 0, 0, 2, 2 },
+              tileid = 101
+            },
+            {
+              wangid = { 2, 0, 0, 0, 0, 0, 2, 2 },
+              tileid = 102
+            },
+            {
+              wangid = { 2, 2, 2, 2, 2, 2, 2, 0 },
+              tileid = 104
+            },
+            {
+              wangid = { 2, 0, 2, 2, 2, 2, 2, 2 },
+              tileid = 105
+            },
+            {
+              wangid = { 0, 0, 2, 0, 2, 0, 0, 0 },
+              tileid = 106
+            },
+            {
+              wangid = { 0, 0, 0, 0, 2, 0, 2, 0 },
+              tileid = 107
+            },
+            {
+              wangid = { 0, 0, 2, 0, 0, 0, 0, 0 },
+              tileid = 109
+            },
+            {
+              wangid = { 0, 0, 2, 0, 0, 0, 2, 0 },
+              tileid = 110
+            },
+            {
+              wangid = { 0, 0, 0, 0, 0, 0, 2, 0 },
+              tileid = 111
+            },
+            {
+              wangid = { 2, 0, 2, 0, 2, 0, 2, 0 },
+              tileid = 112
+            },
+            {
+              wangid = { 2, 2, 2, 2, 2, 0, 2, 2 },
+              tileid = 113
+            },
+            {
+              wangid = { 2, 2, 2, 0, 2, 2, 2, 2 },
+              tileid = 114
+            },
+            {
+              wangid = { 2, 0, 2, 0, 0, 0, 0, 0 },
+              tileid = 115
+            },
+            {
+              wangid = { 2, 0, 0, 0, 0, 0, 2, 0 },
+              tileid = 116
+            },
+            {
+              wangid = { 0, 0, 2, 2, 2, 0, 2, 0 },
+              tileid = 117
+            },
+            {
+              wangid = { 0, 0, 2, 0, 2, 2, 2, 0 },
+              tileid = 118
+            },
+            {
+              wangid = { 0, 0, 2, 0, 2, 0, 2, 0 },
+              tileid = 119
+            },
+            {
+              wangid = { 2, 0, 2, 2, 2, 0, 0, 0 },
+              tileid = 120
+            },
+            {
+              wangid = { 2, 0, 0, 0, 2, 2, 2, 0 },
+              tileid = 121
+            },
+            {
+              wangid = { 2, 2, 2, 0, 2, 0, 0, 0 },
+              tileid = 122
+            },
+            {
+              wangid = { 2, 0, 0, 0, 2, 0, 2, 2 },
+              tileid = 123
+            },
+            {
+              wangid = { 2, 0, 2, 0, 2, 0, 0, 0 },
+              tileid = 124
+            },
+            {
+              wangid = { 2, 0, 0, 0, 2, 0, 2, 0 },
+              tileid = 125
+            },
+            {
+              wangid = { 2, 2, 2, 0, 0, 0, 2, 0 },
+              tileid = 126
+            },
+            {
+              wangid = { 2, 0, 2, 0, 0, 0, 2, 2 },
+              tileid = 127
+            },
+            {
+              wangid = { 2, 0, 2, 0, 0, 0, 2, 0 },
+              tileid = 128
             }
           }
         }
@@ -734,6 +925,288 @@ return {
           properties = {
             ["collidable"] = true
           }
+        },
+        {
+          id = 81,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 82,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 83,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 84,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 85,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 86,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 87,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 88,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 89,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 90,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 91,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 92,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 93,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 94,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 95,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 96,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 97,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 98,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 99,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 100,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 101,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 102,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 104,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 105,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 106,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 107,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 108,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 109,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 110,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 111,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 112,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 113,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 114,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 115,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 116,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 117,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 118,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 119,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 120,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 121,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 122,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 123,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 124,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 125,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 126,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 127,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 128,
+          properties = {
+            ["collidable"] = true
+          }
         }
       }
     }
@@ -972,6 +1445,20 @@ return {
           shape = "rectangle",
           x = 2880,
           y = 480,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 2,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 53,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2864,
+          y = 768,
           width = 16,
           height = 16,
           rotation = 0,
