@@ -91,7 +91,7 @@ function timetable:enter(from, booted, allowBack)
 
     if self.from == game and not booted then
         self.offY = -255
-        timer.tween(0.3, self, {offY = 0}, 'out-quad')
+        timer.tween(0.3, self, {offY = 0}, 'out-quad', function() self.offY = 0 end)
     end
 
     self.buttons[1].disabled = true
@@ -124,7 +124,7 @@ function timetable:update(dt)
 end
 
 function timetable:draw()
-    if self.from == game then
+    if self.offY ~= 0  and self.from == game then
         self.from:draw()
     end
 
