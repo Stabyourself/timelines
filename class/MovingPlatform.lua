@@ -46,7 +46,7 @@ end
 
 function MovingPlatform:collide(other, nx, ny)
     if other.class then
-        if ny > 0 and other.onTopOf ~= self then
+        if (other.y + other.h) < self.y and other.onTopOf ~= self then
             other.onTopOf = self
         end
     end
