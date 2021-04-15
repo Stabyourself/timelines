@@ -41,8 +41,8 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="8" name="tiles" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="81" columns="9">
-  <image source="../img/tiles.png" width="162" height="162"/>
+ <tileset firstgid="8" name="tiles" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="144" columns="9">
+  <image source="../img/tiles.png" width="162" height="288"/>
   <tile id="0">
    <properties>
     <property name="collidable" type="bool" value="true"/>

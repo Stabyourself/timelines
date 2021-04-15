@@ -101,7 +101,7 @@ return {
       columns = 9,
       image = "../img/tiles.png",
       imagewidth = 162,
-      imageheight = 162,
+      imageheight = 288,
       objectalignment = "unspecified",
       tileoffset = {
         x = 0,
@@ -315,7 +315,7 @@ return {
           }
         }
       },
-      tilecount = 81,
+      tilecount = 144,
       tiles = {
         {
           id = 0,
