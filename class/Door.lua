@@ -58,8 +58,9 @@ function Door:open()
     self:removeFromWorld()
 
     self.playLockAnimation = true
+    self.lockAnimation:gotoFrame(2)
 
-    timer.after(0.3, function()
+    timer.after(0.1, function()
         self.playDoorAnimation = true
     end)
 
