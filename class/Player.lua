@@ -212,6 +212,7 @@ function Player:grounded()
 end
 
 function Player:die()
+    soundManager3.play("die")
     if not self.dead then
         self.dead = true
         game:die()
