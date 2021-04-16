@@ -39,7 +39,7 @@ function timetable:init()
 
     self.buttons = {
         Button:new(self, 15, 200, nil, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
-        Button:new(self, WIDTH-83, 200, nil, 20, "Back", function() self:close() end),
+        Button:new(self, WIDTH-83, 200, nil, 20, "Back", function() self:backButton() end),
         Button:new(self, WIDTH-35, 200, 20, 20, settingsIcon, function()  end),
     }
 
@@ -92,11 +92,15 @@ function timetable:enter(from, booted, allowBack)
 
     if self.from == game and not booted then
         self.offY = -255
-        timer.tween(0.3, self, {offY = 0}, 'out-quad', function() self.offY = 0 end)
+        timer.tween(0.3, self, {offY = 0}, 'out-quad', function()
+             self.offY = 0
+             self.backButtonEnabled = allowBack
+             self.buttons[2].disabled = not self.backButtonEnabled
+        end)
     end
 
     self.buttons[1].disabled = true
-    self.buttons[2].disabled = not allowBack
+    self.buttons[2].disabled = true
     self.dragging = false
 
     self.nodeTable = self:buildNodeTable()
@@ -144,6 +148,10 @@ function timetable:update(dt)
     if controls:pressed("nodeselection") then
         self:nodeWindowPress(self.camera.x, self.camera.y, true)
     end
+
+    if controls:pressed("backbutton") then
+        self:backButton()
+    end
 end
 
 function timetable:draw()
@@ -176,7 +184,7 @@ function timetable:draw()
         local r, g, b = textBackground:rgb()
         love.graphics.setColor(textForeground:rgb())
 
-        printfShadow(r, g, b, "A game by Maurice and Hans\n\nSelect the node with the mouse to begin", 0, 51, WIDTH, "center")
+        printfShadow(r, g, b, "A game by Maurice and Hans\n\nSelect the node with the mouse or controller to begin", 0, 51, WIDTH, "center")
 
         love.graphics.setColor(1, 1, 1)
     end
@@ -217,7 +225,6 @@ function timetable:getMousePosition()
 end
 
 function timetable:mousepressed(x, y, button)
-    self.crosshairEnabled = false
     x = x/SCALE
     y = y/SCALE
 
@@ -270,6 +277,7 @@ function timetable:mousereleased(x, y, button)
 end
 
 function timetable:mousemoved(_, _, x, y)
+    self.crosshairEnabled = false
     x = x/SCALE
     y = y/SCALE
 
@@ -297,6 +305,13 @@ end
 
 function timetable:wheelmoved(_, y)
     self:zoomCamera(1.1^y)
+end
+
+function timetable:backButton()
+    if self.backButtonEnabled then
+        self.backButtonEnabled = false
+        self:close()
+    end
 end
 
 function timetable:close()

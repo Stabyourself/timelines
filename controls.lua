@@ -15,7 +15,9 @@ return {
 
         zoomin = {'axis:righty-'},
         zoomout = {'axis:righty+'},
+
         nodeselection = {'button:a'},
+        backbutton = {'button:b', 'button:x'},
 
         debug1 = {'key:k'},
     },
