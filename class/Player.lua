@@ -268,6 +268,7 @@ function Player:draw()
 end
 
 function Player:startSpawnAnimation()
+    soundManager3.play("spawn")
     self.gravity = 0
     self.y = self.y - 17
     self.onGround = false
@@ -379,6 +380,7 @@ function Player:createParticles(physics)
 end
 
 function Player:startGlowing()
+    soundManager3.play("finishSpawn")
     self.glowing = 1
 end
 

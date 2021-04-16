@@ -34,6 +34,8 @@ soundManager3.loadSounds({
     {name="doorOpen", path="sound/door_open.wav", count=2},
     {name="die", path="sound/die.wav", count=1},
     {name="playerLand", path="sound/player_land.wav", count=2},
+    {name="spawn", path="sound/spawn.wav", count=1},
+    {name="finishSpawn", path="sound/finish_spawn.wav", count=1},
 })
 
 function love.load()
