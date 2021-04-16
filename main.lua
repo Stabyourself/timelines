@@ -33,6 +33,7 @@ soundManager3.loadSounds({
     {name="glass", path="sound/glass.wav", count=10},
     {name="doorOpen", path="sound/door_open.wav", count=2},
     {name="die", path="sound/die.wav", count=1},
+    {name="playerLand", path="sound/player_land.wav", count=2},
 })
 
 function love.load()

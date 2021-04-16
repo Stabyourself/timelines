@@ -209,6 +209,7 @@ end
 
 function Player:grounded()
     self.jumping = false
+    soundManager3.play("playerLand")
 end
 
 function Player:die()
