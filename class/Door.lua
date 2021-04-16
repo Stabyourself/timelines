@@ -54,6 +54,7 @@ function Door:draw()
 end
 
 function Door:open()
+    soundManager3.play("doorOpen")
     self:removeFromWorld()
 
     self.playLockAnimation = true

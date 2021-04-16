@@ -39,7 +39,10 @@ function playerJumping:process(e, dt)
                 e.vy = -e.jumpSpeed
 
                 if not onGround then
+                    soundManager3.play("doubleJump")
                     e.airJumpsLeft = e.airJumpsLeft - 1
+                else
+                    soundManager3.play("jump")
                 end
             end
         end

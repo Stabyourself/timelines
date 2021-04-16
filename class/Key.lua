@@ -14,7 +14,7 @@ Key.metaDrawable.y = 4
 Key.metaDrawable.ox = 7
 Key.metaDrawable.oy = 4
 
-Key.doesntCollideWith = {"Sand", "Arrow", "Door"}
+Key.doesntCollideWith = {"Sand", "Arrow", "Door", "PlayerParticle"}
 
 function Key:filter(other)
     if other.class and other.class.name == "Player" then

@@ -115,6 +115,10 @@ function PlayerParticle:collide(other, nx, ny)
             self.gravity = 0
             self.animating = false
         end
+
+        if self.vy < -5 then
+            soundManager3.play("glass", math.min(1, -self.vy/70))
+        end
     end
 
     self.vx = self.vx * self.dampening

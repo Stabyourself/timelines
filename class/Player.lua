@@ -142,6 +142,8 @@ function Player:collide(other, nx, ny)
     if other.isInstanceOf then
         if other.class.name == "Key" then
             other:queueRemove()
+            soundManager3.play("keyCollect")
+
             if other.meta then
                 game.metaState.keyCount = game.metaState.keyCount + 1
             else
@@ -280,6 +282,7 @@ function Player:startDeathAnimation()
 end
 
 function Player:explodeAnimation()
+    soundManager3.play("explode")
     self.visible = false
     self:removeFromWorld()
 

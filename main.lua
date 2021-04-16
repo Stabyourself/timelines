@@ -22,7 +22,17 @@ timer = require "lib.timer"
 flowControllers = {}
 -------------------------------------------------------
 
+-- sounds
+soundManager3 = require "lib.soundManager3"
 
+soundManager3.loadSounds({
+    {name="jump", path="sound/jump.wav", count=2},
+    {name="doubleJump", path="sound/double_jump.wav", count=2},
+    {name="keyCollect", path="sound/key_collect.wav", count=2},
+    {name="explode", path="sound/explode.wav", count=1},
+    {name="glass", path="sound/glass.wav", count=10},
+    {name="doorOpen", path="sound/door_open.wav", count=2},
+})
 
 function love.load()
     imageFont = love.graphics.newImageFont("img/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?\"%()/+-=", 1)
