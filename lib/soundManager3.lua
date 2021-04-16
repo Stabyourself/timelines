@@ -1,10 +1,10 @@
 local SoundType = class("Sound")
 
 function SoundType:initialize(path, count)
-    self.instances = {}
+    self.instances = {love.audio.newSource(path, "static")}
 
-    for i = 1, count do
-        table.insert(self.instances, love.audio.newSource(path, "static"))
+    for i = 2, count do
+        table.insert(self.instances, self.instances[1]:clone())
     end
 
     self.pos = 1
