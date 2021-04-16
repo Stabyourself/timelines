@@ -46,6 +46,7 @@ function timetable:init()
     self.camera = camera()
     self.camera:lookAt(9, 9)
 
+    self.crosshairEnabled = false
 
 
     if TIMETABLEDEBUG then
@@ -121,6 +122,28 @@ end
 function timetable:update(dt)
     nodeAnimation:update(dt)
     nodeAnimationActive:update(dt)
+
+    -- controller controls
+    local x, y = controls:get("movement")
+
+    if x ~= 0 or y ~= 0 then
+        self.crosshairEnabled = true
+
+        x = x*dt*300
+        y = y*dt*300
+
+        self:moveCamera(x, y)
+    end
+
+    local zoom = controls:get("zoomin") - controls:get("zoomout")
+
+    zoom = zoom * dt * 20
+
+    self:zoomCamera(1.1^zoom)
+
+    if controls:pressed("nodeselection") then
+        self:nodeWindowPress(self.camera.x, self.camera.y, true)
+    end
 end
 
 function timetable:draw()
@@ -158,6 +181,16 @@ function timetable:draw()
         love.graphics.setColor(1, 1, 1)
     end
 
+    if self.crosshairEnabled then
+        love.graphics.setColor(1, 1, 1, 0.5)
+        love.graphics.rectangle("fill", 0, HEIGHT/2-1, WIDTH/2-9, 2)
+        love.graphics.rectangle("fill", WIDTH/2+9, HEIGHT/2-1, WIDTH/2-9, 2)
+
+        love.graphics.rectangle("fill", WIDTH/2-1, 0, 2, HEIGHT/2-9)
+        love.graphics.rectangle("fill", WIDTH/2-1, HEIGHT/2+9, 2, HEIGHT/2-9)
+        love.graphics.setColor(1, 1, 1)
+    end
+
     love.graphics.draw(timetableOverlay)
 
     love.graphics.draw(titleImg, (WIDTH-titleImg:getWidth())*.5, 2)
@@ -170,15 +203,21 @@ function timetable:draw()
 end
 
 function timetable:getMousePosition()
-    local x, y = love.mouse.getPosition()
+    if self.crosshairEnabled then -- center
+        return WIDTH/2, HEIGHT/2
 
-    x = x/SCALE
-    y = y/SCALE-self.offY
+    else -- actual mouse
+        local x, y = love.mouse.getPosition()
 
-    return x, y
+        x = x/SCALE
+        y = y/SCALE-self.offY
+
+        return x, y
+    end
 end
 
 function timetable:mousepressed(x, y, button)
+    self.crosshairEnabled = false
     x = x/SCALE
     y = y/SCALE
 
@@ -192,16 +231,25 @@ function timetable:mousepressed(x, y, button)
 
     x, y = self.camera:worldCoords(x, y)
 
+    self:nodeWindowPress(x, y)
+
+    self.dragging = true
+end
+
+function timetable:nodeWindowPress(x, y, launchIfSelected)
     for _, nodeLocation in ipairs(self.nodeTable) do
         if nodeLocation.clickable then
             if self:nodeCollision(nodeLocation, x, y) then
+                if self.selectedNode == nodeLocation.node and launchIfSelected then
+                    game:startOnNode(self.selectedNode)
+                    self:close()
+                end
+
                 self.selectedNode = nodeLocation.node
                 self.buttons[1].disabled = false
             end
         end
     end
-
-    self.dragging = true
 end
 
 function timetable:nodeCollision(nodeLocation, x, y)
@@ -226,21 +274,29 @@ function timetable:mousemoved(_, _, x, y)
     y = y/SCALE
 
     if self.dragging then
-        self.camera:move(-x/self.camera.scale, -y/self.camera.scale)
-
-        -- don't let the player move the timetable offscreen (what a dummy)
-        self.camera.x = math.max(self.camera.x, self.panWindow[1])
-        self.camera.y = math.max(self.camera.y, self.panWindow[2])
-
-        self.camera.x = math.min(self.camera.x, self.panWindow[3])
-        self.camera.y = math.min(self.camera.y, self.panWindow[4])
+        self:moveCamera(-x, -y)
     end
 end
 
-function timetable:wheelmoved(_, y)
-    self.camera:zoom(1.1^y)
+function timetable:moveCamera(x, y)
+    self.camera:move(x/self.camera.scale, y/self.camera.scale)
+
+    -- don't let the player move the timetable offscreen (what a dummy)
+    self.camera.x = math.max(self.camera.x, self.panWindow[1])
+    self.camera.y = math.max(self.camera.y, self.panWindow[2])
+
+    self.camera.x = math.min(self.camera.x, self.panWindow[3])
+    self.camera.y = math.min(self.camera.y, self.panWindow[4])
+end
+
+function timetable:zoomCamera(zoom)
+    self.camera:zoom(zoom)
 
     self.camera.scale = math.min(1, math.max(1/SCALE, self.camera.scale))
+end
+
+function timetable:wheelmoved(_, y)
+    self:zoomCamera(1.1^y)
 end
 
 function timetable:close()

@@ -6,17 +6,22 @@ return {
         down = {'key:s', 'axis:lefty+', 'button:dpdown'},
 
         jump = {"key:space", 'button:a'},
-        use = {"key:e"},
+        use = {"key:e", "button:x", "button:b"},
 
         camleft = {'key:left', 'axis:rightx-'},
         camright = {'key:right', 'axis:rightx+'},
         camup = {'key:up', 'axis:righty-'},
         camdown = {'key:down', 'axis:righty+'},
 
+        zoomin = {'axis:righty-'},
+        zoomout = {'axis:righty+'},
+        nodeselection = {'button:a'},
+
         debug1 = {'key:k'},
     },
     pairs = {
-        camera = {'camleft', 'camright', 'camup', 'camdown'}
+        movement = {'left', 'right', 'up', 'down'},
+        camera = {'camleft', 'camright', 'camup', 'camdown'},
     },
     joystick = love.joystick.getJoysticks()[1]
 }

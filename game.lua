@@ -11,7 +11,7 @@ function game:init()
     self.metaState = {
         state = {},
         keyCount = 0,
-        sand = 0.5,
+        sand = 0.25,
     }
     self.rootNode = Node:new(nil, 0, 1)
 
@@ -74,10 +74,6 @@ function game:update(dt)
         if controls:pressed("use") and shrine then
             self:useShrine(shrine)
         end
-    end
-
-    if controls:pressed("debug1") then
-
     end
 end
 
