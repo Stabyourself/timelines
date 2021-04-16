@@ -151,7 +151,7 @@ function Player:collide(other, nx, ny)
 
         if other.class.name == "Door" then
             if self:openDoor(other, true) then
-                other:queueRemove()
+                other:open()
             end
         end
 
