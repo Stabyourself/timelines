@@ -225,19 +225,21 @@ function Player:die()
 end
 
 function Player:openDoor(door, forReal)
-    if game.metaState.keyCount > 0 and door.meta then -- don't open regular doors with meta keys, softlock!
-        if forReal then
-            game.metaState.keyCount = game.metaState.keyCount - 1
+    if not door.triggered then
+        if game.metaState.keyCount > 0 and door.meta then -- don't open regular doors with meta keys, softlock!
+            if forReal then
+                game.metaState.keyCount = game.metaState.keyCount - 1
+            end
+
+            return true
+
+        elseif self.keyCount > 0 then
+            if forReal then
+                self.keyCount = self.keyCount - 1
+            end
+
+            return true
         end
-
-        return true
-
-    elseif self.keyCount > 0 then
-        if forReal then
-            self.keyCount = self.keyCount - 1
-        end
-
-        return true
     end
 end
 
