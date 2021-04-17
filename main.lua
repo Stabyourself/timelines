@@ -40,6 +40,7 @@ soundManager3.loadSounds({
     {name="sandUpgrade", path="sound/sand_upgrade.wav", count=1},
     {name="bossHit", path="sound/boss_hit.wav", count=1},
     {name="bossNotHit", path="sound/boss_not_hit.wav", count=2},
+    {name="shrineActivate", path="sound/shrine_activate.wav", count=2},
 })
 
 function love.load()

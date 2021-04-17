@@ -148,6 +148,7 @@ end
 function game:useShrine(shrine)
     if not shrine.used then
         shrine:use()
+        soundManager3.play("shrineActivate")
 
         -- make new state
         self.activeNode.state = self.level:makeState()
