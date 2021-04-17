@@ -60,6 +60,10 @@ function game:resume()
 
         -- flow:addWait(0.1)
         -- start
+        flow:addCall(function()
+            music:seek(0.99)
+            music:play()
+        end)
         flow:addCall(function() self.level.player:enableControls() end)
 
         self.spawnAnimation = false
