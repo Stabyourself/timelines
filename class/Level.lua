@@ -113,7 +113,7 @@ function Level:initialize(gamestate, path)
         end
 
         if type == "sand-upgrade" then
-            local sandUpgrade = SandUpgrade:new(self, object.x+1, object.y-13)
+            local sandUpgrade = SandUpgrade:new(self, object.x, object.y-16)
             sandUpgrade.id = object.id
 
             self:addEntity(sandUpgrade)
