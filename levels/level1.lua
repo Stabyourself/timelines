@@ -1998,20 +1998,6 @@ return {
           gid = 10,
           visible = true,
           properties = {}
-        },
-        {
-          id = 127,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 400,
-          y = 400,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          gid = 10,
-          visible = true,
-          properties = {}
         }
       }
     }

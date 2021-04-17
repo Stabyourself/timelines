@@ -119,6 +119,8 @@ end
 
 function Boss:hurt()
     if not self.stylish then
+        soundManager3.play("bossHit")
+
         game:hurtBoss()
         self.stylish = true
 
@@ -129,6 +131,8 @@ function Boss:hurt()
             self.dead = true
             self.vx = 0
         end
+    else
+        soundManager3.play("bossNotHit")
     end
 end
 
