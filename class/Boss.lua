@@ -27,6 +27,9 @@ local hitAnimation = anim8.newAnimation(grid("8-9", 1), 0.2, function(anim)
     anim:pauseAtEnd()
 end)
 
+local hurtAnimation = anim8.newAnimation(grid(10, 1), math.huge)
+local deadAnimation = anim8.newAnimation(grid(11, 1), math.huge)
+
 local speed = 80
 local jumpForce = 220
 local jumpTime = 2.5
@@ -38,11 +41,13 @@ function Boss:initialize(level, x, y)
 
     self.state = "chasing"
 
-    self.jumpTimer = 0
+    self.jumpTimer = 2
     self.animation = idleAnimation
 
     self.stylish = false
     self.dir = -1
+    self.hurting = false
+    self.dead = false
 end
 
 function Boss:update(dt)
@@ -65,37 +70,48 @@ function Boss:update(dt)
     end
 
     -- movement
-    if self.state == "chasing" then
-        if self.x > self.level.player.x+chaseDistance then
-            self.vx = -speed
-            self.dir = -1
-        elseif self.x < self.level.player.x-12-chaseDistance then
-            self.vx = speed
-            self.dir = 1
-        else
-            self.animation = idleAnimation
-            self.vx = 0
+    if not self.dead then
+        if self.state == "chasing" then
+            if self.x > self.level.player.x+chaseDistance then
+                self.vx = -speed
+                self.dir = -1
+            elseif self.x < self.level.player.x-12-chaseDistance then
+                self.vx = speed
+                self.dir = 1
+            else
+                self.animation = idleAnimation
+                self.vx = 0
+            end
+        end
+
+        -- jumping
+        if self.state == "chasing" then
+            self.jumpTimer = self.jumpTimer + dt
+
+            if self.jumpTimer >= jumpTime then
+                self.jumpTimer = self.jumpTimer - jumpTime
+
+                self:jump()
+            end
+        end
+
+        -- animation
+        if self.jumping then
+            if self.vy < 0 then
+                self.animation = chargeAnimation
+            else
+                self.animation = hitAnimation
+            end
         end
     end
 
-    -- jumping
-    if self.state == "chasing" then
-        self.jumpTimer = self.jumpTimer + dt
 
-        if self.jumpTimer >= jumpTime then
-            self.jumpTimer = self.jumpTimer - jumpTime
-
-            self:jump()
-        end
+    if self.hurting then
+        self.animation = hurtAnimation
     end
 
-    -- animation
-    if self.jumping then
-        if self.vy < 0 then
-            self.animation = chargeAnimation
-        else
-            self.animation = hitAnimation
-        end
+    if self.dead then
+        self.animation = deadAnimation
     end
 
     self.animation:update(dt)
@@ -105,6 +121,14 @@ function Boss:hurt()
     if not self.stylish then
         game:hurtBoss()
         self.stylish = true
+
+        if game.metaState.bossHp > 1 then
+            self.hurting = true
+            timer.after(0.3, function() self.hurting = false end)
+        else
+            self.dead = true
+            self.vx = 0
+        end
     end
 end
 
@@ -135,7 +159,7 @@ function Boss:draw()
 end
 
 function Boss:collide(other, nx, ny)
-    if other.class and other.class.name == "Player" then
+    if not self.dead and other.class and other.class.name == "Player" then
         if ny < 1 then
             other:die()
         end

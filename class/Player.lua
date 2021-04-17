@@ -183,7 +183,7 @@ function Player:collide(other, nx, ny)
             other:push()
         end
 
-        if other.class.name == "Boss" then
+        if other.class.name == "Boss" and not other.dead then
             if ny < 0 then
                 other:hurt()
                 self.vy = -self.vy

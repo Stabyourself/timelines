@@ -13,7 +13,7 @@ function game:init()
         state = {},
         keyCount = 0,
         sand = 0.25,
-        bossHp = 3,
+        bossHp = 1, -- 3
     }
     self.rootNode = Node:new(nil, 0, 1)
 
