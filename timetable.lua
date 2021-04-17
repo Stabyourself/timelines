@@ -315,6 +315,7 @@ function timetable:backButton()
 end
 
 function timetable:close()
+    self.backButtonEnabled = false
     local function backToGame()
         gamestate.pop()
     end
