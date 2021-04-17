@@ -6,7 +6,9 @@ local Level = require "class.Level"
 
 local keyUi = love.graphics.newImage("img/key_ui.png")
 local keyUiMeta = love.graphics.newImage("img/key_ui_meta.png")
+
 local bossHpImg = love.graphics.newImage("img/boss_hp.png")
+local bossHpDot = love.graphics.newImage("img/boss_hp_dot.png")
 
 function game:init()
     self.metaState = {
@@ -105,8 +107,9 @@ function game:draw()
         love.graphics.translate(150, 20)
         printShadow(0.1, 0.1, 0.1, "BOSS", 0, 0)
 
+        love.graphics.draw(bossHpImg, 30, -3)
         for i = 1, self.metaState.bossHp do
-            love.graphics.draw(bossHpImg, (i-1)*24+30, 0)
+            love.graphics.draw(bossHpDot, (i-1)*12+39, 1)
         end
 
         love.graphics.pop()

@@ -11,12 +11,12 @@ return {
         camleft = {'key:a', 'axis:rightx-'},
         camright = {'key:d', 'axis:rightx+'},
         camup = {'key:w', 'axis:righty-'},
-        camdown = {'key:down', 'axis:righty+'},
+        camdown = {'key:s', 'axis:righty+'},
 
         zoomin = {'axis:righty-'},
         zoomout = {'axis:righty+'},
 
-        nodeselection = {"key:space", 'button:a'},
+        nodeselection = {"key:y", "key:z", "key:w", 'button:a'},
         backbutton = {"key:x", 'button:b', 'button:x'},
 
         debug1 = {'key:k'},
