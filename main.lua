@@ -17,6 +17,7 @@ local frameDebug3 = require "lib.frameDebug3"
 gamestate = require "lib.gamestate"
 require "game"
 require "timetable"
+require "endScreen"
 controls = baton.new(require "controls")
 timer = require "lib.timer"
 flowControllers = {}

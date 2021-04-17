@@ -197,6 +197,8 @@ end
 function game:hurtBoss()
     self.metaState.bossHp = self.metaState.bossHp - 1
     if self.metaState.bossHp == 0 then
-        print("WIN!")
+        timer.after(1.5, function()
+            gamestate.push(endScreen)
+        end)
     end
 end
