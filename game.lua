@@ -138,6 +138,7 @@ function game:die()
     local playerEntities
 
     -- shard creation
+    music:stop()
     flow:addCall(function() self.level.player:startDeathAnimation() end)
 
     flow:addWait(1)
@@ -168,6 +169,7 @@ function game:useShrine(shrine)
 end
 
 function game:startOnNode(parentNode)
+    music:stop()
     if self.activeNode then
         self.activeNode.ended = true
     end
