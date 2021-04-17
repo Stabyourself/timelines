@@ -13,6 +13,7 @@ local Door = require "class.Door"
 local Shrine = require "class.Shrine"
 local ArrowShooter = require "class.ArrowShooter"
 local SandUpgrade = require "class.SandUpgrade"
+local Trigger = require "class.Trigger"
 
 local tiny = require "lib.tiny"
 
@@ -46,6 +47,7 @@ function Level:initialize(gamestate, path)
         if type == "key" then
             local key = Key:new(self, object.x+1, object.y-13)
             key.meta = object.properties.meta
+            key.id = object.id
 
             self:addEntity(key)
         end
@@ -53,6 +55,8 @@ function Level:initialize(gamestate, path)
         if type == "door" then
             local door = Door:new(self, object.x+4, object.y-32)
             door.meta = object.properties.meta
+            door.id = object.id
+            door.triggered = object.properties.triggered
 
             self:addEntity(door)
         end
@@ -60,6 +64,7 @@ function Level:initialize(gamestate, path)
         if type == "shrine" then
             local shrine = Shrine:new(self, object.x, object.y-63)
             shrine.used = object.properties.used
+            shrine.id = object.id
 
             self:addEntity(shrine)
         end
@@ -69,6 +74,7 @@ function Level:initialize(gamestate, path)
 
             arrowShooter.dir = object.properties.dir or "right"
             arrowShooter.entitySpawnTime = object.properties.spawnTime or 2
+            arrowShooter.id = object.id
 
             self:addEntity(arrowShooter)
         end
@@ -81,6 +87,7 @@ function Level:initialize(gamestate, path)
             box.w = w
             box.h = h
             box.meta = object.properties.meta
+            box.id = object.id
 
             self:addEntity(box)
         end
@@ -99,6 +106,7 @@ function Level:initialize(gamestate, path)
 
             movingPlatform.w = object.width
             movingPlatform.h = object.height
+            movingPlatform.id = object.id
 
 
             self:addEntity(movingPlatform)
@@ -106,8 +114,17 @@ function Level:initialize(gamestate, path)
 
         if type == "sand-upgrade" then
             local sandUpgrade = SandUpgrade:new(self, object.x+1, object.y-13)
+            sandUpgrade.id = object.id
 
             self:addEntity(sandUpgrade)
+        end
+
+        if type == "trigger" then
+            local trigger = Trigger:new(self, object.x+4, object.y-10)
+            trigger.target = object.properties.target.id
+            trigger.id = object.id
+
+            self:addEntity(trigger)
         end
     end
 
@@ -123,6 +140,26 @@ function Level:initialize(gamestate, path)
 
     -- background
     self.background = Background:new({{},{},{},{},{},{},{},{},{},{}}, "img/background/")
+
+    -- self:updateSpritebatches()
+end
+
+function Level:updateSpritebatches()
+    local sx, sy = self.map:convertPixelToTile(self.camera:worldCoords(0, 0))
+    sx, sy = math.floor(sx)+1, math.floor(sy)+1
+
+    sx = math.max(1, sx)
+    sy = math.max(1, sy)
+
+    if not self.cullX or sx ~= self.cullX or sy ~= self.cullY then
+        local ex = math.ceil(sx + WIDTH/16)
+        local ey = math.ceil(sy + HEIGHT/16)
+
+        self.map:set_batches(self.map.layers[1], nil, sx, sy, ex, ey)
+
+        self.cullX = sx
+        self.cullY = sy
+    end
 end
 
 function Level:update(dt)
@@ -156,6 +193,7 @@ function Level:update(dt)
         self.camera.x = self.camera.x + x*dt*2000
         self.camera.y = self.camera.y + y*dt*2000
     end
+    -- self:updateSpritebatches()
 
     self.background:moveTo(self.camera.x)
     self.background:moveY(self.camera.y-oldY)
@@ -239,6 +277,14 @@ function Level:getEntities(entityClass)
     end
 
     return t
+end
+
+function Level:getEntityById(id)
+    for _, entity in ipairs(self.entities) do
+        if entity.id == id then
+            return entity
+        end
+    end
 end
 
 function Level:makeState()

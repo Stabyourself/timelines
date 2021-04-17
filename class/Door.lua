@@ -8,10 +8,12 @@ local doorGrid = anim8.newGrid(8, 32, doorImg:getWidth(), doorImg:getHeight())
 
 local lockImg = love.graphics.newImage("img/door_lock.png")
 local lockImgMeta = love.graphics.newImage("img/door_lock_meta.png")
+local lockImgTriggered = love.graphics.newImage("img/sand_lock.png")
 local lockGrid = anim8.newGrid(32, 32, lockImg:getWidth(), lockImg:getHeight())
 
 combineArrays(Door.serializeTable, {
     "meta",
+    "triggered",
 })
 
 function Door:initialize(level, x, y)
@@ -22,8 +24,6 @@ function Door:initialize(level, x, y)
 
     self.lockAnimation = anim8.newAnimation(lockGrid("1-8", 1), 0.1, function() self.lockAnimation:pauseAtEnd() end)
     self.playLockAnimation = false
-
-
 end
 
 function Door:update(dt)
@@ -43,6 +43,10 @@ function Door:postAdd()
     if self.meta then
         self.img = doorImgMeta
         self.lockImg = lockImgMeta
+    end
+
+    if self.triggered then
+        self.lockImg = lockImgTriggered
     end
 
     Entity.postAdd(self)

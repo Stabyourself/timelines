@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="1020" height="100" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#4848fc" nextlayerid="9" nextobjectid="119">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="1020" height="100" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#4848fc" nextlayerid="9" nextobjectid="121">
  <editorsettings>
   <export target="level1.lua" format="lua"/>
  </editorsettings>
@@ -810,7 +810,7 @@
   </object>
   <object id="74" gid="6" x="736" y="400" width="16" height="32">
    <properties>
-    <property name="meta" type="bool" value="true"/>
+    <property name="meta" type="bool" value="false"/>
    </properties>
   </object>
   <object id="76" gid="5" x="4512" y="688" width="16" height="16">
@@ -914,6 +914,16 @@
   <object id="118" gid="3" x="7904" y="624" width="16" height="16">
    <properties>
     <property name="meta" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="119" gid="9" x="272" y="384" width="16" height="16">
+   <properties>
+    <property name="target" type="object" value="120"/>
+   </properties>
+  </object>
+  <object id="120" gid="3" x="320" y="368" width="16" height="16">
+   <properties>
+    <property name="triggered" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

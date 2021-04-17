@@ -10,6 +10,7 @@ Entity.serializeTable = {
     "active",
     "physics",
     "onGround",
+    "id"
 }
 
 function Entity:filter(other)

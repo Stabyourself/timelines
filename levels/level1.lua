@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 119,
+  nextobjectid = 121,
   backgroundcolor = { 72, 72, 252 },
   properties = {},
   tilesets = {
@@ -1558,7 +1558,7 @@ return {
           gid = 6,
           visible = true,
           properties = {
-            ["meta"] = true
+            ["meta"] = false
           }
         },
         {
@@ -1949,6 +1949,38 @@ return {
           visible = true,
           properties = {
             ["meta"] = true
+          }
+        },
+        {
+          id = 119,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 272,
+          y = 384,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 9,
+          visible = true,
+          properties = {
+            ["target"] = { id = 120 }
+          }
+        },
+        {
+          id = 120,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 320,
+          y = 368,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {
+            ["triggered"] = true
           }
         }
       }

@@ -177,6 +177,10 @@ function Player:collide(other, nx, ny)
             self.sand = 1
         end
 
+        if other.class.name == "Trigger" and not other.used and self.sand > 0 then
+            other:push()
+        end
+
     else -- world tile
         if other.properties.spike then
             local dir = other.properties.spike

@@ -491,7 +491,13 @@ function Map:addNewLayerTile(layer, chunk, tile, x, y)
 	table.insert(self.tileInstances[tile.gid], instance)
 end
 
-function Map:set_batches(layer, chunk)
+function Map:set_batches(layer, chunk, sx, sy, ex, ey)
+	if layer.batches then
+		for _, batch in ipairs(layer.batches) do
+			batch:clear()
+		end
+	end
+
 	if chunk then
 		chunk.batches = {}
 	else
@@ -515,6 +521,13 @@ function Map:set_batches(layer, chunk)
 		elseif self.renderorder == "left-up" then
 			startX, endX, incrementX = endX, startX, -1
 			startY, endY, incrementY = endY, startY, -1
+		end
+
+		if sx then
+			startX = sx
+			startY = sy
+			endX = ex
+			endY = ey
 		end
 
 		for y = startY, endY, incrementY do
