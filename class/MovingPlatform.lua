@@ -16,7 +16,7 @@ combineArrays(MovingPlatform.serializeTable, {
     "moveTimes",
 })
 
-MovingPlatform.doesntCollideWith = {"Sand"}
+MovingPlatform.doesntCollideWith = {"Sand", "Arrow"}
 
 function MovingPlatform:filter(other)
     -- hack to stop falling through platforms that go up while jumping

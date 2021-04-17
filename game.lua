@@ -146,6 +146,8 @@ function game:die()
 end
 
 function game:useShrine(shrine)
+    self.level.player.sand = self.metaState.sand
+
     if not shrine.used then
         shrine:use()
         soundManager3.play("shrineActivate")
