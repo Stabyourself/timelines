@@ -12,6 +12,15 @@ combineArrays(Boss.serializeTable, {
 local img = love.graphics.newImage("img/HAMMER.png")
 local grid = anim8.newGrid(48, 48, img:getWidth(), img:getHeight())
 local idleAnimation = anim8.newAnimation(grid(1, 1), math.huge)
+local chargeAnimation = anim8.newAnimation(grid("2-3", 1), 0.2, function(anim)
+    anim.position = 3
+    anim:pauseAtEnd()
+end)
+
+local hitAnimation = anim8.newAnimation(grid("4-5", 1), 0.2, function(anim)
+    anim.position = 5
+    anim:pauseAtEnd()
+end)
 
 local speed = 80
 local jumpForce = 220
@@ -29,16 +38,27 @@ function Boss:initialize(level, x, y)
     self.stylish = false
 
     self.animation = idleAnimation
+
+    self.dir = -1
 end
 
 function Boss:update(dt)
-
+    -- behavior
     if math.abs((self.x+12)-(self.level.player.x+6)) < 100 then
         self.state = "chasing"
         game.bossActive = true
     else
         self.state = "idle"
         self.vx = 0
+    end
+
+    -- animation
+    if self.jumping then
+        if self.vy < 0 then
+            self.animation = chargeAnimation
+        else
+            self.animation = hitAnimation
+        end
     end
 
     -- state update
@@ -52,8 +72,10 @@ function Boss:update(dt)
     if self.state == "chasing" then
         if self.x > self.level.player.x+chaseDistance then
             self.vx = -speed
+            self.dir = -1
         elseif self.x < self.level.player.x-12-chaseDistance then
             self.vx = speed
+            self.dir = 1
         else
             self.vx = 0
         end
@@ -69,6 +91,8 @@ function Boss:update(dt)
             self:jump()
         end
     end
+
+    self.animation:update(dt)
 end
 
 function Boss:hurt()
@@ -76,11 +100,23 @@ function Boss:hurt()
 end
 
 function Boss:jump()
+    self.jumping = true
     self.vy = -jumpForce
+    self.animation = chargeAnimation
+
+    chargeAnimation:gotoFrame(1)
+    chargeAnimation:resume()
+    hitAnimation:gotoFrame(1)
+    hitAnimation:resume()
+end
+
+function Boss:grounded()
+    self.animation = idleAnimation
+    self.jumping = false
 end
 
 function Boss:draw()
-    self.animation:draw(img, self.x, self.y, 0, 1, 1, 10, 23)
+    self.animation:draw(img, self.x+12, self.y, 0, -self.dir, 1, 22, 23)
 end
 
 function Boss:collide(other, nx, ny)
