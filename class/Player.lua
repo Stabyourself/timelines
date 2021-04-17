@@ -124,6 +124,13 @@ function Player:initialize(level, x, y)
     self.controlsEnabled = true
 end
 
+function Player:postAdd()
+    self.vx = 0
+    self.vy = 0
+
+    Entity.postAdd(self)
+end
+
 function Player:nearShrine()
     if self.onGround then
         local items, len = self.level.world:queryRect(self.x, self.y, self.w, self.h, function(item)
