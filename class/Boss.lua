@@ -10,7 +10,7 @@ combineArrays(Boss.serializeTable, {
 })
 
 local img = love.graphics.newImage("img/HAMMER.png")
-local grid = anim8.newGrid(32, 32, img:getWidth(), img:getHeight())
+local grid = anim8.newGrid(48, 48, img:getWidth(), img:getHeight())
 local idleAnimation = anim8.newAnimation(grid(1, 1), math.huge)
 
 local speed = 80
@@ -80,7 +80,7 @@ function Boss:jump()
 end
 
 function Boss:draw()
-    self.animation:draw(img, self.x, self.y, 0, 1, 1, 4, 7)
+    self.animation:draw(img, self.x, self.y, 0, 1, 1, 10, 23)
 end
 
 function Boss:collide(other, nx, ny)
