@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 121,
+  nextobjectid = 122,
   backgroundcolor = { 72, 72, 252 },
   properties = {},
   tilesets = {
@@ -1982,6 +1982,20 @@ return {
           properties = {
             ["triggered"] = true
           }
+        },
+        {
+          id = 121,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 288,
+          y = 336,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          gid = 8,
+          visible = true,
+          properties = {}
         }
       }
     }
