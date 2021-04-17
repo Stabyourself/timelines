@@ -122,7 +122,7 @@ function Boss:hurt()
         game:hurtBoss()
         self.stylish = true
 
-        if game.metaState.bossHp > 1 then
+        if game.metaState.bossHp > 0 then
             self.hurting = true
             timer.after(0.3, function() self.hurting = false end)
         else
