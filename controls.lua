@@ -1,23 +1,23 @@
 return {
     controls = {
-        left = {'key:a', 'axis:leftx-', 'button:dpleft'},
-        right = {'key:d', 'axis:leftx+', 'button:dpright'},
-        up = {'key:w', 'axis:lefty-', 'button:dpup'},
-        down = {'key:s', 'axis:lefty+', 'button:dpdown'},
+        left = {'key:left', 'axis:leftx-', 'button:dpleft'},
+        right = {'key:right', 'axis:leftx+', 'button:dpright'},
+        up = {'key:up', 'axis:lefty-', 'button:dpup'},
+        down = {'key:down', 'axis:lefty+', 'button:dpdown'},
 
-        jump = {"key:space", 'button:a'},
-        use = {"key:e", "button:x", "button:b"},
+        jump = {"key:y", "key:z", "key:w", 'button:a'},
+        use = {"key:x", "button:x", "button:b"},
 
-        camleft = {'key:left', 'axis:rightx-'},
-        camright = {'key:right', 'axis:rightx+'},
-        camup = {'key:up', 'axis:righty-'},
+        camleft = {'key:a', 'axis:rightx-'},
+        camright = {'key:d', 'axis:rightx+'},
+        camup = {'key:w', 'axis:righty-'},
         camdown = {'key:down', 'axis:righty+'},
 
         zoomin = {'axis:righty-'},
         zoomout = {'axis:righty+'},
 
         nodeselection = {"key:space", 'button:a'},
-        backbutton = {"key:e", 'button:b', 'button:x'},
+        backbutton = {"key:x", 'button:b', 'button:x'},
 
         debug1 = {'key:k'},
     },
