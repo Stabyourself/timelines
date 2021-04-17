@@ -174,12 +174,25 @@ function Player:collide(other, nx, ny)
         if other.class.name == "SandUpgrade" then
             other:queueRemove()
             game.metaState.sand = 1
-            self.sand = 1
+            self.sand = game.metaState.sand
+
+            soundManager3.play("sandUpgrade")
         end
 
         if other.class.name == "Trigger" and not other.used and self.sand > 0 then
             other:push()
         end
+
+        if other.class.name == "Boss" then
+            if ny < 0 then
+                other:hurt()
+                self.vy = -self.vy
+                return false
+            else
+                self:die()
+            end
+        end
+
 
     else -- world tile
         if other.properties.spike then
@@ -217,8 +230,8 @@ function Player:grounded()
 end
 
 function Player:die()
-    soundManager3.play("die")
     if not self.dead then
+        soundManager3.play("die")
         self.dead = true
         game:die()
     end
