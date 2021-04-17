@@ -18,7 +18,7 @@ function physics:process(e, dt)
         return
     end
 
-    if e.physics and e.active and dt > 0 then
+    if e.physics and e.active and dt > 0 and game.level.world:hasItem(e) then
         local wasOnGround = e.onGround
 
         e.onGround = false
