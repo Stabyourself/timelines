@@ -36,6 +36,7 @@ soundManager3.loadSounds({
     {name="playerLand", path="sound/player_land.wav", count=2},
     {name="spawn", path="sound/spawn.wav", count=1},
     {name="finishSpawn", path="sound/finish_spawn.wav", count=1},
+    {name="sandUpgrade", path="sound/sand_upgrade.wav", count=1},
 })
 
 function love.load()

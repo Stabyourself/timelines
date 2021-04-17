@@ -15,7 +15,7 @@ local topGrid = anim8.newGrid(16, 16, topImg:getWidth(), topImg:getHeight())
 local shardImg = love.graphics.newImage("img/player_shards.png")
 local sharedGrid = anim8.newGrid(8, 8, shardImg:getWidth(), shardImg:getHeight())
 
-PlayerParticle.doesntCollideWith = {"PlayerParticle", "Arrow", "Sand", "Key"}
+PlayerParticle.doesntCollideWith = {"PlayerParticle", "Arrow", "Sand", "Key", "Boss"}
 
 function PlayerParticle:initialize(level, x, y, t, shardI, physics, angle)
     local destX, destY = x, y

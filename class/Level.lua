@@ -14,6 +14,7 @@ local Shrine = require "class.Shrine"
 local ArrowShooter = require "class.ArrowShooter"
 local SandUpgrade = require "class.SandUpgrade"
 local Trigger = require "class.Trigger"
+local Boss = require "class.Boss"
 
 local tiny = require "lib.tiny"
 
@@ -125,6 +126,12 @@ function Level:initialize(gamestate, path)
             trigger.id = object.id
 
             self:addEntity(trigger)
+        end
+
+        if type == "boss" then
+            local boss = Boss:new(self, object.x+4, object.y-24)
+
+            self:addEntity(boss)
         end
     end
 

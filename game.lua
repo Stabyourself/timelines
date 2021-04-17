@@ -6,18 +6,21 @@ local Level = require "class.Level"
 
 local keyUi = love.graphics.newImage("img/key_ui.png")
 local keyUiMeta = love.graphics.newImage("img/key_ui_meta.png")
+local bossHpImg = love.graphics.newImage("img/boss_hp.png")
 
 function game:init()
     self.metaState = {
         state = {},
         keyCount = 0,
         sand = 0.25,
+        bossHp = 3,
     }
     self.rootNode = Node:new(nil, 0, 1)
 
     self.level = Level:new(self, "levels/level1.lua")
 
     self.rootNode.state = self.level:makeState()
+    self.bossActive = false
 end
 
 function game:enter(previous)
@@ -84,6 +87,7 @@ function game:draw()
 
     -- UI!
     love.graphics.translate(4, 4)
+
     love.graphics.draw(keyUiMeta, 0, 0)
     printShadow(0.1, 0.1, 0.1, "x", 16, 1)
     printfShadow(0.1, 0.1, 0.1, self.metaState.keyCount, 24, 1, 10, "center")
@@ -93,6 +97,20 @@ function game:draw()
     printfShadow(0.1, 0.1, 0.1, self.level.player.keyCount, 24, 17, 10, "center")
 
     love.graphics.pop()
+
+    -- boss hp
+    if self.bossActive then
+        love.graphics.push()
+
+        love.graphics.translate(150, 20)
+        printShadow(0.1, 0.1, 0.1, "BOSS", 0, 0)
+
+        for i = 1, self.metaState.bossHp do
+            love.graphics.draw(bossHpImg, (i-1)*24+30, 0)
+        end
+
+        love.graphics.pop()
+    end
 end
 
 function game:mousepressed(x, y, button)
@@ -173,5 +191,12 @@ function game:updatemetaState()
         if entity.meta then -- only store meta items
             table.insert(self.metaState.entities, entity:toState())
         end
+    end
+end
+
+function game:hurtBoss()
+    self.metaState.bossHp = self.metaState.bossHp - 1
+    if self.metaState.bossHp == 0 then
+        print("WIN!")
     end
 end
