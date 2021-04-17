@@ -9,15 +9,20 @@ combineArrays(Boss.serializeTable, {
 
 })
 
-local img = love.graphics.newImage("img/HAMMER.png")
-local grid = anim8.newGrid(48, 48, img:getWidth(), img:getHeight())
+local imgNormal = love.graphics.newImage("img/HAMMER.png")
+local imgHat = love.graphics.newImage("img/HAMMER_hat.png")
+
+local grid = anim8.newGrid(48, 48, imgNormal:getWidth(), imgNormal:getHeight())
 local idleAnimation = anim8.newAnimation(grid(1, 1), math.huge)
-local chargeAnimation = anim8.newAnimation(grid("2-3", 1), 0.2, function(anim)
+
+local walkAnimation = anim8.newAnimation(grid("2-5", 1), 0.15)
+
+local chargeAnimation = anim8.newAnimation(grid("6-7", 1), 0.2, function(anim)
     anim.position = 3
     anim:pauseAtEnd()
 end)
 
-local hitAnimation = anim8.newAnimation(grid("4-5", 1), 0.2, function(anim)
+local hitAnimation = anim8.newAnimation(grid("8-9", 1), 0.2, function(anim)
     anim.position = 5
     anim:pauseAtEnd()
 end)
@@ -34,11 +39,9 @@ function Boss:initialize(level, x, y)
     self.state = "chasing"
 
     self.jumpTimer = 0
-
-    self.stylish = false
-
     self.animation = idleAnimation
 
+    self.stylish = false
     self.dir = -1
 end
 
@@ -47,18 +50,11 @@ function Boss:update(dt)
     if math.abs((self.x+12)-(self.level.player.x+6)) < 100 then
         self.state = "chasing"
         game.bossActive = true
+        self.animation = walkAnimation
     else
         self.state = "idle"
         self.vx = 0
-    end
-
-    -- animation
-    if self.jumping then
-        if self.vy < 0 then
-            self.animation = chargeAnimation
-        else
-            self.animation = hitAnimation
-        end
+        self.animation = idleAnimation
     end
 
     -- state update
@@ -77,6 +73,7 @@ function Boss:update(dt)
             self.vx = speed
             self.dir = 1
         else
+            self.animation = idleAnimation
             self.vx = 0
         end
     end
@@ -92,11 +89,23 @@ function Boss:update(dt)
         end
     end
 
+    -- animation
+    if self.jumping then
+        if self.vy < 0 then
+            self.animation = chargeAnimation
+        else
+            self.animation = hitAnimation
+        end
+    end
+
     self.animation:update(dt)
 end
 
 function Boss:hurt()
-    game:hurtBoss()
+    if not self.stylish then
+        game:hurtBoss()
+        self.stylish = true
+    end
 end
 
 function Boss:jump()
@@ -116,6 +125,12 @@ function Boss:grounded()
 end
 
 function Boss:draw()
+    local img = imgNormal
+
+    if self.stylish then
+        img = imgHat
+    end
+
     self.animation:draw(img, self.x+12, self.y, 0, -self.dir, 1, 22, 23)
 end
 
