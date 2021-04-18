@@ -38,7 +38,7 @@ function timetable:init()
     self.nodeLocations = {}
 
     self.buttons = {
-        Button:new(self, 15, 200, nil, 20, "Start from here", function() game:startOnNode(self.selectedNode); self:close() end),
+        Button:new(self, 15, 200, nil, 20, "Start from here", function() self:startOnNode(self.selectedNode) end),
         Button:new(self, WIDTH-83, 200, nil, 20, "Back", function() self:backButton() end),
         Button:new(self, WIDTH-35, 200, 20, 20, settingsIcon, function()  end),
     }
@@ -85,6 +85,8 @@ end
 function timetable:enter(from, booted, allowBack)
     -- note: nodes should not be changed during this gamestate, because their position is cached.
 
+
+    self.closing = false
     self.selectedNode = nil
     self.booted = booted or false
     self.from = from
@@ -243,13 +245,19 @@ function timetable:mousepressed(x, y, button)
     self.dragging = true
 end
 
+function timetable:startOnNode(node)
+    if self.closing == false then
+        game:startOnNode(node)
+        self:close()
+    end
+end
+
 function timetable:nodeWindowPress(x, y, launchIfSelected)
     for _, nodeLocation in ipairs(self.nodeTable) do
         if nodeLocation.clickable then
             if self:nodeCollision(nodeLocation, x, y) then
                 if self.selectedNode == nodeLocation.node and launchIfSelected then
-                    game:startOnNode(self.selectedNode)
-                    self:close()
+                    self:startOnNode(self.selectedNode)
                 end
 
                 self.selectedNode = nodeLocation.node
@@ -315,7 +323,9 @@ function timetable:backButton()
 end
 
 function timetable:close()
+    self.closing = true
     self.backButtonEnabled = false
+
     local function backToGame()
         gamestate.pop()
     end
