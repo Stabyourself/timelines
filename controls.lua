@@ -1,25 +1,25 @@
 return {
     controls = {
-        left = {'key:left', 'axis:leftx-', 'button:dpleft'},
-        right = {'key:right', 'axis:leftx+', 'button:dpright'},
-        up = {'key:up', 'axis:lefty-', 'button:dpup'},
-        down = {'key:down', 'axis:lefty+', 'button:dpdown'},
+        left = {'sc:left', 'axis:leftx-', 'button:dpleft'},
+        right = {'sc:right', 'axis:leftx+', 'button:dpright'},
+        up = {'sc:up', 'axis:lefty-', 'button:dpup'},
+        down = {'sc:down', 'axis:lefty+', 'button:dpdown'},
 
-        jump = {"key:y", "key:z", "key:w", 'button:a'},
-        use = {"key:x", "button:x", "button:b"},
+        jump = {"sc:z", 'button:a'},
+        use = {"sc:x", "button:x", "button:b"},
 
-        camleft = {'key:a', 'axis:rightx-'},
-        camright = {'key:d', 'axis:rightx+'},
-        camup = {'key:w', 'axis:righty-'},
-        camdown = {'key:s', 'axis:righty+'},
+        camleft = {'sc:a', 'axis:rightx-'},
+        camright = {'sc:d', 'axis:rightx+'},
+        camup = {'sc:w', 'axis:righty-'},
+        camdown = {'sc:s', 'axis:righty+'},
 
         zoomin = {'axis:righty-'},
         zoomout = {'axis:righty+'},
 
-        nodeselection = {"key:y", "key:z", "key:w", 'button:a'},
-        backbutton = {"key:x", 'button:b', 'button:x'},
+        nodeselection = {"sc:z", 'button:a'},
+        backbutton = {"sc:x", 'button:b', 'button:x'},
 
-        debug1 = {'key:k'},
+        debug1 = {'sc:k'},
     },
     pairs = {
         movement = {'left', 'right', 'up', 'down'},
