@@ -48,8 +48,8 @@ music:setLooping(true)
 music:setVolume(0.15)
 
 function love.load()
-    imageFont = love.graphics.newImageFont("img/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?\"%()/+-=", 1)
-    love.graphics.setFont(imageFont)
+    -- imageFont = love.graphics.newImageFont("img/font.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?\"%()/+-=", 1)
+    -- love.graphics.setFont(imageFont)
 
     gamestate.registerEvents()
     gamestate.switch(game)
@@ -68,7 +68,7 @@ function love.update(dt)
     updateGroup(flowControllers, dt)
     controls:update()
 
-    love.window.setTitle("Timelines " .. love.timer.getFPS())
+    -- love.window.setTitle("Timelines " .. love.timer.getFPS())
 end
 
 function love.keypressed(key)

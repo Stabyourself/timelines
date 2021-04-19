@@ -276,8 +276,8 @@ function Map:setLayer(layer, path)
 	elseif layer.type == "objectgroup" then
 		self:setObjectData(layer)
 		self:setObjectCoordinates(layer)
-		self:setObjectSpriteBatches(layer)
-		layer.draw = function() self:drawObjectLayer(layer) end
+	-- 	self:setObjectSpriteBatches(layer)
+		-- layer.draw = function() self:drawObjectLayer(layer) end
 	elseif layer.type == "imagelayer" then
 		layer.draw = function() self:drawImageLayer(layer) end
 
@@ -466,7 +466,7 @@ function Map:addNewLayerTile(layer, chunk, tile, x, y)
 		size    = layer.width * layer.height
 	end
 
-	batches[tileset] = batches[tileset] or lg.newSpriteBatch(image, size)
+	-- batches[tileset] = batches[tileset] or lg.newSpriteBatch(image, size)
 
 	local batch = batches[tileset]
 	local tileX, tileY = self:getLayerTilePosition(layer, tile, x, y)

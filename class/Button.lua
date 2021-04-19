@@ -32,10 +32,10 @@ function Button:initialize(parent, x, y, w, h, content, func)
     self.x = x
     self.y = y
     if self.text then
-        self.w = w or imageFont:getWidth(content)+16
+        self.w = w or love.graphics.getFont():getWidth(content)+16
     else
         if self.text then
-            self.w = w or imageFont:getWidth(content)+16
+            self.w = w or love.graphics.getFont():getWidth(content)+16
         else
             self.w = w or self.img:getWidth()+(h-self.img:getHeight())
         end

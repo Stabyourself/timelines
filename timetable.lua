@@ -213,17 +213,7 @@ function timetable:draw()
 end
 
 function timetable:getMousePosition()
-    if self.crosshairEnabled then -- center
-        return WIDTH/2, HEIGHT/2
-
-    else -- actual mouse
-        local x, y = love.mouse.getPosition()
-
-        x = x/SCALE
-        y = y/SCALE-self.offY
-
-        return x, y
-    end
+    return WIDTH/2, HEIGHT/2
 end
 
 function timetable:mousepressed(x, y, button)
@@ -440,11 +430,11 @@ function timetable:drawNode(node)
     if clickable then
         local img = timetableNodeOverlay
 
-        local x, y = self.camera:worldCoords(self:getMousePosition())
+        -- local x, y = self.camera:worldCoords(self:getMousePosition())
 
-        if self:nodeCollision(node, x, y) then
-            img = timetableNodeOverlayHighlight
-        end
+        -- if self:nodeCollision(node, x, y) then
+        --     img = timetableNodeOverlayHighlight
+        -- end
 
         love.graphics.draw(img, node.x, node.y)
     end

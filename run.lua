@@ -1,7 +1,7 @@
 local frameDebug3 = require "lib.frameDebug3"
 
 function love.run()
-	if love.load then love.load(love.arg.parseGameArguments(arg), arg) end
+	if love.load then love.load(arg) end
 
 	-- We don't want the first frame's dt to include time taken by love.load.
 	if love.timer then love.timer.step() end
@@ -34,7 +34,7 @@ function love.run()
 		-- Call update and draw
 		if love.update then love.update(dt) end -- will pass 0 if love.timer is disabled
 
-		if love.graphics and love.graphics.isActive() then
+		if love.graphics then
 			love.graphics.origin()
 			love.graphics.clear(love.graphics.getBackgroundColor())
 			love.graphics.scale(SCALE, SCALE)
