@@ -43,7 +43,7 @@ soundManager3.loadSounds({
     {name="shrineActivate", path="sound/shrine_activate.wav", count=2},
 })
 
-music = love.audio.newSource("sound/music.wav", "stream")
+music = love.audio.newSource("sound/music.wav", "static")
 music:setLooping(true)
 music:setVolume(0.15)
 
