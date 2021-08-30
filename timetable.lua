@@ -42,6 +42,7 @@ function timetable:init()
         Button:new(self, WIDTH-83, 200, nil, 20, "Back", function() self:backButton() end),
         Button:new(self, WIDTH-35, 200, 20, 20, settingsIcon, function()  end),
     }
+    self.buttons[3].disabled = true
 
     self.camera = camera()
     self.camera:lookAt(9, 9)
