@@ -25,7 +25,7 @@ function endScreen:draw()
     local r, g, b = textBackground:rgb()
     love.graphics.setColor(textForeground:rgb())
 
-    printfShadow(r, g, b, ".done\n\nYou beat the evil hammer guy! Good job.\n\n\n\n\n\n\n(A beta version of) A game by Maurice and Hans", 0, 51, WIDTH, "center")
+    printfShadow(r, g, b, "Great job!\n\nYou beat the evil hammer guy! Good job.\n\n\n\n\n\n\n(A demo of) A game by Maurice and Hans", 0, 51, WIDTH, "center")
 
     love.graphics.draw(titleImg, (WIDTH-titleImg:getWidth())*.5, 130)
 end
