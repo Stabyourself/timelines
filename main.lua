@@ -1,5 +1,11 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 
+isweb = love.system.getOS() == "Web"
+if isweb then
+    -- no quitting in browsers
+    love.event.quit = function() end
+end
+
 require "util"
 require "variables"
 if love.filesystem.getInfo("environment.lua") then
@@ -68,7 +74,9 @@ function love.update(dt)
     updateGroup(flowControllers, dt)
     controls:update()
 
-    love.window.setTitle("Timelines " .. love.timer.getFPS())
+    if not isweb then
+        love.window.setTitle("Timelines " .. love.timer.getFPS())
+    end
 end
 
 function love.keypressed(key)
