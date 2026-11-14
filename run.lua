@@ -25,6 +25,7 @@ function love.run()
 
 		-- Update dt, as we'll be passing it to update
 		if love.timer then dt = love.timer.step() end
+		dt = math.min(dt, 1/30)
 
 		-- fake DT for debug
 		if FRAMEDEBUG then
