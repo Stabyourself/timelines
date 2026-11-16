@@ -309,7 +309,7 @@ end
 function timetable:zoomCamera(zoom)
     self.camera:zoom(zoom)
 
-    self.camera.scale = math.min(1, math.max(1/SCALE, self.camera.scale))
+    self.camera.scale = math.min(1, math.max(1/3, self.camera.scale))
 end
 
 function timetable:wheelmoved(_, y)

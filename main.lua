@@ -76,6 +76,33 @@ function love.update(dt)
 
     if not isweb then
         love.window.setTitle("Timelines " .. love.timer.getFPS())
+    else
+        updatewebscale(dt)
+    end
+end
+
+--web: biggest whole scale that fits the browser window, the page stretches the rest
+function webscale()
+    local size = love.js and love.js.eval and
+        love.js.eval("Math.floor(innerWidth*devicePixelRatio)+' '+Math.floor(innerHeight*devicePixelRatio)")
+    local w, h = string.match(size or "", "(%d+) (%d+)")
+    if not w then
+        return SCALE
+    end
+    return math.max(1, math.min(math.floor(tonumber(w)/WIDTH), math.floor(tonumber(h)/HEIGHT)))
+end
+
+local webscaletimer = 0.5
+function updatewebscale(dt)
+    webscaletimer = webscaletimer + dt
+    if webscaletimer < 0.5 then
+        return
+    end
+    webscaletimer = 0
+    local s = webscale()
+    if s ~= SCALE then
+        SCALE = s
+        love.window.setMode(WIDTH*SCALE, HEIGHT*SCALE)
     end
 end
 
